@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UserService } from './services/user/user.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'qrvey-demo-app';
+  constructor( private user: UserService,  private router: Router) {
+    if(!this.user.getUser()) {
+      this.router.navigate(['login']);
+    }
+  }
 }
