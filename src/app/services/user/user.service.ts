@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class UserService {
 
-  user:any = localStorage.getItem('loggedUser');
+  user:any = localStorage.getItem('loggedUser') ? JSON.parse(localStorage.getItem('loggedUser') as string) : null;
 
   constructor(private httpClient: HttpClient) {}
 
@@ -19,7 +19,12 @@ export class UserService {
     localStorage.removeItem('loggedUser');
   }
 
-  public setUser(){
-    this.user = localStorage.getItem('loggedUser');
+  public setUser(user:any){
+    this.user = user;
   }
+
+  public authUser(body:any) {
+    return this.httpClient.post('/users/auth', body);
+  }
+
 }

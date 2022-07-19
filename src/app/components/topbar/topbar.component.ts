@@ -9,12 +9,17 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class TopbarComponent implements OnInit {
 
-  constructor(private user: UserService, private router: Router) { }
+  loggedUser: any = null;
+
+  constructor(private user: UserService, private router: Router) { 
+    this.loggedUser = user.getUser();
+    console.log(this.loggedUser)
+  }
 
   ngOnInit(): void {
   }
 
-  logout(){
+  logout() {
     this.user.removeUser();
     this.router.navigate(['/login']);
   }

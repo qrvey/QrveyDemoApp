@@ -9,11 +9,13 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  user_email:string = '';
-  user_password:string = '';
+  user_email: string = '';
+  user_password: string = '';
+  error: any = null;
+  validating: boolean = false;
 
-  constructor(private user: UserService, private router: Router) { 
-    if(this.user.getUser()) {
+  constructor(private user: UserService, private router: Router) {
+    if (this.user.getUser()) {
       this.router.navigate(['/']);
     }
   }
@@ -21,16 +23,23 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  signIn(){ //backend auth
-    let sample_user = {
-      email: "sample@sample.com",
-      id: 123456,
-      name: "Sergio Blanco",
-      type: "composer"
+  signIn() { //backend auth
+    if (!this.user_email || this.validating) return;
+    this.error = null;
+    this.validating = true;
+    this.user.authUser({ email: this.user_email }).subscribe((response: any) => {
+      console.log(response);
+      localStorage.setItem('loggedUser', JSON.stringify(response));
+      this.user.setUser(response);
+      this.router.navigate(['/']);
+      this.validating = false;
+    },
+    (error: any) => {
+      console.log(error.error.message);
+      this.error = error.error;
+      this.validating = false;
     }
-    localStorage.setItem('loggedUser', JSON.stringify(sample_user));
-    this.user.setUser();
-    this.router.navigate(['/']);
+    );
   }
 
 }
