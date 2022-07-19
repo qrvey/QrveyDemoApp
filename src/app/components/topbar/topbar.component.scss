@@ -1,0 +1,202 @@
+@import '../../global/vars.scss';
+
+.main-topbar {
+    width: 100%;
+    height: 50px;
+    background-color: #FFF;
+    padding: 14px 20px;
+    box-sizing: border-box;
+    position: relative;
+
+    .logo {
+        background-image: url(../../../assets/ica_header.svg);
+        width: 38px;
+        height: 32px;
+        background-repeat: no-repeat;
+        display: inline-block;
+    }
+
+    nav {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        margin-left: 23px;
+        height: 100%;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            height: 100%;
+
+            li {
+                display: inline-block;
+                height: 100%;
+
+                a {
+                    display: inline-block;
+                    position: relative;
+                    height: 100%;
+                    box-sizing: border-box;
+                    padding: 0px 10px;
+                    line-height: 50px;
+                    color: $primary-color;
+                    font-size: 13px;
+                    font-weight: 400;
+                    font-style: normal;
+                    letter-spacing: 0px;
+                    text-decoration: none;
+
+                    span{
+                        filter: invert(43%) sepia(77%) saturate(7052%) hue-rotate(223deg) brightness(100%) contrast(92%);
+                    }
+
+                    .admin-icon {
+                        width: 11px;
+                        height: 13px;
+                        background-image: url(../../../assets/icons/admin.svg);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        display: inline-block;
+                        position: relative;
+                        top: 1px;
+                        margin-right: 4px;
+                    }
+
+                    .dataset-icon {
+                        width: 13px;
+                        height: 13px;
+                        background-image: url(../../../assets/icons/datasets.svg);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        display: inline-block;
+                        position: relative;
+                        top: 2px;
+                        margin-right: 4px;
+                    }
+
+                    .reports-icon {
+                        width: 11px;
+                        height: 13px;
+                        background-image: url(../../../assets/icons/report.svg);
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        display: inline-block;
+                        position: relative;
+                        top: 2px;
+                        margin-right: 4px;
+                    }
+
+                    &:hover{
+                        background-color: rgb(244, 246, 248);
+                    }
+                }
+
+                &.selected {
+                    a {
+                        background-color: #2E5DF4;
+                        color: rgba(255, 255, 255, 1);
+                        span{
+                            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(316deg) brightness(103%) contrast(104%);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .searchbar {
+        position: absolute;
+        border-radius: 5px;
+        background-color: rgba(232, 236, 240, 1);
+        width: 363px;
+        height: 25px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: none;
+        box-sizing: border-box;
+        padding: 0px 10px;
+        font-size: 13px;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: 0px;
+
+        &::placeholder {
+            opacity: 0.5;
+            color: rgba(71, 71, 71, 1);
+        }
+
+        &:focus {
+            outline: 2px solid $primary-color;
+        }
+    }
+
+    .user {
+        position: absolute;
+        right: 10px;
+        top: 0px;
+        height: 100%;
+        line-height: 50px;
+
+        .name {
+            color: rgba(86, 86, 86, 1);
+            font-size: 12px;
+            font-weight: 500;
+            font-style: normal;
+            letter-spacing: 0px;
+            display: inline-block;
+            margin-right: 9px;
+        }
+
+        .profile-pic {
+            height: 32px;
+            width: 32px;
+            position: relative;
+            display: inline-block;
+            border-radius: 50%;
+            background-color: #999;
+            top: 10px;
+        }
+
+        .sub-menu {
+            position: absolute;
+            width: 115px;
+            height: auto;
+            background-color: #FFF;
+            box-shadow: 1px 1px 3px #d0cece;
+            border-radius: 4px;
+            right: 2px;
+            line-height: 50px;
+            display: none;
+            top: 48px;
+
+            .logout {
+                display: inline-block;
+                font-size: 13px;
+                padding: 10px;
+                width: 100%;
+                box-sizing: border-box;
+                line-height: initial;
+                font-weight: 500;
+
+                &:hover {
+                    background-color: rgb(244, 246, 248);
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &:hover {
+            >.sub-menu {
+                display: block;
+            }
+        }
+    }
+}
+
+.sub-topbar {
+    width: 100%;
+    height: 45px;
+    background-color: rgba(244, 246, 248, 1);
+}

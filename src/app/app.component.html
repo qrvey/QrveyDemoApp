@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<app-topbar *ngIf="loggedUser()"></app-topbar>
+<div [ngClass]="{'content' : loggedUser()}">
+    <router-outlet></router-outlet>
+</div>
