@@ -1,0 +1,25 @@
+<div class="left-bar">
+    <div class="create-report" *ngIf="loggedUser.type != 'viewer'">
+        <span>
+            + Create New Report
+        </span>
+    </div>
+    <ul class="reports-nav">
+        <li>
+            <span class="selected-bar"></span>
+            <a href="">Report 1</a>
+        </li>
+        <li class="selected">
+            <span class="selected-bar"></span>
+            <a href="">Report 2</a>
+        </li>
+        <li>
+            <span class="selected-bar"></span>
+            <a href="">Report 3</a>
+        </li>
+        <li>
+            <span class="selected-bar"></span>
+            <a href="">Report 4</a>
+        </li>
+    </ul>
+</div>

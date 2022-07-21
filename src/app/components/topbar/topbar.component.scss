@@ -7,6 +7,7 @@
     padding: 14px 20px;
     box-sizing: border-box;
     position: relative;
+    z-index: 3;
 
     .logo {
         background-image: url(../../../assets/ica_header.svg);
@@ -47,7 +48,7 @@
                     letter-spacing: 0px;
                     text-decoration: none;
 
-                    span{
+                    span {
                         filter: invert(43%) sepia(77%) saturate(7052%) hue-rotate(223deg) brightness(100%) contrast(92%);
                     }
 
@@ -87,7 +88,7 @@
                         margin-right: 4px;
                     }
 
-                    &:hover{
+                    &:hover {
                         background-color: rgb(244, 246, 248);
                     }
                 }
@@ -96,7 +97,8 @@
                     a {
                         background-color: #2E5DF4;
                         color: rgba(255, 255, 255, 1);
-                        span{
+
+                        span {
                             filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(316deg) brightness(103%) contrast(104%);
                         }
                     }
@@ -134,7 +136,7 @@
 
     .user {
         position: absolute;
-        right: 10px;
+        right: 20px;
         top: 0px;
         height: 100%;
         line-height: 50px;
@@ -155,8 +157,9 @@
             position: relative;
             display: inline-block;
             border-radius: 50%;
-            background-color: #999;
+            background-color: #ddd;
             top: 10px;
+            background-size: 100%;
         }
 
         .sub-menu {
@@ -199,4 +202,53 @@
     width: 100%;
     height: 45px;
     background-color: rgba(244, 246, 248, 1);
+    position: relative;
+
+    nav {
+        display: inline-block;
+        position: absolute;
+        height: 100%;
+        left: 0;
+
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            height: 100%;
+
+            li {
+                display: inline-block;
+                height: 100%;
+
+                a {
+                    display: inline-block;
+                    position: relative;
+                    height: 100%;
+                    box-sizing: border-box;
+                    padding: 0px 20px;
+                    line-height: 45px;
+                    opacity: 0.3;
+                    color: rgba(71, 71, 71, 1);
+                    font-size: 15px;
+                    font-weight: 500;
+                    font-style: normal;
+                    letter-spacing: 0px;
+                    text-decoration: none;
+                    &:hover{
+                        opacity: 0.7;
+                    }
+                    &.title{
+                        opacity: 1;
+                    }
+                }
+                &.selected {
+                    a {
+                        color: $primary-color;
+                        opacity: 1;
+                        border-bottom: 3px solid $primary-color;
+                    }
+                }
+            }
+        }
+    }
 }

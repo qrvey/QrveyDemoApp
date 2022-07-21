@@ -12,7 +12,7 @@ var users = [
   { 
     id: 1,
     email: "composer@autoberlin.com",
-    name: "Composer Autoberlin",
+    name: "Autoberlin Composer",
     organization: {
       name: "Auto Berlin",
       id: 1,
@@ -23,7 +23,7 @@ var users = [
   { 
     id: 2,
     email: "viewer@autoberlin.com",
-    name: "Viewer Autoberlin",
+    name: "Autoberlin Viewer",
     organization: {
       name: "Auto Berlin",
       id: 1,
@@ -34,7 +34,7 @@ var users = [
   { 
     id: 3,
     email: "composer@v8cars.com",
-    name: "Composer V8Cars",
+    name: "V8Cars Composer",
     organization: {
       name: "V8 Cars",
       id: 2,
@@ -45,7 +45,7 @@ var users = [
   { 
     id: 4,
     email: "viewer@v8cars.com",
-    name: "Viewer V8Cars",
+    name: "V8Cars Viewer",
     organization: {
       name: "V8 Cars",
       id: 2,
@@ -56,7 +56,7 @@ var users = [
   { 
     id: 5,
     email: "composer@autopartsllc.com",
-    name: "Composer Autopars LLC",
+    name: "AutoparsLLC Composer",
     organization: {
       name: "Autopars LLC",
       id: 3,
@@ -67,7 +67,7 @@ var users = [
   { 
     id: 6,
     email: "viewer@autopartsllc.com",
-    name: "Viewer Autopars LLC",
+    name: "AutoparsLLC Viewer",
     organization: {
       name: "Autopars LLC",
       id: 3,

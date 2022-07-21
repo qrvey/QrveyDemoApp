@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -9,11 +9,15 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class TopbarComponent implements OnInit {
 
-  loggedUser: any = null;
+  @Input() noSecondBar: any;
+  @Input() selectedRoute: any;
 
-  constructor(private user: UserService, private router: Router) { 
+  loggedUser: any = null;
+  avatarURL: string = '';
+
+  constructor(private user: UserService, private router: Router) {
     this.loggedUser = user.getUser();
-    console.log(this.loggedUser)
+    this.avatarURL = "url('" + this.user.avatarGenerator(this.loggedUser.name) + "')";
   }
 
   ngOnInit(): void {
