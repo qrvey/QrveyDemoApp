@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  qrvey_domain: "https://demo.qrvey.com" 
 };

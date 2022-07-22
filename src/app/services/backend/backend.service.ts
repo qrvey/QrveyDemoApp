@@ -11,5 +11,9 @@ export class BackendService {
   public getReports(body:any) {
     return this.httpClient.post('/api/getReports', body);
   }
+
+  public generateJwt(body:any) {
+    return this.httpClient.post('/api/generateJwt', body);
+  }
   
 }

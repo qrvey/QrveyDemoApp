@@ -6,3 +6,11 @@ app-actions{
     top: -45px;
     z-index: 2;
 }
+
+.side-content{
+    position: absolute;
+    width: calc(100% - 200px);
+    height: 100%;
+    left: 200px;
+    overflow: auto;
+}

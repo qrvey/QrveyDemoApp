@@ -5,9 +5,9 @@
         </span>
     </div>
     <ul class="reports-nav">
-        <li *ngFor="let report of reports">
+        <li *ngFor="let report of reports" [ngClass]="{'selected' : report.selected}">
             <span class="selected-bar"></span>
-            <a [ngClass]="{'base-page':!report.system_user_id}" title="{{report.name}}">{{report.name}}{{!report.system_user_id ? '*' : ''}}</a>
+            <a (click)="selectReport(report)" [ngClass]="{'base-page':!report.system_user_id}" title="{{report.name}}">{{report.name}}{{!report.system_user_id ? '*' : ''}}</a>
         </li>
         <li class="selected" *ngIf="loading">
             <a>Loading...</a>

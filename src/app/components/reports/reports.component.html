@@ -1,2 +1,6 @@
 <app-actions *ngIf="loggedUser.type != 'viewer'"></app-actions>
-<app-leftbar [loggedUser]="loggedUser" [reports]="reports" [loading]="loading"></app-leftbar>
+<app-leftbar [loggedUser]="loggedUser" [reports]="reports" [loading]="loading" (reportClicked)="loadPageView($event)"></app-leftbar>
+<div class="side-content">
+    <div class="widget-wrapper"></div>
+    <app-loading *ngIf="loading_widget" [size]=0.8></app-loading>
+</div>

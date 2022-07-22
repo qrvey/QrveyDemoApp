@@ -12,6 +12,7 @@ import { LeftbarComponent } from './components/reports/leftbar/leftbar.component
 import { ActionsComponent } from './components/reports/actions/actions.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { DatasetsComponent } from './components/datasets/datasets.component';
+import { LoadingComponent } from './components/loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DatasetsComponent } from './components/datasets/datasets.component';
     LeftbarComponent,
     ActionsComponent,
     AdminComponent,
-    DatasetsComponent
+    DatasetsComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
