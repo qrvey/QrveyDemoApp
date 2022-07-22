@@ -7,90 +7,118 @@ var users = [
     id: 0,
     email: "admin@ica.com",
     name: "ICA Admin",
-    type: "admin"
+    type: "admin",
+    qrvey_info: {
+      userid:"iN3xBZfkO",
+      appid:"vt1gmR0cH"
+    }
   },
   { 
     id: 1,
-    email: "composer@autoberlin.com",
-    name: "Autoberlin Composer",
+    email: "composer@avstores.com",
+    name: "AVStoresCo Composer",
     organization: {
-      name: "Auto Berlin",
-      id: 1,
+      name: "AV Stores, Co.",
+      id: 187,
       planid: 1
     },
-    type: "composer"
+    type: "composer",
+    qrvey_info: {
+      userid:"vc1xpuGjz",
+      appid:"7QPNzup4O"
+    }
   },
   { 
     id: 2,
-    email: "viewer@autoberlin.com",
-    name: "Autoberlin Viewer",
+    email: "viewer@avstores.com",
+    name: "AVStoresCo Viewer",
     organization: {
-      name: "Auto Berlin",
-      id: 1,
+      name: "AV Stores, Co.",
+      id: 187,
       planid: 1
     },
-    type: "viewer"
+    type: "viewer",
+    qrvey_info: {
+      userid:"vc1xpuGjz",
+      appid:"7QPNzup4O"
+    }
   },
   { 
     id: 3,
-    email: "composer@v8cars.com",
-    name: "V8Cars Composer",
+    email: "composer@clovercollections.com",
+    name: "CloverCollections Composer",
     organization: {
-      name: "V8 Cars",
-      id: 2,
+      name: "Clover Collections, Co.",
+      id: 189,
       planid: 2
     },
-    type: "composer"
+    type: "composer",
+    qrvey_info: {
+      userid:"K5aX7Ykvh",
+      appid:"hvrMRg551"
+    }
   },
   { 
     id: 4,
-    email: "viewer@v8cars.com",
-    name: "V8Cars Viewer",
+    email: "viewer@clovercollections.com",
+    name: "CloverCollections Viewer",
     organization: {
-      name: "V8 Cars",
-      id: 2,
+      name: "Clover Collections, Co.",
+      id: 189,
       planid: 2
     },
-    type: "viewer"
+    type: "viewer",
+    qrvey_info: {
+      userid:"K5aX7Ykvh",
+      appid:"hvrMRg551"
+    }
   },
   { 
     id: 5,
-    email: "composer@autopartsllc.com",
-    name: "AutoparsLLC Composer",
+    email: "composer@volvomodelsreplicas.com",
+    name: "VolvoModelReplicas Composer",
     organization: {
-      name: "Autopars LLC",
-      id: 3,
+      name: "Volvo Model Replicas, Co",
+      id: 144,
       planid: 3
     },
-    type: "composer"
+    type: "composer",
+    qrvey_info: {
+      userid:"oYDACWI0C",
+      appid:"9ouUXHfDK"
+    }
   },
   { 
     id: 6,
-    email: "viewer@autopartsllc.com",
-    name: "AutoparsLLC Viewer",
+    email: "viewer@volvomodelsreplicas.com",
+    name: "VolvoModelReplicas Viewer",
     organization: {
-      name: "Autopars LLC",
-      id: 3,
+      name: "Volvo Model Replicas, Co",
+      id: 144,
       planid: 3
     },
-    type: "viewer"
+    type: "viewer",
+    qrvey_info: {
+      userid:"oYDACWI0C",
+      appid:"9ouUXHfDK"
+    }
   }
 ];
 
 var organizations = [
   {
-    name: "Auto Berlin",
-    id: 1,
+    name: "AV Stores, Co.",
+    id: 187,
     planid: 1
   },
   {
-    name: "V8 Cars",
-    id: 2,
+    name: "Clover Collections, Co.",
+    id: 189,
     planid: 2
   },
   {
-    name: "Autopars LLC",
-    id: 3,
+    name: "Volvo Model Replicas, Co",
+    id: 144,
     planid: 3
   }
 ];

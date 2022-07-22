@@ -38,7 +38,6 @@ router.post('/api/getReports', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/?limit=100`;
     let api = process.env.API_KEY;
-    let data = JSON.stringify(body);
 
     var config = {
         method: 'get',

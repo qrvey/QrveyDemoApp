@@ -5,21 +5,12 @@
         </span>
     </div>
     <ul class="reports-nav">
-        <li>
+        <li *ngFor="let report of reports">
             <span class="selected-bar"></span>
-            <a href="">Report 1</a>
+            <a [ngClass]="{'base-page':!report.system_user_id}" title="{{report.name}}">{{report.name}}{{!report.system_user_id ? '*' : ''}}</a>
         </li>
-        <li class="selected">
-            <span class="selected-bar"></span>
-            <a href="">Report 2</a>
-        </li>
-        <li>
-            <span class="selected-bar"></span>
-            <a href="">Report 3</a>
-        </li>
-        <li>
-            <span class="selected-bar"></span>
-            <a href="">Report 4</a>
+        <li class="selected" *ngIf="loading">
+            <a>Loading...</a>
         </li>
     </ul>
 </div>

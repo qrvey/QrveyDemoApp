@@ -7,11 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LeftbarComponent implements OnInit {
 
-  @Input() loggedUser:any; 
+  @Input() loggedUser:any;
+  @Input() loading: any;
+  @Input() reports: any[] = [];
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.loading)
   }
 
 }

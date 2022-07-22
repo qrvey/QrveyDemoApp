@@ -34,11 +34,11 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/']);
       this.validating = false;
     },
-    (error: any) => {
-      console.log(error.error.message);
-      this.error = error.error;
-      this.validating = false;
-    }
+      (error: any) => {
+        console.log(error.error.message);
+        this.error = error.error;
+        this.validating = false;
+      }
     );
   }
 

@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BackendService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
+
+  public getReports(body:any) {
+    return this.httpClient.post('/api/getReports', body);
+  }
+  
 }
