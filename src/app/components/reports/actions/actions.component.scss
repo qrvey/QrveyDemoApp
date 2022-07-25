@@ -6,6 +6,10 @@
     line-height: 45px;
     padding-right: 20px;
 
+    &.disabled{
+        opacity: 0;
+    }
+
     span,
     div {
         display: inline-block;
@@ -50,6 +54,13 @@
 
             &:hover{
                 cursor: pointer;
+            }
+        }
+
+        &.view-only{
+            width: 79px;
+            span{
+                width: 100%;
             }
         }
     }

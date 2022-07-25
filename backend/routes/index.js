@@ -179,4 +179,42 @@ router.put('/api/updateReport', (req, res, next) => {
 })
 
 
+router.post('/api/datasetLookup', (req, res, next) => {
+    let { body } = req;
+    let url = `${process.env.BASE_PATH}/devapi/v4/user/${body.userid}/app/${body.appid}/qollect/dataset/all`;
+    let api = process.env.API_KEY;
+
+    const filter_body = {
+        "limit": 1,
+        "filters": [
+            {
+                "filterType": "CONTAINS",
+                "column": "search",
+                "value": body.datasetname.toLowerCase()
+            }
+        ],
+        "warning": false
+    };
+
+    let data = JSON.stringify(filter_body);
+
+    var config = {
+        method: 'post',
+        url: url,
+        headers: {
+            'x-api-key': api,
+            "Content-Type": 'application/json'
+        },
+        data: data
+    };
+
+    axios(config)
+        .then(function (response) {
+            return res.send(response.data)
+        })
+        .catch(function (error) {
+            res.status(500).send(error.response.data)
+        });
+})
+
 module.exports = router;

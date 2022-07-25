@@ -1,10 +1,10 @@
-<div class="report-actions">
+<div class="report-actions" [ngClass]="{'disabled':!selectedReport}">
     <span class="status">
         <b>Status:</b> Published
     </span>
-    <div class="view-edit">
-        <span class="selected">View Mode</span>
-        <span>Edit Mode</span>
+    <div class="view-edit" [ngClass]="{'view-only': selectedReport && !selectedReport.system_user_id}">
+        <span [ngClass]="{'selected': mode == 'view'}" (click)="changeView('view')">View Mode</span>
+        <span *ngIf="selectedReport && selectedReport.system_user_id" [ngClass]="{'selected': mode == 'edit'}" (click)="changeView('edit')">Edit Mode</span>
     </div>
     <span class="share">
         <i></i>

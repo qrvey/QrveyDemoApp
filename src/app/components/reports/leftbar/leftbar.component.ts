@@ -22,6 +22,7 @@ export class LeftbarComponent implements OnInit {
     if(this.current_report) this.current_report.selected = false;
     report.selected = true;
     this.current_report = report;
+    report['sidebar'] = true;
     this.reportClicked.emit(report);
   }
 
