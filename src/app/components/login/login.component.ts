@@ -31,7 +31,11 @@ export class LoginComponent implements OnInit {
       console.log(response);
       localStorage.setItem('loggedUser', JSON.stringify(response));
       this.user.setUser(response);
-      this.router.navigate(['/']);
+      if(response.type == "viewer"){
+        this.router.navigate(['/shared-reports']);
+      }else{
+        this.router.navigate(['/']);
+      }
       this.validating = false;
     },
       (error: any) => {

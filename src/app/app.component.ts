@@ -15,6 +15,11 @@ export class AppComponent implements OnInit {
   constructor(private user: UserService, private router: Router) {
     if (!this.user.getUser()) {
       this.router.navigate(['login']);
+    }else{
+      let user = this.user.getUser();
+      if(user.type == "viewer"){
+        this.router.navigate(['shared-reports']);
+      }
     }
 
     router.events.subscribe((event: Event) => {

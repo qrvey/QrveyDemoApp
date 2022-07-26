@@ -10,6 +10,7 @@ export class LeftbarComponent implements OnInit {
   @Input() loggedUser:any;
   @Input() loading: any;
   @Input() reports: any[] = [];
+  @Input() shareReportsPages: any;
   @Output() reportClicked: EventEmitter<any> = new EventEmitter();
   current_report: any;
 

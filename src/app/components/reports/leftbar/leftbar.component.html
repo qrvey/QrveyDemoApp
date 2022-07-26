@@ -1,5 +1,5 @@
 <div class="left-bar">
-    <div class="create-report" *ngIf="loggedUser.type != 'viewer'">
+    <div class="create-report" *ngIf="loggedUser.type != 'viewer' && !shareReportsPages">
         <span>
             + Create New Report
         </span>

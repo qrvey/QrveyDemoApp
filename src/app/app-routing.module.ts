@@ -7,6 +7,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
   {path: '', component: ReportsComponent},
+  {path: 'shared-reports', component: ReportsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'admin', component: AdminComponent},
   {path: 'datasets', component: DatasetsComponent}

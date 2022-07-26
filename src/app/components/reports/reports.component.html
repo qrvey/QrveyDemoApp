@@ -1,5 +1,5 @@
-<app-actions *ngIf="loggedUser.type != 'viewer'" [selectedReport]="selected_report" [mode]="view_mode" (actionClicked)="actionClicked($event)"></app-actions>
-<app-leftbar [loggedUser]="loggedUser" [reports]="reports" [loading]="loading" (reportClicked)="loadPageWidget($event)"></app-leftbar>
+<app-actions *ngIf="loggedUser.type != 'viewer'" [selectedReport]="selected_report" [mode]="view_mode" [shareReportsPages]="share_report_page" (actionClicked)="actionClicked($event)" (shareReport)="shareReport($event)" ></app-actions>
+<app-leftbar [loggedUser]="loggedUser" [reports]="reports" [shareReportsPages]="share_report_page" [loading]="loading" (reportClicked)="loadPageWidget($event)"></app-leftbar>
 <div class="side-content">
     <div class="widget-wrapper"></div>
     <app-loading *ngIf="loading_widget" [size]=0.8></app-loading>

@@ -50,6 +50,9 @@ router.post('/api/getReports', (req, res, next) => {
 
     axios(config)
         .then(function (response) {
+            if(body.getshared){
+                response.data.Items = response.data.Items.filter( r => r.shared);
+            }
             return res.send(response.data)
         })
         .catch(function (error) {
@@ -142,6 +145,31 @@ router.post('/api/getReport', (req, res, next) => {
             'x-api-key': api,
             "Content-Type": 'application/json'
         }
+    };
+
+    axios(config)
+        .then(function (response) {
+            return res.send(response.data)
+        })
+        .catch(function (error) {
+            res.status(500).send(error.response.data)
+        });
+})
+
+router.post('/api/compareReport', (req, res, next) => {
+    let { body } = req;
+    let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/${body.pageid}/compare`;
+    let api = process.env.API_KEY;
+    let data = JSON.stringify(body.qbody);
+
+    var config = {
+        method: 'post',
+        url: url,
+        headers: {
+            'x-api-key': api,
+            "Content-Type": 'application/json'
+        },
+        data: data
     };
 
     axios(config)

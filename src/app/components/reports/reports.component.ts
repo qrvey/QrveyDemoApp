@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { BackendService } from 'src/app/services/backend/backend.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -18,10 +18,21 @@ export class ReportsComponent implements OnInit {
   selected_report: any = null;
   view_mode: string = 'view';
   widgetContainer: any;
-
+  share_report_page:boolean = false;
 
   constructor(private user: UserService, private router: Router, private backend: BackendService) {
     this.loggedUser = this.user.getUser();
+
+    router.events.subscribe((event: Event) => {
+      // see also 
+      if (event instanceof NavigationEnd) {
+        if (event.url.includes('shared-reports')) {
+          this.share_report_page = true;
+        }else{
+          this.share_report_page = false;
+        }
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -29,7 +40,7 @@ export class ReportsComponent implements OnInit {
   }
 
   getReports() {
-    this.backend.getReports({ userid: this.loggedUser.qrvey_info.userid, appid: this.loggedUser.qrvey_info.appid }).subscribe((response: any) => {
+    this.backend.getReports({ userid: this.loggedUser.qrvey_info.userid, appid: this.loggedUser.qrvey_info.appid, getshared: this.share_report_page }).subscribe((response: any) => {
       this.reports = response.Items;
       this.loading = false;
     },
@@ -40,10 +51,12 @@ export class ReportsComponent implements OnInit {
     );
   }
 
-  loadingOn(){
+  loadingOn(hideHTML:boolean = true){
     this.loading_widget = true;
-    this.widgetContainer = document.querySelector(".widget-wrapper");
-    this.widgetContainer.innerHTML = '';
+    if(hideHTML){
+      this.widgetContainer = document.querySelector(".widget-wrapper");
+      this.widgetContainer.innerHTML = '';
+    }
   }
 
   loadPageWidget(report: any, builder?: boolean) {
@@ -131,12 +144,12 @@ export class ReportsComponent implements OnInit {
     )
   }
 
-  updatePageStatus(updates:any, callback:any) {
-    this.loadingOn();
+  updatePageStatus(updates:any, hideHTML:boolean, callback:any) {
+    this.loadingOn(hideHTML);
 
     this.backend.getReport({ userid: this.loggedUser.qrvey_info.userid, appid: this.loggedUser.qrvey_info.appid, pageid: this.selected_report.pageid }).subscribe((response: any) => {
 
-      let report_model = {...this.selected_report, ...updates};
+      let report_model = {...response, ...updates};
 
       report_model.selected = false;
 
@@ -148,8 +161,28 @@ export class ReportsComponent implements OnInit {
       };
 
       this.backend.updateReport(update_body).subscribe((response: any) => {
-        this.loading = false;
-        callback();
+
+        this.selected_report = response;
+
+        const compare_body = { 
+          userid: this.loggedUser.qrvey_info.userid, 
+          appid: this.loggedUser.qrvey_info.appid, 
+          pageid: this.selected_report.pageid,
+          qbody: {
+            version: "LATEST"
+          }
+        };
+
+        this.backend.compareReport(compare_body).subscribe((response: any) => {
+          callback();
+        },
+          (error: any) => {
+            console.log(error);
+            this.loading = false;
+          }
+        );
+
+
       },
         (error: any) => {
           console.log(error);
@@ -165,13 +198,19 @@ export class ReportsComponent implements OnInit {
     );
   }
 
-  async actionClicked(m: string) {
+  shareReport(share:any){
+    this.updatePageStatus({shared:share},false,()=>{
+      this.loading_widget = false;
+    })
+  }
+
+  actionClicked(m: string) {
     if (this.view_mode == m) return;
     this.view_mode = m;
     if (m == 'view') {
-      this.updatePageStatus({editing:false, published: true}, () => this.loadPageWidget(this.selected_report));
+      this.updatePageStatus({editing:false, published: true, updateTo: "Published", forceUpdate: true}, true, () => this.loadPageWidget(this.selected_report));
     } else {
-      this.updatePageStatus({editing:true}, () => this.loadPageWidget(this.selected_report, true));
+      this.updatePageStatus({editing:true}, true, () => this.loadPageWidget(this.selected_report, true));
     }
   }
 

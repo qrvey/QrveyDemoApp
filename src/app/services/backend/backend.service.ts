@@ -20,6 +20,10 @@ export class BackendService {
     return this.httpClient.put('/api/updateReport', body);
   }
 
+  public compareReport(body:any) {
+    return this.httpClient.post('/api/compareReport', body);
+  }
+
   public generateJwt(body:any) {
     return this.httpClient.post('/api/generateJwt', body);
   }

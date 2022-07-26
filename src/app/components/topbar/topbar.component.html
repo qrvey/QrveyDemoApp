@@ -38,11 +38,11 @@
 <div class="sub-topbar" *ngIf="!noSecondBar">
     <nav *ngIf="loggedUser.type == 'composer'">
         <ul>
-            <li class="selected">
-                <a href="">My Reports</a>
+            <li [ngClass]="{'selected': selectedRoute == '/'}">
+                <a [routerLink]="['/']">My Reports</a>
             </li>
-            <li>
-                <a href="">Shared Reports</a>
+            <li [ngClass]="{'selected': selectedRoute == '/shared-reports'}">
+                <a [routerLink]="['/shared-reports']">Shared Reports</a>
             </li>
         </ul>
     </nav>
@@ -50,7 +50,7 @@
     <nav *ngIf="loggedUser.type != 'composer'">
         <ul>
             <li>
-                <a class="title">Reports</a>
+                <a class="title">Shared Reports</a>
             </li>
         </ul>
     </nav>
