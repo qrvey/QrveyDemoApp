@@ -31,5 +31,13 @@ export class BackendService {
   public datasetLookup(body:any) {
     return this.httpClient.post('/api/datasetLookup', body);
   }
+
+  public createNewReport(body: any){
+    return this.httpClient.post('/api/createReport', body);
+  }
+
+  public cloneReport(body: any){
+    return this.httpClient.post('/api/cloneReport', body);
+  }
   
 }

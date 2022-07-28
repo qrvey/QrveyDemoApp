@@ -60,7 +60,7 @@ router.post('/api/getReports', (req, res, next) => {
         });
 })
 
-router.post('/api/createReports', (req, res, next) => {
+router.post('/api/createReport', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/?limit=100`;
     let api = process.env.API_KEY;
@@ -96,7 +96,7 @@ router.post('/api/createReports', (req, res, next) => {
         });
 })
 
-router.post('/api/cloneReports', (req, res, next) => {
+router.post('/api/cloneReport', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/${body.pageid}/clone`;
     let api = process.env.API_KEY;

@@ -13,6 +13,7 @@ import { ActionsComponent } from './components/reports/actions/actions.component
 import { AdminComponent } from './components/admin/admin.component';
 import { DatasetsComponent } from './components/datasets/datasets.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { NewReportComponent } from './components/reports/new-report/new-report.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     ActionsComponent,
     AdminComponent,
     DatasetsComponent,
-    LoadingComponent
+    LoadingComponent,
+    NewReportComponent
   ],
   imports: [
     BrowserModule,

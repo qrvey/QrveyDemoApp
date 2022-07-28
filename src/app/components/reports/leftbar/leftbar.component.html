@@ -1,11 +1,11 @@
 <div class="left-bar">
     <div class="create-report" *ngIf="loggedUser.type != 'viewer' && !shareReportsPages">
-        <span>
+        <span (click)="triggerNewReport()">
             + Create New Report
         </span>
     </div>
     <ul class="reports-nav">
-        <li *ngFor="let report of reports" [ngClass]="{'selected' : report.selected}">
+        <li *ngFor="let report of reports" [ngClass]="{'selected' : report.selected || (current_report && report.pageid == current_report.pageid)}">
             <span class="selected-bar"></span>
             <a (click)="selectReport(report)" [ngClass]="{'base-page':!report.system_user_id}" title="{{report.name}}">{{report.name}}{{!report.system_user_id ? '*' : ''}}</a>
         </li>

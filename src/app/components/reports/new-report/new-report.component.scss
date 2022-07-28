@@ -1,0 +1,92 @@
+@import '../../../global/vars.scss';
+
+.modal-back {
+    position: fixed;
+    z-index: 12;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    .modal-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 550px;
+        height: 246px;
+        background-color: #FFF;
+        box-shadow: 0 3px 6 rgba(74, 74, 74, 0.15);
+        border-radius: 2px;
+        box-sizing: border-box;
+        padding: 20px;
+
+        h5.title {
+            padding: 0;
+            margin: 0;
+            color: $primary-color;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .close-modal {
+            position: absolute;
+            right: 20px;
+            top: 25px;
+            opacity: 0.4;
+            color: rgba(125, 125, 125, 1);
+            cursor: pointer;
+        }
+
+        .content {
+            margin-top: 20px;
+            margin-bottom: 20px;
+
+            fieldset {
+                border: none;
+                padding: 0;
+                margin: 0;
+                margin-bottom: 15px;
+
+                &>* {
+                    display: block;
+                }
+
+                &:last-child{
+                    margin-bottom: 0px;
+                }
+
+                label {
+                    color: rgba(71, 71, 71);
+                    font-size: 13px;
+                    font-weight: 500;
+                    letter-spacing: 0px;
+                    text-align: left;
+                    margin-bottom: 5px;
+                }
+
+                input, select{
+                    border-radius: 1px;
+                    border: 1px solid rgba(192,192,192, 1);
+                    opacity: 1;
+                    background-color: rgba(255,255,255, 1);
+                    width: 100%;
+                    height: 30px;
+                    padding: 0 10px;
+                    box-sizing: border-box;
+                    outline: none;
+                    font-size: 12px;
+                }
+
+            }
+        }
+
+        .footer{
+            text-align: right;
+            button{
+                margin-left: 10px;
+            }
+        }
+    }
+}

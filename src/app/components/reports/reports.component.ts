@@ -18,17 +18,18 @@ export class ReportsComponent implements OnInit {
   selected_report: any = null;
   view_mode: string = 'view';
   widgetContainer: any;
-  share_report_page:boolean = false;
+  share_report_page: boolean = false;
+  new_report_modal: boolean = false;
 
   constructor(private user: UserService, private router: Router, private backend: BackendService) {
     this.loggedUser = this.user.getUser();
 
-    router.events.subscribe((event: Event) => {
+    this.router.events.subscribe((event: Event) => {
       // see also 
       if (event instanceof NavigationEnd) {
         if (event.url.includes('shared-reports')) {
           this.share_report_page = true;
-        }else{
+        } else {
           this.share_report_page = false;
         }
       }
@@ -40,22 +41,83 @@ export class ReportsComponent implements OnInit {
   }
 
   getReports() {
-    this.backend.getReports({ userid: this.loggedUser.qrvey_info.userid, appid: this.loggedUser.qrvey_info.appid, getshared: this.share_report_page }).subscribe((response: any) => {
-      this.reports = response.Items;
-      this.loading = false;
-    },
-      (error: any) => {
-        console.log(error);
+    this.backend.getReports({ userid: this.loggedUser.qrvey_info.userid, appid: this.loggedUser.qrvey_info.appid, getshared: this.share_report_page }).subscribe({
+      next: (response: any) => {
+        this.reports = response.Items;
+      },
+      error: (e: any) => {
+        console.log(e);
+        this.loading = false;
+      }, 
+      complete: () => {
         this.loading = false;
       }
-    );
+    });
   }
 
-  loadingOn(hideHTML:boolean = true){
+  loadingOn(hideHTML: boolean = true) {
     this.loading_widget = true;
-    if(hideHTML){
+    if (hideHTML) {
       this.widgetContainer = document.querySelector(".widget-wrapper");
       this.widgetContainer.innerHTML = '';
+    }
+  }
+
+  getDatasetRLS(body: any, callback: any) {
+    let permissions: any = [];
+    this.backend.datasetLookup(body).subscribe({
+      next: (response: any) => {
+        permissions = [
+          {
+            "dataset_id": response.Items[0].datasetId,
+            "record_permissions": [
+              {
+                "security_name": "customer_number",
+                "values": [
+                  this.loggedUser.organization.id
+                ]
+              }
+            ]
+          }
+        ];
+      },
+      error: (e: any) => {
+        console.log(e);
+        this.loading = false;
+      },
+      complete: () => {
+        callback(permissions);
+      }
+    })
+  }
+
+  getJWT(body: any, callback: any) {
+    let token: any = null;
+    this.backend.generateJwt(body).subscribe({
+      next: (response: any) => {
+        token = response.token;
+      },
+      error: (e: any) => {
+        console.log(e);
+        this.loading_widget = false;
+      },
+      complete: () => {
+        callback(token);
+      }
+    })
+  }
+
+  buildQrveyPage(token: any, builder: boolean) {
+    this.loading_widget = false;
+    (window as any).qrveyPageConfig = {
+      qv_token: token,
+      domain: environment.qrvey_domain
+    };
+    let page_view_tag = !builder ? document.createElement("qrvey-end-user") : document.createElement("qrvey-builders");
+    page_view_tag.setAttribute("settings", "qrveyPageConfig");
+    this.widgetContainer.append(page_view_tag);
+    if (builder) {
+      (window as any).runEndUser(true /* True if it's pageBuilder, False if it's pageView widget */, true /* False if you want to set your on CSS, True if you want for the script to apply a default pageBuilder Limited view */);
     }
   }
 
@@ -67,36 +129,17 @@ export class ReportsComponent implements OnInit {
     if (this.view_mode == 'edit') {
       builder = true;
     }
-
     if (!report.system_user_id && this.view_mode == 'edit') {
       this.view_mode = 'view';
       builder = false;
     }
-
-
     const dbody = {
       userid: this.loggedUser.qrvey_info.userid,
       appid: this.loggedUser.qrvey_info.appid,
       datasetname: "Main Mysql - orders - View"
     }
-
-
-    this.backend.datasetLookup(dbody).subscribe((res: any) => {
-
-      let permissions = [
-        {
-          "dataset_id": res.Items[0].datasetId,
-          "record_permissions": [
-            {
-              "security_name": "customer_number",
-              "values": [
-                this.loggedUser.organization.id
-              ]
-            }
-          ]
-        }
-      ];
-
+    this.getDatasetRLS(dbody, (dresponse: any) => {
+      let permissions = dresponse;
       let asset_permissions = {};
       if (builder) {
         asset_permissions = {
@@ -107,99 +150,92 @@ export class ReportsComponent implements OnInit {
           }
         }
       }
-
-      const jbody = {
+      const jwtbody = {
         userid: this.loggedUser.qrvey_info.userid,
         appid: this.loggedUser.qrvey_info.appid,
         pageid: report.pageid,
         permissions,
         asset_permissions
       }
-
-      this.backend.generateJwt(jbody).subscribe((response: any) => {
-        this.loading_widget = false;
-        (window as any).qrveyPageConfig = {
-          qv_token: response.token,
-          domain: environment.qrvey_domain
-        };
-        let page_view_tag = !builder ? document.createElement("qrvey-end-user") : document.createElement("qrvey-builders");
-        page_view_tag.setAttribute("settings", "qrveyPageConfig");
-        this.widgetContainer.append(page_view_tag);
-        if (builder) {
-          (window as any).runEndUser(true /* True if it's pageBuilder, False if it's pageView widget */, true /* False if you want to set your on CSS, True if you want for the script to apply a default pageBuilder Limited view */);
-        }
-      },
-        (error: any) => {
-          console.log(error);
-          this.loading_widget = false;
-        }
-      );
-
-
-    },
-      (error: any) => {
-        console.log(error);
-        this.loading_widget = false;
-      }
-    )
+      this.getJWT(jwtbody, (jwtresponse: any) => {
+        this.buildQrveyPage(jwtresponse, builder as boolean);
+      })
+    })
   }
 
-  updatePageStatus(updates:any, hideHTML:boolean, callback:any) {
+  getReportAndMerge(body: any, updates: any, callback: any) {
+    let report_model: any;
+    this.backend.getReport(body).subscribe({
+      next: (response) => {
+        report_model = { ...response, ...updates };
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        callback(report_model);
+      }
+    });
+  }
+
+  updateReport(body: any, callback: any) {
+    this.backend.updateReport(body).subscribe({
+      next: (response) => {
+        this.selected_report = {...response, selected: true};
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        callback();
+      }
+    });
+  }
+
+  compareReporVersions(body: any, callback: any) {
+    this.backend.compareReport(body).subscribe({
+      error: (e) => {
+        console.log(e)
+      },
+      complete: () => {
+        callback();
+      }
+    });
+  }
+
+  updatePageStatus(updates: any, hideHTML: boolean, callback: any) {
     this.loadingOn(hideHTML);
 
-    this.backend.getReport({ userid: this.loggedUser.qrvey_info.userid, appid: this.loggedUser.qrvey_info.appid, pageid: this.selected_report.pageid }).subscribe((response: any) => {
+    const rmbody = { 
+      userid: this.loggedUser.qrvey_info.userid, 
+      appid: this.loggedUser.qrvey_info.appid, 
+      pageid: this.selected_report.pageid 
+    };
 
-      let report_model = {...response, ...updates};
-
-      report_model.selected = false;
-
-      const update_body = { 
-        userid: this.loggedUser.qrvey_info.userid, 
-        appid: this.loggedUser.qrvey_info.appid, 
+    this.getReportAndMerge(rmbody, updates, (rmresponse: any) => {
+      const updatebody = {
+        userid: this.loggedUser.qrvey_info.userid,
+        appid: this.loggedUser.qrvey_info.appid,
         pageid: this.selected_report.pageid,
-        qbody: report_model
+        qbody: rmresponse
       };
 
-      this.backend.updateReport(update_body).subscribe((response: any) => {
-
-        this.selected_report = response;
-
-        const compare_body = { 
-          userid: this.loggedUser.qrvey_info.userid, 
-          appid: this.loggedUser.qrvey_info.appid, 
+      this.updateReport(updatebody, () => {
+        const comparebody = {
+          userid: this.loggedUser.qrvey_info.userid,
+          appid: this.loggedUser.qrvey_info.appid,
           pageid: this.selected_report.pageid,
           qbody: {
             version: "LATEST"
           }
         };
-
-        this.backend.compareReport(compare_body).subscribe((response: any) => {
-          callback();
-        },
-          (error: any) => {
-            console.log(error);
-            this.loading = false;
-          }
-        );
-
-
-      },
-        (error: any) => {
-          console.log(error);
-          this.loading = false;
-        }
-      );
-
-    },
-      (error: any) => {
-        console.log(error);
-        this.loading = false;
-      }
-    );
+        this.compareReporVersions(comparebody, () => callback() )
+      })
+    })
   }
 
-  shareReport(share:any){
-    this.updatePageStatus({shared:share},false,()=>{
+  shareReport(share: any) {
+    this.updatePageStatus({ shared: share }, false, () => {
       this.loading_widget = false;
     })
   }
@@ -207,11 +243,25 @@ export class ReportsComponent implements OnInit {
   actionClicked(m: string) {
     if (this.view_mode == m) return;
     this.view_mode = m;
+    let updates: any;
     if (m == 'view') {
-      this.updatePageStatus({editing:false, published: true, updateTo: "Published", forceUpdate: true}, true, () => this.loadPageWidget(this.selected_report));
+      updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false};
+      this.updatePageStatus( updates, true, () => this.loadPageWidget(this.selected_report));
     } else {
-      this.updatePageStatus({editing:true}, true, () => this.loadPageWidget(this.selected_report, true));
+      updates = { editing: true };
+      this.updatePageStatus(updates, true, () => this.loadPageWidget(this.selected_report, true));
     }
+  }
+
+  newReportModal(){
+    this.new_report_modal = !this.new_report_modal;
+  }
+
+  newReportAdded(report: any){
+    this.getReports();
+    this.view_mode = this.view_mode == "edit" ? "view" : "edit";
+    this.selected_report = report;
+    this.actionClicked(this.view_mode == "edit" ? "view" : "edit");
   }
 
 }

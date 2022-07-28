@@ -11,8 +11,9 @@ export class LeftbarComponent implements OnInit {
   @Input() loading: any;
   @Input() reports: any[] = [];
   @Input() shareReportsPages: any;
+  @Input() current_report: any;
   @Output() reportClicked: EventEmitter<any> = new EventEmitter();
-  current_report: any;
+  @Output() newReport: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -25,6 +26,10 @@ export class LeftbarComponent implements OnInit {
     this.current_report = report;
     report['sidebar'] = true;
     this.reportClicked.emit(report);
+  }
+
+  triggerNewReport(){
+    this.newReport.emit();
   }
 
 }
