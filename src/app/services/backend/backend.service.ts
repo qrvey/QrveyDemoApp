@@ -39,5 +39,9 @@ export class BackendService {
   public cloneReport(body: any){
     return this.httpClient.post('/api/cloneReport', body);
   }
+
+  public deleteReport(body: any){
+    return this.httpClient.post('/api/deleteReport', body);
+  }
   
 }

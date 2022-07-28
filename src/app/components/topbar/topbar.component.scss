@@ -162,34 +162,6 @@
             background-size: 100%;
         }
 
-        .sub-menu {
-            position: absolute;
-            width: 115px;
-            height: auto;
-            background-color: #FFF;
-            box-shadow: 1px 1px 3px #d0cece;
-            border-radius: 4px;
-            right: 2px;
-            line-height: 50px;
-            display: none;
-            top: 48px;
-
-            .logout {
-                display: inline-block;
-                font-size: 13px;
-                padding: 10px;
-                width: 100%;
-                box-sizing: border-box;
-                line-height: initial;
-                font-weight: 500;
-
-                &:hover {
-                    background-color: rgb(244, 246, 248);
-                    cursor: pointer;
-                }
-            }
-        }
-
         &:hover {
             >.sub-menu {
                 display: block;

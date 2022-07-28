@@ -5,9 +5,31 @@
         </span>
     </div>
     <ul class="reports-nav">
-        <li *ngFor="let report of reports" [ngClass]="{'selected' : report.selected || (current_report && report.pageid == current_report.pageid)}">
+        <li 
+        *ngFor="let report of reports; let i = index" 
+        [ngClass]="{'selected' : report.selected || (current_report && report.pageid == current_report.pageid)}"
+        [ngStyle]="{'z-index': reports.length - i}"
+        >
             <span class="selected-bar"></span>
             <a (click)="selectReport(report)" [ngClass]="{'base-page':!report.system_user_id}" title="{{report.name}}">{{report.name}}{{!report.system_user_id ? '*' : ''}}</a>
+
+            <div class="report-options">
+                <span class="three-dot">
+
+                    <svg width="3px" height="12px" viewBox="0 0 3 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <title>3dots</title>
+                        <g id="3dots" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <path d="M1.5,9 C2.32842712,9 3,9.67157288 3,10.5 C3,11.3284271 2.32842712,12 1.5,12 C0.671572875,12 0,11.3284271 0,10.5 C0,9.67157288 0.671572875,9 1.5,9 L1.5,9 Z M1.5,4.5 C2.32842712,4.5 3,5.17157288 3,6 C3,6.82842712 2.32842712,7.5 1.5,7.5 C0.671572875,7.5 0,6.82842712 0,6 C0,5.17157288 0.671572875,4.5 1.5,4.5 L1.5,4.5 Z M1.5,0 C2.32842712,0 3,0.671572875 3,1.5 C3,2.32842712 2.32842712,3 1.5,3 C0.671572875,3 0,2.32842712 0,1.5 C0,0.671572875 0.671572875,0 1.5,0 Z" id="Shape-Copy-48" fill="#000000"></path>
+                        </g>
+                    </svg>
+
+                </span>
+                <div class="sub-menu">
+                    <span>Rename</span>
+                    <span>Duplicate</span>
+                    <span (click)="reportOption('delete', report.pageid, report.name, i )">Delete</span>
+                </div>
+            </div>
         </li>
         <li class="selected" *ngIf="loading">
             <a>Loading...</a>

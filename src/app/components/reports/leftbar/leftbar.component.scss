@@ -41,6 +41,7 @@
         padding: 0;
         margin: 0;
         list-style: none;
+        z-index: 1;
 
         li {
             width: 100%;
@@ -64,7 +65,7 @@
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
-                padding-right: 19px;
+                padding-right: 35px;
 
                 &.base-page {
                     font-weight: 500;
@@ -94,8 +95,44 @@
             }
 
             &:hover {
-                background-color: rgba(46, 93, 244, 0.03);
+                background-color: rgba(46, 93, 244, 0.1);
                 cursor: pointer;
+                .report-options{
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .report-options{
+        position: absolute;
+        width: 35px;
+        height: 30px;
+        right: 0px;
+        top: 0px;
+        display: none;
+
+        .three-dot{
+            position: relative;
+            display: block;
+            width: 3px;
+            height: 12px;
+            left: 50%;
+            margin-left: -2px;
+            top: 6px;
+            svg path{
+                fill: $primary-color;
+            }
+        }
+
+        .sub-menu{
+            right: 50%;
+            top: 24px;
+        }
+
+        &:hover {
+            >.sub-menu {
+                display: block;
             }
         }
     }

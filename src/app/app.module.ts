@@ -14,6 +14,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { DatasetsComponent } from './components/datasets/datasets.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NewReportComponent } from './components/reports/new-report/new-report.component';
+import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NewReportComponent } from './components/reports/new-report/new-report.c
     AdminComponent,
     DatasetsComponent,
     LoadingComponent,
-    NewReportComponent
+    NewReportComponent,
+    ConfirmationModalComponent
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,14 @@ export class ReportsComponent implements OnInit {
   widgetContainer: any;
   share_report_page: boolean = false;
   new_report_modal: boolean = false;
+  delete_report_modal: boolean = false;
+  loading_general_action: boolean = false;
+  confirmation_modal_text: any = {
+    title: "Delete Report",
+    message: "",
+    action_id: null,
+    action_index: null
+  }
 
   constructor(private user: UserService, private router: Router, private backend: BackendService) {
     this.loggedUser = this.user.getUser();
@@ -48,7 +56,7 @@ export class ReportsComponent implements OnInit {
       error: (e: any) => {
         console.log(e);
         this.loading = false;
-      }, 
+      },
       complete: () => {
         this.loading = false;
       }
@@ -181,7 +189,7 @@ export class ReportsComponent implements OnInit {
   updateReport(body: any, callback: any) {
     this.backend.updateReport(body).subscribe({
       next: (response) => {
-        this.selected_report = {...response, selected: true};
+        this.selected_report = { ...response, selected: true };
       },
       error: (e) => {
         console.log(e);
@@ -206,10 +214,10 @@ export class ReportsComponent implements OnInit {
   updatePageStatus(updates: any, hideHTML: boolean, callback: any) {
     this.loadingOn(hideHTML);
 
-    const rmbody = { 
-      userid: this.loggedUser.qrvey_info.userid, 
-      appid: this.loggedUser.qrvey_info.appid, 
-      pageid: this.selected_report.pageid 
+    const rmbody = {
+      userid: this.loggedUser.qrvey_info.userid,
+      appid: this.loggedUser.qrvey_info.appid,
+      pageid: this.selected_report.pageid
     };
 
     this.getReportAndMerge(rmbody, updates, (rmresponse: any) => {
@@ -229,7 +237,7 @@ export class ReportsComponent implements OnInit {
             version: "LATEST"
           }
         };
-        this.compareReporVersions(comparebody, () => callback() )
+        this.compareReporVersions(comparebody, () => callback())
       })
     })
   }
@@ -245,23 +253,87 @@ export class ReportsComponent implements OnInit {
     this.view_mode = m;
     let updates: any;
     if (m == 'view') {
-      updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false};
-      this.updatePageStatus( updates, true, () => this.loadPageWidget(this.selected_report));
+      updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false };
+      this.updatePageStatus(updates, true, () => this.loadPageWidget(this.selected_report));
     } else {
       updates = { editing: true };
       this.updatePageStatus(updates, true, () => this.loadPageWidget(this.selected_report, true));
     }
   }
 
-  newReportModal(){
+  newReportModal() {
     this.new_report_modal = !this.new_report_modal;
   }
 
-  newReportAdded(report: any){
+  newReportAdded(report: any) {
     this.getReports();
     this.view_mode = this.view_mode == "edit" ? "view" : "edit";
     this.selected_report = report;
     this.actionClicked(this.view_mode == "edit" ? "view" : "edit");
+  }
+
+  reportOption(detail: any) {
+    if (this.loading_general_action) return;
+    switch (detail.option) {
+      case 'delete':
+        this.delete_report_modal = true;
+        this.confirmation_modal_text = {
+          title: "Delete Report",
+          message: `This cannot be undone. Are you sure you want to delete report "${detail.name}"?`,
+          action_id: detail.pageid,
+          action_index: detail.index
+        };
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  closeDeleteReportModal() {
+    this.delete_report_modal = false;
+    this.confirmation_modal_text = {
+      title: "Delete Report",
+      message: "",
+      action_id: null,
+      action_index: null
+    }
+  }
+
+  deleteSelectedReport() {
+    if (this.loading_general_action) return;
+    this.loading_general_action = true;
+    const deletereportbody = {
+      userid: this.loggedUser.qrvey_info.userid,
+      appid: this.loggedUser.qrvey_info.appid,
+      pageid: this.confirmation_modal_text.action_id
+    }
+    let no_error = false;
+    this.backend.deleteReport(deletereportbody).subscribe({
+      next: (response: any) => {
+        no_error = true
+      },
+      error: (e: any) => {
+        console.log(e)
+      },
+      complete: () => {
+        this.loading_general_action = false;
+        if(no_error){
+          this.deleteReportArray(this.confirmation_modal_text.action_index);
+        }
+      }
+    })
+  }
+
+  deleteReportArray(index: number){
+    let new_reports = [...this.reports];
+    new_reports.splice(index, 1);
+    this.reports = new_reports;
+    if(this.selected_report.pageid == this.confirmation_modal_text.action_id){
+      this.widgetContainer.innerHTML = '';
+      this.selected_report = null;
+    }
+    this.closeDeleteReportModal();
   }
 
 }
