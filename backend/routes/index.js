@@ -51,8 +51,13 @@ router.post('/api/getReports', (req, res, next) => {
     axios(config)
         .then(function (response) {
             if(body.getshared){
-                response.data.Items = response.data.Items.filter( r => r.shared);
+                response.data.Items = response.data.Items.filter( r => r.shared && r.system_user_id != body.system_user_id);
             }
+
+            if(body.system_user_id && !body.getshared){
+                response.data.Items = response.data.Items.filter( r => r.system_user_id == body.system_user_id ||!r.system_user_id);
+            }
+
             return res.send(response.data)
         })
         .catch(function (error) {

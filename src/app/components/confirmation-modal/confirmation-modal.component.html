@@ -1,15 +1,15 @@
-<div class="modal-back">
-    <div class="modal-box">
+<div class="modal-back" (click)="closeModal()">
+    <div class="modal-box" [ngClass]="{'scroll-content':scrollContent}" (click)="$event.stopPropagation()">
         <div class="header">
             <h5 class="title">{{texts.title}}</h5>
             <span class="close-modal" (click)="closeModal()"></span>
         </div>
         <div class="content">
             <fieldset>
-                <p>{{texts.message}}</p>
+                <p [innerHTML]="texts.message"></p>
             </fieldset>
         </div>
-        <div class="footer">
+        <div class="footer" *ngIf="!texts.no_footer">
             <button class="button secondary" (click)="closeModal()">Cancel</button>
             <button class="button" (click)="confirm()">{{texts.confirm}}</button>
         </div>

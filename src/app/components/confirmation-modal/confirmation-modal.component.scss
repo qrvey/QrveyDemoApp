@@ -1,4 +1,19 @@
 .modal-box {
     width: 428px;
     height: auto;
+    &.scroll-content {
+        width: 428px;
+        height: 500px;
+        max-height: 90%;
+
+        .content {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            max-height: 80%;
+            height: auto;
+            position: absolute;
+            width: calc(100% - 40px);
+            overflow: auto;
+        }
+    }
 }

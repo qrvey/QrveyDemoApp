@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-confirmation-modal',
@@ -8,19 +8,23 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ConfirmationModalComponent implements OnInit {
 
   @Input() texts: any;
+  @Input() scrollContent: boolean = false;
   @Output() closeConfirmationModal: EventEmitter<any> = new EventEmitter();
   @Output() confirmAction: EventEmitter<any> = new EventEmitter();
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.closeModal()
+  }
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  closeModal(){
+  closeModal() {
     this.closeConfirmationModal.emit();
   }
 
-  confirm(){
+  confirm() {
     this.confirmAction.emit();
   }
 

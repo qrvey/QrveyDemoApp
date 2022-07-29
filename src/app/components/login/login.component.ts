@@ -14,12 +14,35 @@ export class LoginComponent implements OnInit {
   user_password: string = '';
   error: any = null;
   validating: boolean = false;
+  all_users: any[] = [];
+  loading: boolean = true;
+  help_modal: boolean = false;
+  confirmation_modal_text: any = {
+    title: "Demo App Help",
+    message: "",
+    action_id: null,
+    action_index: null,
+    confirm: "",
+    no_footer: true
+  }
 
   constructor(private user: UserService, private router: Router, private SetColorService: SetColorService) {
     if (this.user.getUser()) {
       this.SetColorService.setColor(this.user.getUser());
       this.router.navigate(['/']);
     }
+    this.user.getUsers().subscribe({
+      next: (response: any) => {
+        this.all_users = response;
+      },
+      error: (e: any) => {
+        console.log(e);
+      },
+      complete: () => {
+        this.loading = false;
+        this.confirmation_modal_text.message = this.buildHelpHTML(this.all_users);
+      }
+    })
   }
 
   ngOnInit(): void {
@@ -27,7 +50,7 @@ export class LoginComponent implements OnInit {
   }
 
   signIn() { //backend auth
-    if (!this.user_email || this.validating) return;
+    if (!this.user_email || !this.user_password || this.validating) return;
     this.error = null;
     this.validating = true;
     this.user.authUser({ email: this.user_email }).subscribe((response: any) => {
@@ -35,9 +58,9 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('loggedUser', JSON.stringify(response));
       this.user.setUser(response);
       this.SetColorService.setColor(this.user.getUser());
-      if(response.type == "viewer"){
+      if (response.type == "viewer") {
         this.router.navigate(['/shared-reports']);
-      }else{
+      } else {
         this.router.navigate(['/']);
       }
       this.validating = false;
@@ -48,6 +71,24 @@ export class LoginComponent implements OnInit {
         this.validating = false;
       }
     );
+  }
+
+  modalShow() {
+    this.help_modal = !this.help_modal;
+  }
+
+  buildHelpHTML(users: any) {
+    let HTML = `<b>Here's a list of existing users you can use to test this demo app!</b><br><br>`;
+    users.forEach((u: any, i: number) => {
+      if (u.type != 'admin') {
+        HTML += `<b>Name</b>: ${u.name}<br/>`;
+        HTML += `<b>Email</b>: ${u.email}<br/>`;
+        HTML += `<b>Password</b>: 123456<br/>`;
+        HTML += `<b>Type</b>: ${u.type}<br/>`;
+        HTML += `<b>Organization</b>: ${u.organization.name}${i + 1 == users.length ? '' : '<br/><br/>'}`;
+      }
+    });
+    return HTML;
   }
 
 }

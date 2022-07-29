@@ -1,5 +1,5 @@
-<div class="modal-back">
-    <div class="modal-box">
+<div class="modal-back" (click)="triggerCloseReport()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
         <div class="header">
             <h5 class="title">Create New Report</h5>
             <span class="close-modal" (click)="triggerCloseReport()"></span>

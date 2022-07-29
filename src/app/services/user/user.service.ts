@@ -27,6 +27,10 @@ export class UserService {
     return this.httpClient.post('/users/auth', body);
   }
 
+  public getUsers() {
+    return this.httpClient.get('/users');
+  }
+
   public avatarGenerator (name:string){
     return 'https://ui-avatars.com/api/?name=' + name.replace(' ', '+');
   }

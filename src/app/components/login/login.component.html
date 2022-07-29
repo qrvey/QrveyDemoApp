@@ -11,4 +11,9 @@
         </p>
     </div>
     <p>Forgot your password? <a>Reset Password</a></p>
+    <p>Need extra help? <a (click)="modalShow()">Get Help</a></p>
 </div>
+
+<app-confirmation-modal *ngIf="help_modal" [texts]="confirmation_modal_text" (closeConfirmationModal)="modalShow()" [scrollContent]="true"></app-confirmation-modal>
+
+<app-loading class="full" *ngIf="loading" [size]=0.8></app-loading>

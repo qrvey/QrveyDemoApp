@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { BackendService } from 'src/app/services/backend/backend.service';
 
 @Component({
@@ -16,6 +16,9 @@ export class NewReportComponent implements OnInit {
   @Input() loggedUser: any;
   @Output() newReportClose: EventEmitter<any> = new EventEmitter();
   @Output() newReport: EventEmitter<any> = new EventEmitter();
+  @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
+    this.triggerCloseReport()
+  }
 
   constructor(private backend: BackendService) { }
 

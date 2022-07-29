@@ -35,6 +35,11 @@ export class LeftbarComponent implements OnInit {
   }
 
   reportOption(option: string, report: any, index?: number) {
+    if(report.name == report.new_name){
+      report.renaming = false;
+      report.selected = false;
+      return;
+    }
     this.reportOptionClicked.emit({ option, report: {...report}, index });
   }
 

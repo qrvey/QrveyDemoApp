@@ -51,7 +51,7 @@ export class ReportsComponent implements OnInit {
   }
 
   getReports() {
-    this.backend.getReports({ userid: this.loggedUser.qrvey_info.userid, appid: this.loggedUser.qrvey_info.appid, getshared: this.share_report_page }).subscribe({
+    this.backend.getReports({ userid: this.loggedUser.qrvey_info.userid, appid: this.loggedUser.qrvey_info.appid, getshared: this.share_report_page, system_user_id: this.loggedUser.email }).subscribe({
       next: (response: any) => {
         this.reports = response.Items;
       },
@@ -327,6 +327,8 @@ export class ReportsComponent implements OnInit {
 
   closeDeleteReportModal() {
     this.delete_report_modal = false;
+    this.deleting_report = false;
+    
     this.confirmation_modal_text = {
       title: "Delete Report",
       message: "",
