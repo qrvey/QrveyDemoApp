@@ -9,6 +9,8 @@
 # Node
 /node_modules
 backend/node_modules
+backend/*.zip
+backend/public
 npm-debug.log
 yarn-error.log
 

@@ -119,10 +119,28 @@ export class ReportsComponent implements OnInit {
 
   buildQrveyPage(token: any, builder: boolean) {
     this.loading_widget = false;
+    const MAIN_COLOR = this.loggedUser.organization.hexcolor;
     (window as any).qrveyPageConfig = {
       qv_token: token,
       domain: environment.qrvey_domain,
-      customCSSRules: ''
+      customCSSRules: '',
+      styles: {
+        main_color: MAIN_COLOR,
+        pageView: {
+          canvasButtonBackgroundColor: MAIN_COLOR,
+          canvasDatepickerFontColor: MAIN_COLOR,
+          canvasDatepickerIconSelectorsColor: MAIN_COLOR,
+          canvasValuelistFontColor: MAIN_COLOR,
+          canvasValuelistIconSelectorsColor: MAIN_COLOR,
+          navigationBackgroundColor: MAIN_COLOR,
+          filterIconBackgroundColor: MAIN_COLOR,
+          pageViewButtonBackgroundColor: MAIN_COLOR,
+          tabsBackgroundColor: MAIN_COLOR
+        },
+        panel: {
+          mainColor: MAIN_COLOR
+        }
+      }
     };
     (window as any).customEUStyle = '';
     let page_view_tag = !builder ? document.createElement("qrvey-end-user") : document.createElement("qrvey-builders");
@@ -262,7 +280,7 @@ export class ReportsComponent implements OnInit {
       updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false };
       this.updatePageStatus(updates, true, () => this.loadPageWidget(this.selected_report));
     } else {
-      updates = { editing: true };
+      updates = { editing: true, published: true, updateTo: "Published", forceUpdate: true };
       this.updatePageStatus(updates, true, () => this.loadPageWidget(this.selected_report, true));
     }
   }
@@ -273,9 +291,11 @@ export class ReportsComponent implements OnInit {
 
   newReportAdded(report: any) {
     this.getReports();
-    this.view_mode = this.view_mode == "edit" ? "view" : "edit";
+    if(this.view_mode == "edit"){
+      this.view_mode = "view";
+    }
     this.selected_report = report;
-    this.actionClicked(this.view_mode == "edit" ? "view" : "edit");
+    this.actionClicked("edit");
   }
 
   reportOption(detail: any) {

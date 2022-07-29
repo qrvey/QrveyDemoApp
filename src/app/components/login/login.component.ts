@@ -54,7 +54,6 @@ export class LoginComponent implements OnInit {
     this.error = null;
     this.validating = true;
     this.user.authUser({ email: this.user_email }).subscribe((response: any) => {
-      console.log(response);
       localStorage.setItem('loggedUser', JSON.stringify(response));
       this.user.setUser(response);
       this.SetColorService.setColor(this.user.getUser());
