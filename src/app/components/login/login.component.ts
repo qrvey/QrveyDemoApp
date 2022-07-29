@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user/user.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { SetColorService } from 'src/app/services/set-color/set-color.service';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +15,15 @@ export class LoginComponent implements OnInit {
   error: any = null;
   validating: boolean = false;
 
-  constructor(private user: UserService, private router: Router) {
+  constructor(private user: UserService, private router: Router, private SetColorService: SetColorService) {
     if (this.user.getUser()) {
+      this.SetColorService.setColor(this.user.getUser());
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit(): void {
+    this.SetColorService.setColor();
   }
 
   signIn() { //backend auth
@@ -31,6 +34,7 @@ export class LoginComponent implements OnInit {
       console.log(response);
       localStorage.setItem('loggedUser', JSON.stringify(response));
       this.user.setUser(response);
+      this.SetColorService.setColor(this.user.getUser());
       if(response.type == "viewer"){
         this.router.navigate(['/shared-reports']);
       }else{

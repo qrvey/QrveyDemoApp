@@ -21,6 +21,8 @@ export class TopbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    let logo: HTMLElement = (document as any).querySelector("#logo-place");
+    logo.setAttribute("style", `background-image:url(./assets/${this.loggedUser.organization.logo}); width: ${this.loggedUser.organization.logowidth}px`);
   }
 
   logout() {

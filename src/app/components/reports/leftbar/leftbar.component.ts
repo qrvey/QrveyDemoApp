@@ -34,8 +34,22 @@ export class LeftbarComponent implements OnInit {
     this.newReport.emit();
   }
 
-  reportOption(option: string, pageid: string, name: string, index: number) {
-    this.reportOptionClicked.emit({ option, pageid, name, index });
+  reportOption(option: string, report: any, index?: number) {
+    this.reportOptionClicked.emit({ option, report: {...report}, index });
+  }
+
+  renameReport(report: any){
+    report.renaming = true;
+    report["new_name"] = ''+report.name; 
+    report.selected = true;
+    setTimeout(() => {
+      (document as any).getElementById("input-name-"+report.pageid).select();  
+      (document as any).getElementById("input-name-"+report.pageid).focus();  
+    }, 0);
+  }
+
+  onKey(event:any, option: string, report: any, index?: number ){
+    if(event.key == 'Enter' || event.keyCode == 13)  this.reportOption(option,report,index);
   }
 
 }

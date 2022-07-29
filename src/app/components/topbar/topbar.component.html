@@ -1,5 +1,5 @@
 <div class="main-topbar">
-    <div class="logo"></div>
+    <div class="logo" id="logo-place"></div>
     <nav *ngIf="loggedUser.type == 'admin'">
         <ul>
             <li [ngClass]="{'selected': selectedRoute == '/admin'}">

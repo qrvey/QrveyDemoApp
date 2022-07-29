@@ -1,3 +1,3 @@
 // mainvars
-$primary-color: #2E5DF4;
+$primary-color: var(--primary-color,#FFF);
 $secondary-color: #FFB75D;

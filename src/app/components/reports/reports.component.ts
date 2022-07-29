@@ -22,11 +22,13 @@ export class ReportsComponent implements OnInit {
   new_report_modal: boolean = false;
   delete_report_modal: boolean = false;
   loading_general_action: boolean = false;
+  deleting_report: boolean = false;
   confirmation_modal_text: any = {
     title: "Delete Report",
     message: "",
     action_id: null,
-    action_index: null
+    action_index: null,
+    confirm: "Confirm"
   }
 
   constructor(private user: UserService, private router: Router, private backend: BackendService) {
@@ -119,8 +121,10 @@ export class ReportsComponent implements OnInit {
     this.loading_widget = false;
     (window as any).qrveyPageConfig = {
       qv_token: token,
-      domain: environment.qrvey_domain
+      domain: environment.qrvey_domain,
+      customCSSRules: ''
     };
+    (window as any).customEUStyle = '';
     let page_view_tag = !builder ? document.createElement("qrvey-end-user") : document.createElement("qrvey-builders");
     page_view_tag.setAttribute("settings", "qrveyPageConfig");
     this.widgetContainer.append(page_view_tag);
@@ -189,7 +193,9 @@ export class ReportsComponent implements OnInit {
   updateReport(body: any, callback: any) {
     this.backend.updateReport(body).subscribe({
       next: (response) => {
-        this.selected_report = { ...response, selected: true };
+        if (!body.no_select) {
+          this.selected_report = { ...response, selected: true };
+        }
       },
       error: (e) => {
         console.log(e);
@@ -273,16 +279,45 @@ export class ReportsComponent implements OnInit {
   }
 
   reportOption(detail: any) {
-    if (this.loading_general_action) return;
+    if (this.loading_general_action || this.deleting_report) return;
     switch (detail.option) {
       case 'delete':
         this.delete_report_modal = true;
+        this.deleting_report = true;
         this.confirmation_modal_text = {
           title: "Delete Report",
-          message: `This cannot be undone. Are you sure you want to delete report "${detail.name}"?`,
-          action_id: detail.pageid,
-          action_index: detail.index
+          message: `This cannot be undone. Are you sure you want to delete report "${detail.report.name}"?`,
+          action_id: detail.report.pageid,
+          action_index: detail.index,
+          confirm: "Confirm"
         };
+        break;
+
+      case 'rename':
+        let report_to_update = this.reports[detail.index];
+        report_to_update.name = detail.report.new_name;
+        report_to_update.renaming = false;
+        report_to_update.selected = false;
+        delete report_to_update.new_name;
+        const updatebody = {
+          userid: this.loggedUser.qrvey_info.userid,
+          appid: this.loggedUser.qrvey_info.appid,
+          pageid: report_to_update.pageid,
+          no_select: true,
+          qbody: report_to_update
+        };
+        this.loading_general_action = true;
+        this.updateReport(updatebody, () => {
+          this.loading_general_action = false;
+          this.reports[detail.index].name = report_to_update.name;
+        })
+
+        break;
+
+      case 'duplicate':
+        console.log(detail);
+        this.loading_general_action = true;
+        this.createFromTemplate(detail.report);
         break;
 
       default:
@@ -301,14 +336,13 @@ export class ReportsComponent implements OnInit {
   }
 
   deleteSelectedReport() {
-    if (this.loading_general_action) return;
-    this.loading_general_action = true;
     const deletereportbody = {
       userid: this.loggedUser.qrvey_info.userid,
       appid: this.loggedUser.qrvey_info.appid,
       pageid: this.confirmation_modal_text.action_id
     }
     let no_error = false;
+    this.confirmation_modal_text.confirm = "Deleting...";
     this.backend.deleteReport(deletereportbody).subscribe({
       next: (response: any) => {
         no_error = true
@@ -317,23 +351,67 @@ export class ReportsComponent implements OnInit {
         console.log(e)
       },
       complete: () => {
-        this.loading_general_action = false;
-        if(no_error){
+        this.deleting_report = false;
+        if (no_error) {
           this.deleteReportArray(this.confirmation_modal_text.action_index);
         }
       }
     })
   }
 
-  deleteReportArray(index: number){
+  deleteReportArray(index: number) {
     let new_reports = [...this.reports];
     new_reports.splice(index, 1);
     this.reports = new_reports;
-    if(this.selected_report.pageid == this.confirmation_modal_text.action_id){
+    if (this.selected_report && this.selected_report.pageid == this.confirmation_modal_text.action_id) {
       this.widgetContainer.innerHTML = '';
       this.selected_report = null;
     }
     this.closeDeleteReportModal();
+  }
+
+  createFromTemplate(report: any) {
+    const clonereportbody = {
+      userid: this.loggedUser.qrvey_info.userid,
+      appid: this.loggedUser.qrvey_info.appid,
+      pageid: report.pageid,
+      qbody: {
+        pageName: 'Copy of ' + report.name
+      }
+    }
+    let new_report_model: any;
+    this.backend.cloneReport(clonereportbody).subscribe({
+      next: (response) => {
+        new_report_model = response;
+      },
+      error: (e: any) => {
+        console.log(e);
+      },
+      complete: () => {
+        const rmbody = {
+          userid: this.loggedUser.qrvey_info.userid,
+          appid: this.loggedUser.qrvey_info.appid,
+          pageid: new_report_model.pageId
+        };
+        let updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false, system_user_id: this.loggedUser.email, shared: false };
+        this.getReportAndMerge(rmbody, updates, (rmresponse: any) => {
+          const updatebody = {
+            userid: this.loggedUser.qrvey_info.userid,
+            appid: this.loggedUser.qrvey_info.appid,
+            pageid: new_report_model.pageId,
+            no_select: true,
+            qbody: rmresponse
+          };
+          this.updateReport(updatebody, (updtresponse: any) => {
+            this.loading_general_action = false;
+            if(!this.share_report_page){
+              this.getReports();
+            }
+          })
+        })
+
+      }
+    });
   }
 
 }
