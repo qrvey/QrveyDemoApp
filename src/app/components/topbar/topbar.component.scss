@@ -163,6 +163,7 @@
         }
 
         &:hover {
+            cursor: pointer;
             >.sub-menu {
                 display: block;
             }

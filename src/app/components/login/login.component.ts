@@ -49,6 +49,10 @@ export class LoginComponent implements OnInit {
     this.SetColorService.setColor();
   }
 
+  onKey(event:any){
+    if(event.key == 'Enter' || event.keyCode == 13)  this.signIn();
+  }
+
   signIn() { //backend auth
     if (!this.user_email || !this.user_password || this.validating) return;
     this.error = null;
@@ -77,9 +81,12 @@ export class LoginComponent implements OnInit {
   }
 
   buildHelpHTML(users: any) {
-    let HTML = `<b>Here's a list of existing users you can use to test this demo app!</b><br><br>`;
+    let HTML = `Here's a list of existing users you can use to test this demo app!<br><br>`;
+    let org_id: number = 0;
     users.forEach((u: any, i: number) => {
       if (u.type != 'admin') {
+        if(u.organization.id != org_id && i > 1) HTML += `<b>------------</b><br><br>`;
+        org_id = u.organization.id;
         HTML += `<b>Name</b>: ${u.name}<br/>`;
         HTML += `<b>Email</b>: ${u.email}<br/>`;
         HTML += `<b>Password</b>: 123456<br/>`;
