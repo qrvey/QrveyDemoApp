@@ -119,36 +119,15 @@ export class ReportsComponent implements OnInit {
 
   buildQrveyPage(token: any, builder: boolean) {
     this.loading_widget = false;
-    const MAIN_COLOR = this.loggedUser.organization.hexcolor;
+
     (window as any).qrveyPageConfig = {
       qv_token: token,
-      domain: environment.qrvey_domain,
-      customCSSRules: '',
-      styles: {
-        main_color: MAIN_COLOR,
-        pageView: {
-          canvasButtonBackgroundColor: MAIN_COLOR,
-          canvasDatepickerFontColor: MAIN_COLOR,
-          canvasDatepickerIconSelectorsColor: MAIN_COLOR,
-          canvasValuelistFontColor: MAIN_COLOR,
-          canvasValuelistIconSelectorsColor: MAIN_COLOR,
-          navigationBackgroundColor: MAIN_COLOR,
-          filterIconBackgroundColor: MAIN_COLOR,
-          pageViewButtonBackgroundColor: MAIN_COLOR,
-          tabsBackgroundColor: MAIN_COLOR
-        },
-        panel: {
-          mainColor: MAIN_COLOR
-        }
-      }
+      domain: environment.qrvey_domain
     };
     (window as any).customEUStyle = '';
     let page_view_tag = !builder ? document.createElement("qrvey-end-user") : document.createElement("qrvey-builders");
     page_view_tag.setAttribute("settings", "qrveyPageConfig");
     this.widgetContainer.append(page_view_tag);
-    if (builder) {
-      (window as any).runEndUser(true /* True if it's pageBuilder, False if it's pageView widget */, true /* False if you want to set your on CSS, True if you want for the script to apply a default pageBuilder Limited view */);
-    }
   }
 
   loadPageWidget(report: any, builder?: boolean) {
@@ -171,6 +150,7 @@ export class ReportsComponent implements OnInit {
     this.getDatasetRLS(dbody, (dresponse: any) => {
       let permissions = dresponse;
       let asset_permissions = {};
+      let clientid = null;
       if (builder) {
         asset_permissions = {
           pages: {
@@ -180,12 +160,51 @@ export class ReportsComponent implements OnInit {
           }
         }
       }
+
+      if (this.loggedUser.type == 'viewer') clientid = this.loggedUser.email;
+
+      const MAIN_COLOR = this.loggedUser.organization.hexcolor;
       const jwtbody = {
         userid: this.loggedUser.qrvey_info.userid,
         appid: this.loggedUser.qrvey_info.appid,
         pageid: report.pageid,
         permissions,
-        asset_permissions
+        asset_permissions,
+        clientid,
+        styles: {
+          main_color: MAIN_COLOR,
+          pageView: {
+            canvasButtonBackgroundColor: MAIN_COLOR,
+            canvasDatepickerFontColor: MAIN_COLOR,
+            canvasDatepickerIconSelectorsColor: MAIN_COLOR,
+            canvasValuelistFontColor: MAIN_COLOR,
+            canvasValuelistIconSelectorsColor: MAIN_COLOR,
+            navigationBackgroundColor: MAIN_COLOR,
+            filterIconBackgroundColor: MAIN_COLOR,
+            pageViewButtonBackgroundColor: MAIN_COLOR,
+            tabsBackgroundColor: MAIN_COLOR
+          },
+          panel: {
+            mainColor: MAIN_COLOR
+          }
+        },
+        featurePermission: {
+          navigation: {
+            hideNavigationTab: true,
+          },
+          userManagement: {
+            hideUserManagementTab: true
+          },
+          pagesAndApplication: {
+            hidePublishAppButton: true,
+            hidePublishPageButton: false,
+            hideCopyPageLink: true,
+            hideLaunchButton: true,
+            hideCreateManagePages: true,
+            hidePageStatus: true,
+            hidePagesBar: true
+          }
+        }
       }
       this.getJWT(jwtbody, (jwtresponse: any) => {
         this.buildQrveyPage(jwtresponse, builder as boolean);
@@ -272,13 +291,20 @@ export class ReportsComponent implements OnInit {
     })
   }
 
-  actionClicked(m: string) {
-    if (this.view_mode == m) return;
+  actionClicked(m: string, from_new?: boolean) {
+    // debugger;
+    if (this.view_mode == m && !from_new) return;
     this.view_mode = m;
     let updates: any;
     if (m == 'view') {
       updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false };
-      this.updatePageStatus(updates, true, () => this.loadPageWidget(this.selected_report));
+      this.updatePageStatus(updates, true, () => {
+        if(from_new){
+          this.actionClicked("edit", true);
+        }else{
+          this.loadPageWidget(this.selected_report)
+        }
+      });
     } else {
       updates = { editing: true, published: true, updateTo: "Published", forceUpdate: true };
       this.updatePageStatus(updates, true, () => this.loadPageWidget(this.selected_report, true));
@@ -291,11 +317,8 @@ export class ReportsComponent implements OnInit {
 
   newReportAdded(report: any) {
     this.getReports();
-    if(this.view_mode == "edit"){
-      this.view_mode = "view";
-    }
     this.selected_report = report;
-    this.actionClicked("edit");
+    this.actionClicked("view", true);
   }
 
   reportOption(detail: any) {
@@ -348,7 +371,7 @@ export class ReportsComponent implements OnInit {
   closeDeleteReportModal() {
     this.delete_report_modal = false;
     this.deleting_report = false;
-    
+
     this.confirmation_modal_text = {
       title: "Delete Report",
       message: "",
@@ -426,7 +449,7 @@ export class ReportsComponent implements OnInit {
           };
           this.updateReport(updatebody, (updtresponse: any) => {
             this.loading_general_action = false;
-            if(!this.share_report_page){
+            if (!this.share_report_page) {
               this.getReports();
             }
           })

@@ -5,6 +5,7 @@
 <div class="side-content">
     <div class="widget-wrapper"></div>
     <app-loading *ngIf="loading_widget" [size]=0.8></app-loading>
+    <p class="blank" *ngIf="!selected_report">Please, select a Report.</p>
 </div>
 
 <app-new-report *ngIf="new_report_modal" [loggedUser]="loggedUser" [reports]="reports" (newReportClose)="newReportModal()" (newReport)="newReportAdded($event)"></app-new-report>
