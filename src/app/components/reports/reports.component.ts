@@ -130,11 +130,33 @@ export class ReportsComponent implements OnInit {
     this.widgetContainer.append(page_view_tag);
   }
 
-  loadPageWidget(report: any, builder?: boolean) {
+  comparePublishedVersions(report: any){
+    // Here we doublecheck if the version that was edited is different from the version that is published
+    // If not, then we update the published version
     if (this.loading_widget && report.sidebar) return;
     this.loadingOn();
     this.selected_report = report;
     delete this.selected_report.sidebar;
+    const comparebody = {
+      userid: this.loggedUser.qrvey_info.userid,
+      appid: this.loggedUser.qrvey_info.appid,
+      pageid: this.selected_report.pageid,
+      qbody: {
+        version: "LATEST"
+      }
+    };
+    this.compareReporVersions(comparebody, (r:any) => {
+      if(r.isEquivalent){
+        // If the versions are equal, the widget gets embedded
+        this.loadPageWidget(report);
+      }else{
+        // If not, then using the widget actions component, we updated the published version before embedding
+        this.actionClicked("view", true, true);
+      }
+    })
+  }
+
+  async loadPageWidget(report: any, builder?: boolean) {
     if (this.view_mode == 'edit') {
       builder = true;
     }
@@ -244,12 +266,16 @@ export class ReportsComponent implements OnInit {
   }
 
   compareReporVersions(body: any, callback: any) {
+    let r:any;
     this.backend.compareReport(body).subscribe({
+      next: (response) => {
+        r = response;
+      },
       error: (e) => {
         console.log(e)
       },
       complete: () => {
-        callback();
+        callback(r);
       }
     });
   }
@@ -272,15 +298,7 @@ export class ReportsComponent implements OnInit {
       };
 
       this.updateReport(updatebody, () => {
-        const comparebody = {
-          userid: this.loggedUser.qrvey_info.userid,
-          appid: this.loggedUser.qrvey_info.appid,
-          pageid: this.selected_report.pageid,
-          qbody: {
-            version: "LATEST"
-          }
-        };
-        this.compareReporVersions(comparebody, () => callback())
+        callback();
       })
     })
   }
@@ -291,7 +309,7 @@ export class ReportsComponent implements OnInit {
     })
   }
 
-  actionClicked(m: string, from_new?: boolean) {
+  actionClicked(m: string, from_new?: boolean, checked_version?: boolean) {
     // debugger;
     if (this.view_mode == m && !from_new) return;
     this.view_mode = m;
@@ -299,7 +317,7 @@ export class ReportsComponent implements OnInit {
     if (m == 'view') {
       updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false };
       this.updatePageStatus(updates, true, () => {
-        if(from_new){
+        if(from_new && !checked_version){
           this.actionClicked("edit", true);
         }else{
           this.loadPageWidget(this.selected_report)

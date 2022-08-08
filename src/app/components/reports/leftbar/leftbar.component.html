@@ -12,7 +12,7 @@
 
         <li 
         *ngFor="let report of reports; let i = index" 
-        [ngClass]="{'selected' : report.selected || (current_report && report.pageid == current_report.pageid)}"
+        [ngClass]="{'selected' : report.pageid == current_report?.pageid}"
         [ngStyle]="{'z-index': reports.length - i}"
         >
             <span class="selected-bar"></span>
