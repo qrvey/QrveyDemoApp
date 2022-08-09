@@ -310,7 +310,6 @@ export class ReportsComponent implements OnInit {
   }
 
   actionClicked(m: string, from_new?: boolean, checked_version?: boolean) {
-    // debugger;
     if (this.view_mode == m && !from_new) return;
     this.view_mode = m;
     let updates: any;
