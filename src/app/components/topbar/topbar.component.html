@@ -1,0 +1,57 @@
+<div class="main-topbar">
+    <div class="logo" id="logo-place"></div>
+    <nav *ngIf="loggedUser.type == 'admin'">
+        <ul>
+            <li [ngClass]="{'selected': selectedRoute == '/admin'}">
+                <a [routerLink]="['/admin']">
+                    <span class="admin-icon"></span>
+                    Admin
+                </a>
+            </li>
+            <li [ngClass]="{'selected': selectedRoute == '/datasets'}">
+                <a [routerLink]="['/datasets']">
+                    <span class="dataset-icon"></span>
+                    Datasets
+                </a>
+            </li>
+            <li [ngClass]="{'selected': selectedRoute == '/'}">
+                <a [routerLink]="['/']">
+                    <span class="reports-icon"></span>
+                    Reports
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <input class="searchbar" placeholder="Search" />
+
+    <div class="user">
+        <span class="name">{{loggedUser.name}}</span>
+        <span class="profile-pic" [ngStyle]="{'background-image': avatarURL}"></span>
+
+        <div class="sub-menu">
+            <span (click)="logout()">Log Out</span>
+        </div>
+    </div>
+
+</div>
+<div class="sub-topbar" *ngIf="!noSecondBar">
+    <nav *ngIf="loggedUser.type == 'composer'">
+        <ul>
+            <li [ngClass]="{'selected': selectedRoute == '/'}">
+                <a [routerLink]="['/']">My Reports</a>
+            </li>
+            <li [ngClass]="{'selected': selectedRoute == '/shared-reports'}">
+                <a [routerLink]="['/shared-reports']">Shared Reports</a>
+            </li>
+        </ul>
+    </nav>
+
+    <nav *ngIf="loggedUser.type != 'composer'">
+        <ul>
+            <li>
+                <a class="title">Shared Reports</a>
+            </li>
+        </ul>
+    </nav>
+</div>

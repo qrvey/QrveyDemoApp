@@ -1,0 +1,161 @@
+@import '../../../global/vars.scss';
+
+.left-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    border: 1px solid rgba(222, 222, 222, 1);
+    border-left: none;
+    background-color: rgba(255, 255, 255, 1);
+    box-sizing: border-box;
+
+    .create-report {
+        position: relative;
+        display: block;
+        height: 30px;
+        box-sizing: border-box;
+        border-bottom: 1px solid rgba(222, 222, 222, 1);
+        color: $primary-color;
+        font-size: 13px;
+        font-weight: 400;
+        font-style: normal;
+        letter-spacing: 0px;
+        text-align: left;
+        line-height: 30px;
+        padding-left: 19px;
+
+        span:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+
+    .reports-nav {
+        display: block;
+        position: absolute;
+        height: calc(100% - 30px);
+        overflow: auto;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        z-index: 1;
+
+        li {
+            width: 100%;
+            height: 30px;
+            position: relative;
+
+            &.no-reports{
+                pointer-events: none;
+                a{
+                    font-style: italic;
+                    font-size: 13px;
+                    opacity: 0.5;
+                }
+            }
+
+            a {
+                display: inline-block;
+                position: relative;
+                width: 100%;
+                line-height: 30px;
+                color: rgba(71, 71, 71, 1);
+                font-size: 12px;
+                font-weight: 400;
+                font-style: normal;
+                letter-spacing: 0px;
+                text-align: left;
+                box-sizing: border-box;
+                padding-left: 19px;
+                text-decoration: none;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-right: 35px;
+
+                &.base-page {
+                    font-weight: 500;
+                }
+            }
+
+            input{
+                position: absolute;
+                margin-top: 7px;
+                margin-left: 18px;
+                width: 70%;
+                border: 0;
+                font-size: 12px;
+                outline: none;
+                background-color: transparent;
+                border-bottom: 1px solid rgba(0,0,0,0.2)
+            }
+
+
+            .selected-bar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 4px;
+                background-color: $primary-color;
+                display: none;
+            }
+
+            &.selected {
+                background-color: rgba(46, 93, 244, 0.1);
+
+                a {
+                    background-color: rgba(46, 93, 244, 0.1);
+                }
+
+                .selected-bar {
+                    display: block;
+                }
+            }
+
+            &:hover {
+                background-color: rgba(46, 93, 244, 0.1);
+                cursor: pointer;
+                .report-options{
+                    display: block;
+                }
+            }
+        }
+    }
+
+    .report-options{
+        position: absolute;
+        width: 35px;
+        height: 30px;
+        right: 0px;
+        top: 0px;
+        display: none;
+
+        .three-dot{
+            position: relative;
+            display: block;
+            width: 3px;
+            height: 12px;
+            left: 50%;
+            margin-left: -2px;
+            top: 6px;
+            svg path{
+                fill: $primary-color;
+            }
+        }
+
+        .sub-menu{
+            right: 50%;
+            top: 24px;
+        }
+
+        &:hover {
+            >.sub-menu {
+                display: block;
+            }
+        }
+    }
+}

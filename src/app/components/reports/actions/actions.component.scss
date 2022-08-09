@@ -1,0 +1,99 @@
+@import '../../../global/vars.scss';
+
+.report-actions {
+    font-size: 13px;
+    color: #474747;
+    line-height: 45px;
+    padding-right: 20px;
+
+    &.disabled{
+        opacity: 0;
+    }
+
+    span,
+    div {
+        display: inline-block;
+    }
+
+    .status {
+        margin-right: 10px;
+    }
+
+    .view-edit {
+        width: 158px;
+        position: relative;
+        height: 25px;
+        line-height: 24px;
+        border-radius: 5px;
+        border: 1px solid $primary-color;
+        box-sizing: border-box;
+        top: 0px;
+
+        span {
+            position: relative;
+            width: 50%;
+            height: 100%;
+            text-align: center;
+            box-sizing: border-box;
+            opacity: 0.5;
+            color: $primary-color;
+
+            &:first-child {
+                border-radius: 3px 0px 0px 3px;
+            }
+
+            &:last-child {
+                border-radius: 0px 3px 3px 0px;
+            }
+
+            &.selected {
+                background-color: $primary-color;
+                color: #FFF;
+                opacity: 1;
+            }
+
+            &:hover{
+                cursor: pointer;
+            }
+        }
+
+        &.view-only{
+            width: 79px;
+            span{
+                width: 100%;
+            }
+        }
+    }
+
+    .share {
+        margin-left: 10px;
+        border-radius: 5px;
+        opacity: 1;
+        background-color: $primary-color;
+        height: 25px;
+        line-height: 25px;
+        padding: 0px 10px;
+        padding-left: 28px;
+        color: #FFF;
+        position: relative;
+
+        i {
+            position: absolute;
+            width: 10px;
+            height: 11px;
+            background-image: url(../../../../assets/icons/share.svg);
+            background-repeat: no-repeat;
+            background-size: 10px auto;
+            background-position: center;
+            left: 10px;
+            top: 7px;
+            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(316deg) brightness(103%) contrast(104%);
+        }
+
+        &:hover {
+            cursor: pointer;
+            opacity: 0.9;
+        }
+    }
+
+}

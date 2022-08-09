@@ -1,0 +1,26 @@
+<div class="modal-back" (click)="triggerCloseReport()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+        <div class="header">
+            <h5 class="title">Create New Report</h5>
+            <span class="close-modal" (click)="triggerCloseReport()"></span>
+        </div>
+        <div class="content">
+            <fieldset>
+                <label for="">Report Name</label>
+                <input type="text" placeholder="Enter name" [(ngModel)]="report_name">
+            </fieldset>
+            <fieldset>
+                <label for="">Template</label>
+                <select name="" id="" [(ngModel)]="template">
+                    <option value="">Blank Report</option>
+                    <option *ngFor="let report of reports" value="{{report.pageid}}">{{report.name}}</option>
+                </select>
+            </fieldset>
+        </div>
+        <div class="footer">
+            <button class="button secondary" (click)="triggerCloseReport()">Cancel</button>
+            <button class="button" (click)="createReport()">{{create_button_label}}</button>
+        </div>
+    </div>
+</div>
+

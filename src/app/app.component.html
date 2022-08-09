@@ -1,0 +1,4 @@
+<app-topbar [noSecondBar]="hideBar" [selectedRoute]="currentRoute" *ngIf="loggedUser()" ></app-topbar>
+<div [ngClass]="{'content' : loggedUser() && !hideBar, 'content-nobar' : loggedUser() && hideBar}">
+    <router-outlet></router-outlet>
+</div>

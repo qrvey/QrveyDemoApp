@@ -1,0 +1,15 @@
+<app-actions *ngIf="loggedUser.type != 'viewer'" [selectedReport]="selected_report" [mode]="view_mode" [shareReportsPages]="share_report_page" (actionClicked)="actionClicked($event)" (shareReport)="shareReport($event)" ></app-actions>
+
+<app-leftbar [loggedUser]="loggedUser" [reports]="reports" [shareReportsPages]="share_report_page" [loading]="loading" [current_report]="selected_report" (reportClicked)="comparePublishedVersions($event)" (newReport)="newReportModal()" (reportOptionClicked)="reportOption($event)"></app-leftbar>
+
+<div class="side-content">
+    <div class="widget-wrapper"></div>
+    <app-loading *ngIf="loading_widget" [size]=0.8></app-loading>
+    <p class="blank" *ngIf="!selected_report">Please, select a Report.</p>
+</div>
+
+<app-new-report *ngIf="new_report_modal" [loggedUser]="loggedUser" [reports]="reports" (newReportClose)="newReportModal()" (newReport)="newReportAdded($event)"></app-new-report>
+
+<app-confirmation-modal *ngIf="delete_report_modal" [texts]="confirmation_modal_text" (closeConfirmationModal)="closeDeleteReportModal()" (confirmAction)="deleteSelectedReport()"></app-confirmation-modal>
+
+<app-loading class="full" *ngIf="loading_general_action" [size]=0.8></app-loading>
