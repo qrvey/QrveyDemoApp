@@ -219,7 +219,7 @@ export class ReportsComponent implements OnInit {
           },
           pagesAndApplication: {
             hidePublishAppButton: true,
-            hidePublishPageButton: false,
+            hidePublishPageButton: true,
             hideCopyPageLink: true,
             hideLaunchButton: true,
             hideCreateManagePages: true,
