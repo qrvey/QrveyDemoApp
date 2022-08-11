@@ -1,4 +1,4 @@
-<app-actions *ngIf="loggedUser.type != 'viewer'" [selectedReport]="selected_report" [mode]="view_mode" [shareReportsPages]="share_report_page" (actionClicked)="actionClicked($event)" (shareReport)="shareReport($event)" ></app-actions>
+<app-actions *ngIf="loggedUser.type != 'viewer'" [loggedUser]="loggedUser" [selectedReport]="selected_report" [mode]="view_mode" [shareReportsPages]="share_report_page" (actionClicked)="actionClicked($event)" (shareReport)="shareReport($event)" ></app-actions>
 
 <app-leftbar [loggedUser]="loggedUser" [reports]="reports" [shareReportsPages]="share_report_page" [loading]="loading" [current_report]="selected_report" (reportClicked)="comparePublishedVersions($event)" (newReport)="newReportModal()" (reportOptionClicked)="reportOption($event)"></app-leftbar>
 

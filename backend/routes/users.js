@@ -13,7 +13,9 @@ var users = [
       appid: "vt1gmR0cH"
     },
     organization: {
-      hexcolor: "#2E5DF4"
+      hexcolor: "#2E5DF4",
+      logo: "ica_header.svg",
+      id: '*',
     }
   },
   {

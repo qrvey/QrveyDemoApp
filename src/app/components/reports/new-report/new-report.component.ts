@@ -47,7 +47,7 @@ export class NewReportComponent implements OnInit {
       "published": true,
       "active": false,
       "editing": false,
-      "system_user_id": this.loggedUser.email, //Custom prop
+      "system_user_id": this.loggedUser.type == 'admin' ? null : this.loggedUser.email, //Custom prop, admins don't link reports with accounts, they all create baseline content
     }
 
     const newreportbody = {

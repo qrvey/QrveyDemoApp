@@ -160,7 +160,7 @@ export class ReportsComponent implements OnInit {
     if (this.view_mode == 'edit') {
       builder = true;
     }
-    if (!report.system_user_id && this.view_mode == 'edit') {
+    if (!report.system_user_id && this.loggedUser.type != 'admin' && this.view_mode == 'edit') {
       this.view_mode = 'view';
       builder = false;
     }
@@ -219,7 +219,7 @@ export class ReportsComponent implements OnInit {
           },
           pagesAndApplication: {
             hidePublishAppButton: true,
-            hidePublishPageButton: false,
+            hidePublishPageButton: true,
             hideCopyPageLink: true,
             hideLaunchButton: true,
             hideCreateManagePages: true,
@@ -455,7 +455,15 @@ export class ReportsComponent implements OnInit {
           appid: this.loggedUser.qrvey_info.appid,
           pageid: new_report_model.pageId
         };
-        let updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false, system_user_id: this.loggedUser.email, shared: false };
+        let updates = { 
+          editing: false, 
+          published: true, 
+          updateTo: "Published", 
+          forceUpdate: true, 
+          selected: false, 
+          system_user_id: this.loggedUser.type == 'admin' ? null : this.loggedUser.email, 
+          shared: false 
+        };
         this.getReportAndMerge(rmbody, updates, (rmresponse: any) => {
           const updatebody = {
             userid: this.loggedUser.qrvey_info.userid,

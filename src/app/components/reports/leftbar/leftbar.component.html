@@ -17,7 +17,7 @@
         >
             <span class="selected-bar"></span>
 
-            <a *ngIf="!report.renaming" (click)="selectReport(report)" [ngClass]="{'base-page':!report.system_user_id}" title="{{report.name}}">{{report.name}}{{!report.system_user_id ? '*' : ''}}</a>
+            <a *ngIf="!report.renaming" (click)="selectReport(report)" [ngClass]="{'base-page':!report.system_user_id && loggedUser.type != 'admin'}" title="{{report.name}}">{{report.name}}{{!report.system_user_id && loggedUser.type != 'admin' ? '*' : ''}}</a>
 
             <input *ngIf="report.renaming" type="text" id="input-name-{{report.pageid}}" [(ngModel)]="report.new_name" (blur)="reportOption('rename', report, i )" (keyup)="onKey($event, 'rename', report, i )">
 

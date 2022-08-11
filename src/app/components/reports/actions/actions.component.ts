@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ActionsComponent implements OnInit {
 
+  @Input() loggedUser: any;
   @Input() selectedReport:any;
   @Input() mode: string = "view";
   @Input() shareReportsPages: any;
