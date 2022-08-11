@@ -1,0 +1,81 @@
+.admin-cards {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 1em;
+}
+
+.admin-card {
+    border-radius: 5px;
+    border: 1px solid rgba(222, 222, 222, 1);
+    background-color: rgba(255, 255, 255, 1);
+    height: 313px;
+    padding: 15px 20px;
+    position: relative;
+
+    .head {
+        width: 100%;
+        margin-bottom: 15px;
+
+        h6 {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            color: rgba(71, 71, 71, 1);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0px;
+            text-align: left;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
+        .extra-info {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: rgba(71, 71, 71, 1);
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0px;
+        }
+    }
+
+    .user-list {
+        position: relative;
+        margin-bottom: 15px;
+
+        .user {
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(237, 237, 237, 1);
+            color: rgba(71, 71, 71, 1);
+            font-size: 13px;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0px;
+            text-align: left;
+            margin-bottom: 10px;
+
+            .email {
+                float: right;
+                color: rgb(125, 125, 125);
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .details {
+        opacity: 1;
+        color: rgba(46, 93, 244, 1);
+        font-size: 13px;
+        font-weight: 500;
+        font-style: normal;
+        text-align: left;
+    }
+}

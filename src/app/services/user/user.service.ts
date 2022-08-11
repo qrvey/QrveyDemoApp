@@ -31,6 +31,10 @@ export class UserService {
     return this.httpClient.get('/users');
   }
 
+  public getTenantsAndUsers() {
+    return this.httpClient.get('/users/tenants-users');
+  }
+
   public avatarGenerator (name:string){
     return 'https://ui-avatars.com/api/?name=' + name.replace(' ', '+');
   }

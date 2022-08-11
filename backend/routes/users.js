@@ -214,6 +214,14 @@ router.get('/organizations', (req, res, next) => {
   return res.send(organizations);
 })
 
+router.get('/tenants-users', (req, res, next) => {
+  let org = [...organizations];
+  org.forEach( o => {
+    o['users'] = users.filter( u => u.organization.id == o.id)
+  })
+  return res.send(org);
+})
+
 router.post('/auth', (req, res, next) => {
   let { body } = req;
   console.log(body);

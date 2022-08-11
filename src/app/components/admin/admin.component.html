@@ -1,1 +1,24 @@
-<p>admin works!</p>
+<div class="admin-cards" *ngIf="!loading">
+    <div class="admin-card" *ngFor="let tenant of tenants; let i = index">
+        <div class="head">
+            <h6>{{tenant.name}}</h6>
+            <div class="extra-info">
+                <div class="users">
+                    <i></i>
+                    {{tenant.users.length}}
+                </div>
+                <span class="menu"></span>
+            </div>
+        </div>
+        <div class="user-list">
+            <div class="user" *ngFor="let user of tenant.users; let j = index">
+                <span class="name">{{user.name}}</span>
+                <span class="email">{{user.email}}</span>
+            </div>
+        </div>
+        <a class="details">View Details</a>
+    </div>
+</div>
+
+<app-loading class="full" *ngIf="loading" [size]=0.8></app-loading>
+

@@ -228,7 +228,7 @@ export class ReportsComponent implements OnInit {
           }
         }
       }
-      this.widgetContainer.style.cssText = `--qv-main-color: ${MAIN_COLOR}`;
+      this.widgetContainer.style.cssText = `--qv-main-color: ${MAIN_COLOR};  --qv-tab-bar-color: rgb(244, 246, 248); --qv-tab-font-color: #585858; --qv-secondary-color: #585858 !important;`;
       this.getJWT(jwtbody, (jwtresponse: any) => {
         this.buildQrveyPage(jwtresponse, builder as boolean);
       })
