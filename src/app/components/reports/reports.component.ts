@@ -228,6 +228,7 @@ export class ReportsComponent implements OnInit {
           }
         }
       }
+      this.widgetContainer.style.cssText = `--qv-main-color: ${MAIN_COLOR}`;
       this.getJWT(jwtbody, (jwtresponse: any) => {
         this.buildQrveyPage(jwtresponse, builder as boolean);
       })

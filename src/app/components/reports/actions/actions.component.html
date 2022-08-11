@@ -1,5 +1,5 @@
 <div class="report-actions" [ngClass]="{'disabled':!selectedReport}" *ngIf="!shareReportsPages">
-    <span class="status">
+    <span class="status" *ngIf="loggedUser.type != 'admin'">
         <b>Status:</b> {{selectedReport && selectedReport.shared ? "Public" : "Private"}}
     </span>
     <div class="view-edit" [ngClass]="{'view-only': selectedReport && (!selectedReport.system_user_id && loggedUser.type != 'admin')}">

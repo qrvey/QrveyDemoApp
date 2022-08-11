@@ -50,7 +50,7 @@
     <nav *ngIf="loggedUser.type != 'composer'">
         <ul>
             <li>
-                <a class="title">Shared Reports</a>
+                <a class="title">{{loggedUser.type == 'admin' ? 'Reports' : 'Shared Reports'}}</a>
             </li>
         </ul>
     </nav>

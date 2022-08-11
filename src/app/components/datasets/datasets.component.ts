@@ -32,7 +32,7 @@ export class DatasetsComponent implements OnInit {
   buildQrveyDataset(token: string){
     this.loading = false;
     this.widgetContainer = document.querySelector(".widget-wrapper");
-
+    this.widgetContainer.style.cssText = `--qv-main-color: ${this.loggedUser.organization.hexcolor}`;
     (window as any).qrveyDatasetConfig = {
       qv_token: token,
       domain: environment.qrvey_domain
