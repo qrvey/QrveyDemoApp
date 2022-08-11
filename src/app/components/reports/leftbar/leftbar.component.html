@@ -21,7 +21,7 @@
 
             <input *ngIf="report.renaming" type="text" id="input-name-{{report.pageid}}" [(ngModel)]="report.new_name" (blur)="reportOption('rename', report, i )" (keyup)="onKey($event, 'rename', report, i )">
 
-            <div class="report-options" *ngIf="!report.renaming">
+            <div class="report-options" *ngIf="!report.renaming && loggedUser.type != 'viewer'">
                 <span class="three-dot">
 
                     <svg width="3px" height="12px" viewBox="0 0 3 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
