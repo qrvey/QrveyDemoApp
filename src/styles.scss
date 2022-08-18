@@ -197,3 +197,14 @@ app-loading{
 .widget-wrapper {
     height: 100%;
 }
+
+.admin-cards {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 10px;
+    row-gap: 1em;
+    &.no-padding{
+        padding: 0px;
+    }
+}

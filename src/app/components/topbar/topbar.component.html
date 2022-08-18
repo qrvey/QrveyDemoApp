@@ -2,7 +2,7 @@
     <div class="logo" id="logo-place"></div>
     <nav *ngIf="loggedUser.type == 'admin'">
         <ul>
-            <li [ngClass]="{'selected': selectedRoute == '/admin'}">
+            <li [ngClass]="{'selected': selectedRoute.includes('/admin') }">
                 <a [routerLink]="['/admin']">
                     <span class="admin-icon"></span>
                     Admin

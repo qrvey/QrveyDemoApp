@@ -206,12 +206,52 @@ var organizations = [
   }
 ];
 
+var plans = [
+  {
+    id: 3,
+    name: "bronze",
+    package: [
+      {name: "Master Database", type: "Dataset"},
+      {name: "Reach Report", type: "Report"},
+      {name: "Sales 2022", type: "Report"}
+    ]
+  },
+  {
+    id: 2,
+    name: "silver",
+    package: [
+      {name: "Master Database", type: "Dataset"},
+      {name: "Reach Report", type: "Report"},
+      {name: "Sales 2022", type: "Report"},
+      {name: "Sales 2021", type: "Report"},
+      {name: "Customer Data", type: "Dataset"}
+    ]
+  },
+  {
+    id: 1,
+    name: "gold",
+    package: [
+      {name: "Master Database", type: "Dataset"},
+      {name: "Reach Report", type: "Report"},
+      {name: "Sales 2022", type: "Report"},
+      {name: "Sales 2021", type: "Report"},
+      {name: "Customer Data", type: "Dataset"},
+      {name: "Salesforce Database", type: "Dataset"},
+      {name: "Salesforce Report", type: "Report"},
+    ]
+  }
+]
+
 router.get('/', (req, res, next) => {
   return res.send(users)
 })
 
 router.get('/organizations', (req, res, next) => {
   return res.send(organizations);
+})
+
+router.get('/plans', (req, res, next) => {
+  return res.send(plans);
 })
 
 router.get('/tenants-users', (req, res, next) => {
@@ -240,11 +280,13 @@ router.get('/:userid', (req, res, next) => {
   return res.send(user);
 })
 
+
 router.get('/organizations/:organizationid', (req, res, next) => {
   let org = organizations.filter(u => u.id == req.params.organizationid)[0];
   if (!org) {
     res.status(500).send({ message: "Organization does not exist." });
   }
+  org['users'] = users.filter( u => u.organization.id == org.id)
   return res.send(org)
 })
 

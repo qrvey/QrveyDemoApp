@@ -15,6 +15,8 @@ import { DatasetsComponent } from './components/datasets/datasets.component';
 import { LoadingComponent } from './components/loading/loading.component';
 import { NewReportComponent } from './components/reports/new-report/new-report.component';
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
+import { CardComponent } from './components/admin/card/card.component';
+import { TenantInfoComponent } from './components/admin/tenant-info/tenant-info.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { ConfirmationModalComponent } from './components/confirmation-modal/conf
     DatasetsComponent,
     LoadingComponent,
     NewReportComponent,
-    ConfirmationModalComponent
+    ConfirmationModalComponent,
+    CardComponent,
+    TenantInfoComponent
   ],
   imports: [
     BrowserModule,

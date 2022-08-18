@@ -3,7 +3,7 @@
 ## Angular Set Up
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.6.
-User Node v16.15.0
+Use Node v16.15.0
 Go to the root folder and Run `npm i` 
 
 ## Backend Set Up

@@ -1,0 +1,37 @@
+<div class="tenant-info"  *ngIf="!loading">
+    <div class="back" [routerLink]="['/admin']">
+        <i class="back-icon"></i><a class="back">Back to Tenants</a>
+    </div>
+    
+    <h6>{{tenant.name}} Plan</h6>
+    <div class="admin-cards no-padding">
+        <app-admin-card *ngFor="let plan of plans; let i = index" [plan]="plan" [plan_template]="true" [tenant]="tenant"></app-admin-card>
+    </div>
+    <h6>{{tenant.name}} Users ({{tenant.users.length}})</h6>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>ID</th>
+                <th class="center">Viewer</th>
+                <th class="center">Editor</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of tenant.users; let i = index">
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.id}}</td>
+                <td class="center">
+                    <input type="radio" [checked]="user.type == 'viewer'" (click)="$event.preventDefault()">
+                </td>
+                <td class="center">
+                    <input type="radio" [checked]="user.type == 'composer'" (click)="$event.preventDefault()">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<app-loading class="full" *ngIf="loading" [size]=0.8></app-loading>

@@ -1,0 +1,110 @@
+.tenant-info {
+    padding: 20px;
+
+    .back {
+        display: inline-block;
+
+        a{
+            color: rgba(71, 71, 71, 1);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 0px;
+            text-align: left;
+            text-decoration: none;
+            margin-bottom: 18px;
+            display: inline-block;
+        }
+        
+        &:hover {
+            cursor: pointer;
+            a{
+                text-decoration: underline;
+            }
+        }
+
+        .back-icon{
+            position: relative;
+            display: inline-block;
+            width: 9px;
+            height: 17px;
+            background-image: url(../../../../assets/icons/back.svg);
+            background-repeat: no-repeat;
+            background-size: contain;
+            filter: invert(43%) sepia(77%) saturate(7052%) hue-rotate(223deg) brightness(100%) contrast(92%);
+            top: 4px;
+            margin-right: 8px;
+        }
+    }
+
+    
+
+    h6 {
+        color: rgba(71, 71, 71, 1);
+        font-size: 15px;
+        font-weight: 500;
+        font-style: normal;
+        letter-spacing: 0px;
+        text-align: left;
+        display: block;
+        padding: 0;
+        margin: 0;
+        margin-bottom: 10px;
+    }
+
+    .admin-cards {
+        margin-bottom: 20px;
+    }
+
+    table {
+        display: table;
+        width: 100%;
+        border-spacing: 0;
+        border: 1px solid rgb(222, 222, 222);
+        border-radius: 4px;
+        overflow: hidden;
+
+        th {
+            color: rgba(71, 71, 71, 1);
+            font-size: 13px;
+            font-weight: 500;
+            text-align: left;
+            background-color: rgb(244, 246, 248);
+            border-right: 1px solid rgb(222, 222, 222);
+            padding: 8px 10px;
+
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        td {
+            padding: 8px 10px;
+            color: rgba(71, 71, 71, 1);
+            font-size: 12px;
+            font-weight: 400;
+            font-style: normal;
+            letter-spacing: 0px;
+            text-align: left;
+            background-color: #FFF;
+            border-right: 1px solid rgb(222, 222, 222);
+            border-bottom: 1px solid rgb(222, 222, 222);
+            &:last-child {
+                border-right: none;
+            }
+            input{
+                width: 16px;
+                height: 16px;
+            }
+        }
+
+        .center{
+            text-align: center;
+        }
+
+        tr:last-child{
+            td{
+                border-bottom: none;
+            }
+        }
+    }
+}

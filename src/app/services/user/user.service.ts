@@ -35,6 +35,14 @@ export class UserService {
     return this.httpClient.get('/users/tenants-users');
   }
 
+  public getTenant(id:string) {
+    return this.httpClient.get('/users/organizations/' + id);
+  }
+
+  public getPlans() {
+    return this.httpClient.get('/users/plans');
+  }
+
   public avatarGenerator (name:string){
     return 'https://ui-avatars.com/api/?name=' + name.replace(' ', '+');
   }

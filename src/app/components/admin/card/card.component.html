@@ -1,0 +1,32 @@
+<div class="admin-card" *ngIf="!plan_template">
+    <div class="head">
+        <a class="title" [routerLink]="['tenant',tenant.id]">{{tenant.name}}</a>
+        <div class="extra-info">
+            <div class="users">
+                <i></i>
+                {{tenant.users.length}}
+            </div>
+        </div>
+    </div>
+    <div class="user-list">
+        <div class="user" *ngFor="let user of tenant.users; let j = index">
+            <span class="name">{{user.name}}</span>
+            <span class="email">{{user.email}}</span>
+        </div>
+    </div>
+    <a class="details" [routerLink]="['tenant',tenant.id]">View Details</a>
+</div>
+
+<div class="admin-card plan" *ngIf="plan_template">
+    <div class="head">
+        <input type="radio" [checked]="tenant.planid == plan.id" (click)="$event.preventDefault()"><a class="title">{{plan.name}}</a>
+        <div class="plan-color {{plan.name}}">
+        </div>
+    </div>
+    <div class="user-list">
+        <div class="user"  *ngFor="let item of plan.package; let j = index">
+            <span class="name check"><i></i>{{item.name}}</span>
+            <span class="email">{{item.type}}</span>
+        </div>
+    </div>
+</div>
