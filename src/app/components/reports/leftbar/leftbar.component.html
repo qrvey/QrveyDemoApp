@@ -5,7 +5,10 @@
         </span>
     </div>
     <ul class="reports-nav">
-
+        <li class="selected" *ngIf="loading">
+            <a>Loading...</a>
+        </li>
+        
         <li *ngIf="!loading && reports.length == 0" class="no-reports">
             <a>There are no reports.</a>
         </li>
@@ -39,8 +42,7 @@
                 </div>
             </div>
         </li>
-        <li class="selected" *ngIf="loading">
-            <a>Loading...</a>
-        </li>
+
+        
     </ul>
 </div>

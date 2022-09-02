@@ -17,6 +17,7 @@ import { NewReportComponent } from './components/reports/new-report/new-report.c
 import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 import { CardComponent } from './components/admin/card/card.component';
 import { TenantInfoComponent } from './components/admin/tenant-info/tenant-info.component';
+import { PublishComponent } from './components/reports/publish/publish.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { TenantInfoComponent } from './components/admin/tenant-info/tenant-info.
     NewReportComponent,
     ConfirmationModalComponent,
     CardComponent,
-    TenantInfoComponent
+    TenantInfoComponent,
+    PublishComponent
   ],
   imports: [
     BrowserModule,

@@ -122,6 +122,10 @@ button:hover {
             color: $primary-color;
             font-size: 18px;
             font-weight: 500;
+            width: calc(100% - 50px);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .close-modal {
@@ -207,4 +211,8 @@ app-loading{
     &.no-padding{
         padding: 0px;
     }
+}
+
+button.disabled{
+    opacity: 0.5;
 }

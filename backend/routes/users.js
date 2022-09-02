@@ -188,21 +188,33 @@ var organizations = [
     id: 187,
     planid: 1,
     hexcolor: "#BE1E2D",
-    logo: "AVStores.svg"
+    logo: "AVStores.svg",
+    qrvey_info: {
+      userid: "vc1xpuGjz",
+      appid: "7QPNzup4O"
+    }
   },
   {
     name: "Clover Collections, Co.",
     id: 189,
     planid: 2,
     hexcolor: "#22B573",
-    logo: "CloverCollection.svg"
+    logo: "CloverCollection.svg",
+    qrvey_info: {
+      userid: "K5aX7Ykvh",
+      appid: "hvrMRg551"
+    }
   },
   {
     name: "Volvo Model Replicas, Co",
     id: 144,
     planid: 3,
     hexcolor: "#254083",
-    logo: "VolvoModelReplicas.svg"
+    logo: "VolvoModelReplicas.svg",
+    qrvey_info: {
+      userid: "oYDACWI0C",
+      appid: "9ouUXHfDK"
+    }
   }
 ];
 

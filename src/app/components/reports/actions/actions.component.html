@@ -6,8 +6,13 @@
         <span [ngClass]="{'selected': mode == 'view'}" (click)="changeView('view')">View Mode</span>
         <span *ngIf="selectedReport && (selectedReport.system_user_id || loggedUser.type == 'admin')" [ngClass]="{'selected': mode == 'edit'}" (click)="changeView('edit')">Edit Mode</span>
     </div>
-    <span class="share" (click)="shareClicked()" *ngIf="selectedReport && selectedReport.system_user_id">
+    <span class="share" (click)="shareClicked()" *ngIf="selectedReport && selectedReport.system_user_id && loggedUser.type != 'admin'">
         <i></i>
-        {{selectedReport && selectedReport.shared ? "Unshare" : "Share"}}
+        {{selectedReport && selectedReport.shared && loggedUser.type != 'admin' ? "Unshare" : "Share"}}
+    </span>
+
+    <span class="share" (click)="publishClicked()" *ngIf="selectedReport && loggedUser.type == 'admin'">
+        <i></i>
+        Publish
     </span>
 </div>

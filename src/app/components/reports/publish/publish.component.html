@@ -1,0 +1,32 @@
+<div class="modal-back" (click)="triggerClosePublishReport()">
+    <div class="modal-box" (click)="closeTenantsDrop();$event.stopPropagation()">
+        <div class="header">
+            <h5 class="title">Publish Report: {{selectedReport?.name}}</h5>
+            <span class="close-modal" (click)="triggerClosePublishReport()"></span>
+        </div>
+        <div class="content">
+            <fieldset>
+                <label for="">Recipients</label>
+                <div id="tenants-drop" class="dropdown-check-list" tabindex="100">
+                    <span class="anchor" (click)="dropOptions($event)" [ngClass]="{'select':this.selected_tenants.length == 0}">{{selected_tenants_text}}</span>
+                    <ul class="items" (click)="$event.stopPropagation()">
+                        <li>
+                            <label for="t-all">
+                                <input type="checkbox" id="t-all" value="all" (change)="addRemoveTenant($event)" />All
+                            </label>
+                        </li>
+                        <li *ngFor="let t of tenants; let i = index" >
+                            <label for="t-{{t.id}}">
+                                <input class="tenants-checks" type="checkbox" id="t-{{t.id}}" value="{{t.id}}" (change)="addRemoveTenant($event)" />{{t.name}} 
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            </fieldset>
+        </div>
+        <div class="footer">
+            <button class="button secondary" (click)="triggerClosePublishReport()">Cancel</button>
+            <button class="button" (click)="publishReport()" [ngClass]="{'disabled':this.selected_tenants.length == 0}" [disabled]="this.selected_tenants.length == 0">Publish</button>
+        </div>
+    </div>
+</div>

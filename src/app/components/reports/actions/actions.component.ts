@@ -13,6 +13,7 @@ export class ActionsComponent implements OnInit {
   @Input() shareReportsPages: any;
   @Output() actionClicked: EventEmitter<any> = new EventEmitter();
   @Output() shareReport: EventEmitter<any> = new EventEmitter();
+  @Output() publishReport: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -25,6 +26,10 @@ export class ActionsComponent implements OnInit {
 
   shareClicked(){
     this.shareReport.emit( !this.selectedReport.shared );
+  }
+
+  publishClicked(){
+    this.publishReport.emit( this.selectedReport );
   }
 
 }

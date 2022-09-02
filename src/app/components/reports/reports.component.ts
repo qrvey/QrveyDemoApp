@@ -15,6 +15,7 @@ export class ReportsComponent implements OnInit {
   loading: boolean = true;
   loading_widget: boolean = false;
   reports: any[] = [];
+  tenants: any[] = [];
   selected_report: any = null;
   view_mode: string = 'view';
   widgetContainer: any;
@@ -23,6 +24,7 @@ export class ReportsComponent implements OnInit {
   delete_report_modal: boolean = false;
   loading_general_action: boolean = false;
   deleting_report: boolean = false;
+  publish_report_modal: boolean = false;
   confirmation_modal_text: any = {
     title: "Delete Report",
     message: "",
@@ -44,6 +46,10 @@ export class ReportsComponent implements OnInit {
         }
       }
     });
+
+    if (this.loggedUser.type == 'admin') {
+      this.getTenants();
+    }
   }
 
   ngOnInit(): void {
@@ -483,6 +489,28 @@ export class ReportsComponent implements OnInit {
 
       }
     });
+  }
+
+  getTenants(){
+    this.user.getTenantsAndUsers().subscribe({
+      next: (response:any) => {
+        this.tenants = response;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        // this.loading = false;
+      }
+    });
+  }
+
+  publishReport(report?: any){
+    this.publish_report_modal = true;
+  }
+
+  publishReportClose(){
+    this.publish_report_modal = false;
   }
 
 }
