@@ -12,6 +12,7 @@ export class TenantInfoComponent implements OnInit {
 
   tenant:any;
   loading: boolean = true;
+  change_load: boolean = false;
   plans:any;
 
   constructor(private user: UserService, private router: Router, private backend: BackendService, private route: ActivatedRoute) { 
@@ -47,6 +48,45 @@ export class TenantInfoComponent implements OnInit {
       },
       complete: () => {
         this.loading = false;
+      }
+    });
+  }
+
+  changeUserType(user:any, type:string, e:any){
+    if(user.type == type) {
+      e.preventDefault();
+      return;
+    }
+
+    this.change_load = true;
+
+    
+    this.user.changeUserType(user.id, type).subscribe({
+      next: (response:any) => {
+        user.type = type;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        this.change_load = false;
+      }
+    });
+
+  }
+
+  changeTenantPlan(info:any){
+    this.change_load = true;
+    this.user.changeTenantPlan(info.tenantid,info.planid).subscribe({
+      next: (response:any) => {
+        this.tenant.planid = info.planid;
+        this.change_load = false;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        this.change_load = false;
       }
     });
   }

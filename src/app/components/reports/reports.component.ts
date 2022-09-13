@@ -16,6 +16,7 @@ export class ReportsComponent implements OnInit {
   loading_widget: boolean = false;
   reports: any[] = [];
   tenants: any[] = [];
+  plans: any[] = [];
   selected_report: any = null;
   view_mode: string = 'view';
   widgetContainer: any;
@@ -48,7 +49,7 @@ export class ReportsComponent implements OnInit {
     });
 
     if (this.loggedUser.type == 'admin') {
-      this.getTenants();
+      this.getPlans();
     }
   }
 
@@ -505,12 +506,30 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  publishReport(report?: any){
+  getPlans(){
+    this.user.getPlans().subscribe({
+      next: (response:any) => {
+        this.plans = response;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        // this.loading = false;
+      }
+    });
+  }
+
+  publishReportModal(report?: any){
     this.publish_report_modal = true;
   }
 
   publishReportClose(){
     this.publish_report_modal = false;
+  }
+
+  publishReport(planid: any){
+    console.log(planid);
   }
 
 }

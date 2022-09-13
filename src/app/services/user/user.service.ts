@@ -47,4 +47,12 @@ export class UserService {
     return 'https://ui-avatars.com/api/?name=' + name.replace(' ', '+');
   }
 
+  public changeUserType(id:string,type:string){
+    return this.httpClient.put('/users',{id,type});
+  }
+
+  public changeTenantPlan(tenantid:string,planid:string){
+    return this.httpClient.put('/users/organizations/' + tenantid + '/changeplan',{planid});
+  }
+
 }

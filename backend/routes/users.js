@@ -1,261 +1,33 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
+const fs = require('fs');
+let raw_users = fs.readFileSync('./routes/database/users.json');
+let raw_organizations = fs.readFileSync('./routes/database/organizations.json');
+let raw_plans = fs.readFileSync('./routes/database/plans.json');
 
-var users = [
-  {
-    id: 0,
-    email: "admin@ica.com",
-    name: "ICA Admin",
-    type: "admin",
-    qrvey_info: {
-      userid: "iN3xBZfkO",
-      appid: "vt1gmR0cH"
-    },
-    organization: {
-      hexcolor: "#2E5DF4",
-      logo: "ica_header.svg",
-      id: '*',
-    }
-  },
-  {
-    id: 1,
-    email: "composer@avstores.com",
-    name: "AVStoresCo Composer",
-    organization: {
-      name: "AV Stores, Co.",
-      id: 187,
-      planid: 1,
-      hexcolor: "#BE1E2D",
-      logo: "AVStores.svg",
-      logowidth: 146
-    },
-    type: "composer",
-    qrvey_info: {
-      userid: "vc1xpuGjz",
-      appid: "7QPNzup4O"
-    }
-  },
-  {
-    id: 7,
-    email: "composer2@avstores.com",
-    name: "AVStoresCo Composer2",
-    organization: {
-      name: "AV Stores, Co.",
-      id: 187,
-      planid: 1,
-      hexcolor: "#BE1E2D",
-      logo: "AVStores.svg",
-      logowidth: 146
-    },
-    type: "composer",
-    qrvey_info: {
-      userid: "vc1xpuGjz",
-      appid: "7QPNzup4O"
-    }
-  },
-  {
-    id: 2,
-    email: "viewer@avstores.com",
-    name: "AVStoresCo Viewer",
-    organization: {
-      name: "AV Stores, Co.",
-      id: 187,
-      planid: 1,
-      hexcolor: "#BE1E2D",
-      logo: "AVStores.svg",
-      logowidth: 146
-    },
-    type: "viewer",
-    qrvey_info: {
-      userid: "vc1xpuGjz",
-      appid: "7QPNzup4O"
-    }
-  },
-  {
-    id: 3,
-    email: "composer@clovercollections.com",
-    name: "CloverCollections Composer",
-    organization: {
-      name: "Clover Collections, Co.",
-      id: 189,
-      planid: 2,
-      hexcolor: "#22B573",
-      logo: "CloverCollection.svg",
-      logowidth: 126
-    },
-    type: "composer",
-    qrvey_info: {
-      userid: "K5aX7Ykvh",
-      appid: "hvrMRg551"
-    }
-  },
-  {
-    id: 8,
-    email: "composer2@clovercollections.com",
-    name: "CloverCollections Composer2",
-    organization: {
-      name: "Clover Collections, Co.",
-      id: 189,
-      planid: 2,
-      hexcolor: "#22B573",
-      logo: "CloverCollection.svg",
-      logowidth: 126
-    },
-    type: "composer",
-    qrvey_info: {
-      userid: "K5aX7Ykvh",
-      appid: "hvrMRg551"
-    }
-  },
-  {
-    id: 4,
-    email: "viewer@clovercollections.com",
-    name: "CloverCollections Viewer",
-    organization: {
-      name: "Clover Collections, Co.",
-      id: 189,
-      planid: 2,
-      hexcolor: "#22B573",
-      logo: "CloverCollection.svg",
-      logowidth: 126
-    },
-    type: "viewer",
-    qrvey_info: {
-      userid: "K5aX7Ykvh",
-      appid: "hvrMRg551"
-    }
-  },
-  {
-    id: 5,
-    email: "composer@volvomodelsreplicas.com",
-    name: "VolvoModelReplicas Composer",
-    organization: {
-      name: "Volvo Model Replicas, Co",
-      id: 144,
-      planid: 3,
-      hexcolor: "#254083",
-      logo: "VolvoModelReplicas.svg",
-      logowidth: 88
-    },
-    type: "composer",
-    qrvey_info: {
-      userid: "oYDACWI0C",
-      appid: "9ouUXHfDK"
-    }
-  },
-  {
-    id: 9,
-    email: "composer2@volvomodelsreplicas.com",
-    name: "VolvoModelReplicas Composer2",
-    organization: {
-      name: "Volvo Model Replicas, Co",
-      id: 144,
-      planid: 3,
-      hexcolor: "#254083",
-      logo: "VolvoModelReplicas.svg",
-      logowidth: 88
-    },
-    type: "composer",
-    qrvey_info: {
-      userid: "oYDACWI0C",
-      appid: "9ouUXHfDK"
-    }
-  },
-  {
-    id: 6,
-    email: "viewer@volvomodelsreplicas.com",
-    name: "VolvoModelReplicas Viewer",
-    organization: {
-      name: "Volvo Model Replicas, Co",
-      id: 144,
-      planid: 3,
-      hexcolor: "#254083",
-      logo: "VolvoModelReplicas.svg",
-      logowidth: 88
-    },
-    type: "viewer",
-    qrvey_info: {
-      userid: "oYDACWI0C",
-      appid: "9ouUXHfDK"
-    }
-  }
-];
+var users = JSON.parse(raw_users);
 
-var organizations = [
-  {
-    name: "AV Stores, Co.",
-    id: 187,
-    planid: 1,
-    hexcolor: "#BE1E2D",
-    logo: "AVStores.svg",
-    qrvey_info: {
-      userid: "vc1xpuGjz",
-      appid: "7QPNzup4O"
-    }
-  },
-  {
-    name: "Clover Collections, Co.",
-    id: 189,
-    planid: 2,
-    hexcolor: "#22B573",
-    logo: "CloverCollection.svg",
-    qrvey_info: {
-      userid: "K5aX7Ykvh",
-      appid: "hvrMRg551"
-    }
-  },
-  {
-    name: "Volvo Model Replicas, Co",
-    id: 144,
-    planid: 3,
-    hexcolor: "#254083",
-    logo: "VolvoModelReplicas.svg",
-    qrvey_info: {
-      userid: "oYDACWI0C",
-      appid: "9ouUXHfDK"
-    }
-  }
-];
+var organizations = JSON.parse(raw_organizations);
 
-var plans = [
-  {
-    id: 3,
-    name: "bronze",
-    package: [
-      {name: "Master Database", type: "Dataset"},
-      {name: "Reach Report", type: "Report"},
-      {name: "Sales 2022", type: "Report"}
-    ]
-  },
-  {
-    id: 2,
-    name: "silver",
-    package: [
-      {name: "Master Database", type: "Dataset"},
-      {name: "Reach Report", type: "Report"},
-      {name: "Sales 2022", type: "Report"},
-      {name: "Sales 2021", type: "Report"},
-      {name: "Customer Data", type: "Dataset"}
-    ]
-  },
-  {
-    id: 1,
-    name: "gold",
-    package: [
-      {name: "Master Database", type: "Dataset"},
-      {name: "Reach Report", type: "Report"},
-      {name: "Sales 2022", type: "Report"},
-      {name: "Sales 2021", type: "Report"},
-      {name: "Customer Data", type: "Dataset"},
-      {name: "Salesforce Database", type: "Dataset"},
-      {name: "Salesforce Report", type: "Report"},
-    ]
-  }
-]
+var plans = JSON.parse(raw_plans);
 
 router.get('/', (req, res, next) => {
   return res.send(users)
+})
+
+router.put('/', (req, res, next) => {
+  let { body } = req;
+  let user;
+  users.forEach(u => {
+    if (u.id == body.id) {
+      u.type = body.type;
+      user = u;
+    }
+  })
+  let data = JSON.stringify(users);
+  fs.writeFileSync('./routes/database/users.json', data);
+  return res.send(user);
 })
 
 router.get('/organizations', (req, res, next) => {
@@ -268,8 +40,8 @@ router.get('/plans', (req, res, next) => {
 
 router.get('/tenants-users', (req, res, next) => {
   let org = [...organizations];
-  org.forEach( o => {
-    o['users'] = users.filter( u => u.organization.id == o.id)
+  org.forEach(o => {
+    o['users'] = users.filter(u => u.organization.id == o.id)
   })
   return res.send(org);
 })
@@ -298,8 +70,30 @@ router.get('/organizations/:organizationid', (req, res, next) => {
   if (!org) {
     res.status(500).send({ message: "Organization does not exist." });
   }
-  org['users'] = users.filter( u => u.organization.id == org.id)
+  org['users'] = users.filter(u => u.organization.id == org.id)
   return res.send(org)
+})
+
+router.put('/organizations/:organizationid/changeplan', (req, res, next) => {
+  let { body } = req;
+  let orgid = req.params.organizationid;
+  let organization;
+  organizations.forEach(o => {
+    if(o.id == orgid){
+      o.planid = body.planid;
+      organization = o;
+    }
+  });
+  users.forEach(u => {
+    if(u.organization.id == orgid){
+      u.organization.planid = body.planid;
+    }
+  });
+  let user_data = JSON.stringify(users);
+  let org_data = JSON.stringify(organizations);
+  fs.writeFileSync('./routes/database/users.json', user_data);
+  fs.writeFileSync('./routes/database/organizations.json', org_data);
+  return res.send(organization);
 })
 
 module.exports = router;

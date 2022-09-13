@@ -1,5 +1,5 @@
 <div class="modal-back" (click)="triggerClosePublishReport()">
-    <div class="modal-box" (click)="closeTenantsDrop();$event.stopPropagation()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
         <div class="header">
             <h5 class="title">Publish Report: {{selectedReport?.name}}</h5>
             <span class="close-modal" (click)="triggerClosePublishReport()"></span>
@@ -7,7 +7,11 @@
         <div class="content">
             <fieldset>
                 <label for="">Recipients</label>
-                <div id="tenants-drop" class="dropdown-check-list" tabindex="100">
+                <select name="" id="" [(ngModel)]="planid">
+                    <option value="">Select a Plan</option>
+                    <option *ngFor="let p of plans" value="{{p.id}}">{{p.name.toUpperCase()}}</option>
+                </select>
+                <!-- <div id="tenants-drop" class="dropdown-check-list" tabindex="100">
                     <span class="anchor" (click)="dropOptions($event)" [ngClass]="{'select':this.selected_tenants.length == 0}">{{selected_tenants_text}}</span>
                     <ul class="items" (click)="$event.stopPropagation()">
                         <li>
@@ -21,12 +25,12 @@
                             </label>
                         </li>
                     </ul>
-                </div>
+                </div> -->
             </fieldset>
         </div>
         <div class="footer">
             <button class="button secondary" (click)="triggerClosePublishReport()">Cancel</button>
-            <button class="button" (click)="publishReport()" [ngClass]="{'disabled':this.selected_tenants.length == 0}" [disabled]="this.selected_tenants.length == 0">Publish</button>
+            <button class="button" (click)="publishReportPlan()" [ngClass]="{'disabled':!this.planid || this.planid == ''}" [disabled]="!this.planid || this.planid == ''">Publish</button>
         </div>
     </div>
 </div>

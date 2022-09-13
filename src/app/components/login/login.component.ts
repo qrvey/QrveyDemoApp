@@ -92,7 +92,12 @@ export class LoginComponent implements OnInit {
       HTML += `<b>Email</b>: ${u.email}<br/>`;
       HTML += `<b>Password</b>: 123456<br/>`;
       HTML += `<b>Type</b>: ${u.type}<br/>`;
-      HTML += `<b>Organization</b>: ${u.organization.name}${i + 1 == users.length ? '' : '<br/><br/>'}`;
+      if(u.type != 'admin'){
+        HTML += `<b>Organization</b>: ${u.organization.name}${i + 1 == users.length ? '' : '<br/><br/>'}`;
+      }else{
+        HTML += `<br/><b>------------</b><br><br>`;
+      }
+      
     });
     return HTML;
   }

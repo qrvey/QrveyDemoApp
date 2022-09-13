@@ -5,7 +5,7 @@
     
     <h6>{{tenant.name}} Plan</h6>
     <div class="admin-cards no-padding">
-        <app-admin-card *ngFor="let plan of plans; let i = index" [plan]="plan" [plan_template]="true" [tenant]="tenant"></app-admin-card>
+        <app-admin-card *ngFor="let plan of plans; let i = index" [plan]="plan" [plan_template]="true" [tenant]="tenant" (changeTenantPlan)="changeTenantPlan($event)"></app-admin-card>
     </div>
     <h6>{{tenant.name}} Users ({{tenant.users.length}})</h6>
     <table>
@@ -24,14 +24,14 @@
                 <td>{{user.email}}</td>
                 <td>{{user.id}}</td>
                 <td class="center">
-                    <input type="radio" [checked]="user.type == 'viewer'" (click)="$event.preventDefault()">
+                    <input type="radio" [checked]="user.type == 'viewer'" (click)="changeUserType(user,'viewer', $event)">
                 </td>
                 <td class="center">
-                    <input type="radio" [checked]="user.type == 'composer'" (click)="$event.preventDefault()">
+                    <input type="radio" [checked]="user.type == 'composer'" (click)="changeUserType(user,'composer', $event)">
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<app-loading class="full" *ngIf="loading" [size]=0.8></app-loading>
+<app-loading class="full" *ngIf="loading || change_load" [size]=0.8></app-loading>

@@ -1,0 +1,83 @@
+[
+    {
+        "id": 3,
+        "name": "bronze",
+        "package": [
+            {
+                "name": "Master Database",
+                "type": "Dataset"
+            },
+            {
+                "name": "Reach Report",
+                "type": "Report"
+            },
+            {
+                "name": "Sales 2022",
+                "type": "Report"
+            }
+        ],
+        "pages_access":["Base Line 1"]
+    },
+    {
+        "id": 2,
+        "name": "silver",
+        "package": [
+            {
+                "name": "Master Database",
+                "type": "Dataset"
+            },
+            {
+                "name": "Reach Report",
+                "type": "Report"
+            },
+            {
+                "name": "Sales 2022",
+                "type": "Report"
+            },
+            {
+                "name": "Sales 2021",
+                "type": "Report"
+            },
+            {
+                "name": "Customer Data",
+                "type": "Dataset"
+            }
+        ],
+        "pages_access":["Base Line 1", "Base Line 2"]
+    },
+    {
+        "id": 1,
+        "name": "gold",
+        "package": [
+            {
+                "name": "Master Database",
+                "type": "Dataset"
+            },
+            {
+                "name": "Reach Report",
+                "type": "Report"
+            },
+            {
+                "name": "Sales 2022",
+                "type": "Report"
+            },
+            {
+                "name": "Sales 2021",
+                "type": "Report"
+            },
+            {
+                "name": "Customer Data",
+                "type": "Dataset"
+            },
+            {
+                "name": "Salesforce Database",
+                "type": "Dataset"
+            },
+            {
+                "name": "Salesforce Report",
+                "type": "Report"
+            }
+        ],
+        "pages_access":["Base Line 1", "Base Line 2", "Base Line 3"]
+    }
+]
