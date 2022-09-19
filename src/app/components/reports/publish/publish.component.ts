@@ -14,6 +14,7 @@ export class PublishComponent implements OnInit {
   @Input() selectedReport: any;
   @Input() plans: any[] = [];
   @Input() loggedUser: any;
+  @Input() publishing: boolean = false;
   @Output() publishReportClose: EventEmitter<any> = new EventEmitter();
   @Output() publishReport: EventEmitter<any> = new EventEmitter();
   @HostListener('document:keydown.escape', ['$event']) onKeydownHandler(event: KeyboardEvent) {
@@ -27,15 +28,6 @@ export class PublishComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // dropOptions(e?: any) {
-  //   e.stopPropagation();
-  //   const checkList: any = document.getElementById('tenants-drop');
-  //   if (checkList && checkList.classList.contains('visible'))
-  //     checkList.classList.remove('visible');
-  //   else
-  //     checkList.classList.add('visible');
-  // }
-
   triggerClosePublishReport() {
     if (this.creating) return;
     this.publishReportClose.emit();
@@ -46,62 +38,6 @@ export class PublishComponent implements OnInit {
     checkList.classList.remove('visible');
   }
 
-  // getTenantsNames(tenantsids: any[]) {
-  //   let names = '';
-  //   tenantsids.forEach((t: string, i: number) => {
-  //     names += this.tenants.filter(e => e.id == t)[0].name;
-  //     if (i + 1 < tenantsids.length) {
-  //       names += ', ';
-  //     }
-  //   });
-  //   return names;
-  // }
-
-  // addRemoveTenant(e: any) {
-  //   console.log(e);
-  //   const checked = e.target.value;
-  //   let checkboxes = document.querySelectorAll(".tenants-checks");
-  //   let t_allcheck: any = (document as any).getElementById("t-all")
-  //   if (checked != 'all') {
-
-  //     if (this.selected_tenants.includes('all')) {
-  //       t_allcheck.checked = false;
-  //       this.selected_tenants = [];
-  //       checkboxes.forEach((c: any) => {
-  //         if(c.checked){
-  //           this.selected_tenants.push(c.value);
-  //         }
-  //       });
-  //     }else{
-  //       if (e.target.checked) {
-  //         this.selected_tenants.push(checked);
-  //       } else {
-  //         this.selected_tenants.splice(this.selected_tenants.indexOf(checked), 1);
-  //       }
-  //     }
-      
-  //     if (this.selected_tenants.length > 0) {
-  //       this.selected_tenants_text = this.getTenantsNames(this.selected_tenants);
-  //     } else {
-  //       this.selected_tenants_text = "Select Tenants";
-  //     }
-  //   } else {
-  //     this.selected_tenants = [];
-  //     if (e.target.checked) {
-  //       checkboxes.forEach((c: any) => {
-  //         c.checked = true;
-  //       });
-  //       this.selected_tenants_text = "All";
-  //       this.selected_tenants.push(checked);
-  //     } else {
-  //       checkboxes.forEach((c: any) => {
-  //         c.checked = false;
-  //       })
-  //       this.selected_tenants_text = "Select Tenants";
-  //     }
-
-  //   }
-  // }
 
   publishReportPlan() { 
     if(!this.planid || this.planid == '') return;

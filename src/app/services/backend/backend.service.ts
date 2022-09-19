@@ -43,5 +43,9 @@ export class BackendService {
   public deleteReport(body: any){
     return this.httpClient.post('/api/deleteReport', body);
   }
+
+  public addPagePlan(body: any){
+    return this.httpClient.put('/deployment/addPagePlan', body);
+  }
   
 }

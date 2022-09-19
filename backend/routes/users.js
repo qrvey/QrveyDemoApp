@@ -48,7 +48,6 @@ router.get('/tenants-users', (req, res, next) => {
 
 router.post('/auth', (req, res, next) => {
   let { body } = req;
-  console.log(body);
   let user = users.filter(u => u.email == body.email)[0];
   if (!user) {
     res.status(500).send({ message: "User does not exist." });

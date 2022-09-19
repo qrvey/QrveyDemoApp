@@ -1,6 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
+const fs = require('fs');
+let raw_users, users, raw_plans, plans, raw_organizations, organizations;
+
+function getUsersPlansOrganizations(){
+    raw_users = fs.readFileSync('./routes/database/users.json');
+    users = JSON.parse(raw_users);
+    raw_plans = fs.readFileSync('./routes/database/plans.json');
+    plans = JSON.parse(raw_plans);
+    raw_organizations = fs.readFileSync('./routes/database/organizations.json');
+    organizations = JSON.parse(raw_organizations);
+}
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -48,28 +59,42 @@ router.post('/api/getReports', (req, res, next) => {
         }
     };
 
+
+
     axios(config)
         .then(function (response) {
-            if(body.getshared){
+            if (body.getshared) {
                 let org = body.system_user_id ? body.system_user_id.split('@')[1] : '';
-                console.log(org);
-                response.data.Items = response.data.Items.filter( r => {
+                
+                response.data.Items = response.data.Items.filter(r => {
                     let report_org = r.system_user_id ? r.system_user_id.split('@')[1] : '';
                     console.log(report_org);
                     return r.shared && r.system_user_id && (org == report_org);
                 });
             }
 
-            if(body.system_user_id && !body.getshared){
-                response.data.Items = response.data.Items.filter( r => r.system_user_id == body.system_user_id ||!r.system_user_id);
+            if (body.system_user_id && !body.getshared) {
+                response.data.Items = response.data.Items.filter(r => r.system_user_id == body.system_user_id || !r.system_user_id);
             }
 
+            getUsersPlansOrganizations();
+            let user = users.filter(u => u.email == body.system_user_id)[0];
+
+            // Filter Plan
+            if (body.system_user_id && user.organization.planid) {
+                let plan = plans.filter(p => p.id == user.organization.planid)[0];
+                response.data.Items = response.data.Items.filter(r => {
+                    return r.system_user_id || plan.pages_access.includes(r.name);
+                })
+            }
             return res.send(response.data)
         })
         .catch(function (error) {
             res.status(500).send(error)
         });
 })
+
+
 
 router.post('/api/createReport', (req, res, next) => {
     let { body } = req;

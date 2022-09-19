@@ -1,35 +1,47 @@
 var express = require('express');
 var router = express.Router();
 const axios = require('axios');
+const fs = require('fs');
+let raw_users, users, raw_plans, plans, raw_organizations, organizations;
 
+function getUsersPlansOrganizations(){
+  raw_users = fs.readFileSync('./routes/database/users.json');
+  users = JSON.parse(raw_users);
+  raw_plans = fs.readFileSync('./routes/database/plans.json');
+  plans = JSON.parse(raw_plans);
+  raw_organizations = fs.readFileSync('./routes/database/organizations.json');
+  organizations = JSON.parse(raw_organizations);
+}
 
 router.get('/', (req, res, next) => {
   return res.send(users)
 })
 
-/*
-PACKAGE
-1- create new package version /api/v4/qrvey/admin/content/deployment/package/{packageID}/job/version - this will return a jobTrackerID
-1.1 - do aput on the package with status: Loading /api/v4/qrvey/admin/content/deployment/package/{packageID}
-2- check job for updates /api/v4/qrvey/admin/content/deployment/worker/job/{jobTrackerID}
-2.1- when the job is completed, do a PUT with status: Completed /api/v4/qrvey/admin/content/deployment/package/{packageID} 
+router.put('/addPagePlan', (req, res, next) => {
+  let { body } = req;
+  let planid = +body.planid;
+  let page = body.page;
+  getUsersPlansOrganizations();
+  let update = false;
+  plans.forEach(p => {
+    if(p.id == planid && !p.pages_access.includes(page.name)){
+      p.pages_access.push(page.name);
+      update = true;
+    }else{
+      if(p.id < planid && !p.pages_access.includes(page.name)){
+        p.pages_access.push(page.name);
+        update = true;
+      }
+    }
+  });
 
-DEPLOYMENT DEFINITION
-1- Create a New definition /api/v4/qrvey/admin/content/deployment/definition - this will return a definition object with a definitionID
-{
-    "name": "Untitled 74",
-    "description": "This is the definition description"
-}
-2- Do a PUT with all the info???
-
-Deployment Job
-1-  create a deployment job /api/v4/qrvey/admin/content/deployment/job/
-{
-    "name": "Untitled 93",
-    "description": "Deployment Job Description"
-}
-2
-*/
+  if(update){
+    let plans_data = JSON.stringify(plans);
+    fs.writeFileSync('./routes/database/plans.json', plans_data);
+  }
+  
+  return res.send(plans);
+})
 
 
 module.exports = router;

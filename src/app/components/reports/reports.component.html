@@ -12,6 +12,6 @@
 
 <app-confirmation-modal *ngIf="delete_report_modal" [texts]="confirmation_modal_text" (closeConfirmationModal)="closeDeleteReportModal()" (confirmAction)="deleteSelectedReport()"></app-confirmation-modal>
 
-<app-publish *ngIf="publish_report_modal" [loggedUser]="loggedUser" [selectedReport]="selected_report" [plans]="plans" (publishReportClose)="publishReportClose()" (publishReport)="publishReport($event)"></app-publish>
+<app-publish *ngIf="publish_report_modal" [loggedUser]="loggedUser" [selectedReport]="selected_report" [plans]="plans" [publishing]="publishing_report" (publishReportClose)="publishReportClose()" (publishReport)="publishReport($event)"></app-publish>
 
 <app-loading class="full" *ngIf="loading_general_action" [size]=0.8></app-loading>

@@ -26,6 +26,7 @@ export class ReportsComponent implements OnInit {
   loading_general_action: boolean = false;
   deleting_report: boolean = false;
   publish_report_modal: boolean = false;
+  publishing_report: boolean = false;
   confirmation_modal_text: any = {
     title: "Delete Report",
     message: "",
@@ -525,11 +526,29 @@ export class ReportsComponent implements OnInit {
   }
 
   publishReportClose(){
+    if(this.publishing_report) return;
     this.publish_report_modal = false;
   }
 
   publishReport(planid: any){
-    console.log(planid);
+    if(this.publishing_report) return;
+    console.log(planid); 
+    const body = {
+      planid,
+      page: this.selected_report
+    }
+    this.backend.addPagePlan(body).subscribe({
+      next: (response:any) => {
+        console.log(response);
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        this.publishing_report = false;
+        this.publishReportClose();
+      }
+    });
   }
 
 }
