@@ -24,23 +24,27 @@ export class UserService {
   }
 
   public authUser(body:any) {
-    return this.httpClient.post('/users/auth', body);
+    return this.httpClient.post('/api/users/auth', body);
   }
 
   public getUsers() {
-    return this.httpClient.get('/users');
+    return this.httpClient.get('/api/users');
+  }
+
+  public getUserStatus() {
+    return this.httpClient.get('/api/users/'+this.user.id);
   }
 
   public getTenantsAndUsers() {
-    return this.httpClient.get('/users/tenants-users');
+    return this.httpClient.get('/api/users/tenants-users');
   }
 
   public getTenant(id:string) {
-    return this.httpClient.get('/users/organizations/' + id);
+    return this.httpClient.get('/api/users/organizations/' + id);
   }
 
   public getPlans() {
-    return this.httpClient.get('/users/plans');
+    return this.httpClient.get('/api/users/plans');
   }
 
   public avatarGenerator (name:string){
@@ -48,11 +52,11 @@ export class UserService {
   }
 
   public changeUserType(id:string,type:string){
-    return this.httpClient.put('/users',{id,type});
+    return this.httpClient.put('/api/users',{id,type});
   }
 
   public changeTenantPlan(tenantid:string,planid:string){
-    return this.httpClient.put('/users/organizations/' + tenantid + '/changeplan',{planid});
+    return this.httpClient.put('/api/users/organizations/' + tenantid + '/changeplan',{planid});
   }
 
 }

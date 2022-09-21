@@ -11,6 +11,7 @@ export class ActionsComponent implements OnInit {
   @Input() selectedReport:any;
   @Input() mode: string = "view";
   @Input() shareReportsPages: any;
+  @Input() disablePublish: boolean = false;
   @Output() actionClicked: EventEmitter<any> = new EventEmitter();
   @Output() shareReport: EventEmitter<any> = new EventEmitter();
   @Output() publishReport: EventEmitter<any> = new EventEmitter();

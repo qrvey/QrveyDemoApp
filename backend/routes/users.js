@@ -2,21 +2,33 @@ var express = require('express');
 var router = express.Router();
 const axios = require('axios');
 const fs = require('fs');
-let raw_users = fs.readFileSync('./routes/database/users.json');
-let raw_organizations = fs.readFileSync('./routes/database/organizations.json');
-let raw_plans = fs.readFileSync('./routes/database/plans.json');
+let raw_users, users, raw_plans, plans, raw_organizations, organizations;
 
-var users = JSON.parse(raw_users);
+function getUsersPlansOrganizations() {
+  raw_users = fs.readFileSync('./routes/database/users.json');
+  users = JSON.parse(raw_users);
+  raw_plans = fs.readFileSync('./routes/database/plans.json');
+  plans = JSON.parse(raw_plans);
+  raw_organizations = fs.readFileSync('./routes/database/organizations.json');
+  organizations = JSON.parse(raw_organizations);
+}
 
-var organizations = JSON.parse(raw_organizations);
+// let raw_users = fs.readFileSync('./routes/database/users.json');
+// let raw_organizations = fs.readFileSync('./routes/database/organizations.json');
+// let raw_plans = fs.readFileSync('./routes/database/plans.json');
 
-var plans = JSON.parse(raw_plans);
+// var users = JSON.parse(raw_users);
+
+// var organizations = JSON.parse(raw_organizations);
+
+// var plans = JSON.parse(raw_plans);
 
 router.get('/', (req, res, next) => {
   return res.send(users)
 })
 
 router.put('/', (req, res, next) => {
+  getUsersPlansOrganizations();
   let { body } = req;
   let user;
   users.forEach(u => {
@@ -31,14 +43,17 @@ router.put('/', (req, res, next) => {
 })
 
 router.get('/organizations', (req, res, next) => {
+  getUsersPlansOrganizations();
   return res.send(organizations);
 })
 
 router.get('/plans', (req, res, next) => {
+  getUsersPlansOrganizations();
   return res.send(plans);
 })
 
 router.get('/tenants-users', (req, res, next) => {
+  getUsersPlansOrganizations();
   let org = [...organizations];
   org.forEach(o => {
     o['users'] = users.filter(u => u.organization.id == o.id)
@@ -47,6 +62,7 @@ router.get('/tenants-users', (req, res, next) => {
 })
 
 router.post('/auth', (req, res, next) => {
+  getUsersPlansOrganizations();
   let { body } = req;
   let user = users.filter(u => u.email == body.email)[0];
   if (!user) {
@@ -56,6 +72,7 @@ router.post('/auth', (req, res, next) => {
 })
 
 router.get('/:userid', (req, res, next) => {
+  getUsersPlansOrganizations();
   let user = users.filter(u => u.id == req.params.userid)[0];
   if (!user) {
     res.status(500).send({ message: "User does not exist." });
@@ -65,6 +82,7 @@ router.get('/:userid', (req, res, next) => {
 
 
 router.get('/organizations/:organizationid', (req, res, next) => {
+  getUsersPlansOrganizations();
   let org = organizations.filter(u => u.id == req.params.organizationid)[0];
   if (!org) {
     res.status(500).send({ message: "Organization does not exist." });
@@ -74,6 +92,7 @@ router.get('/organizations/:organizationid', (req, res, next) => {
 })
 
 router.put('/organizations/:organizationid/changeplan', (req, res, next) => {
+  getUsersPlansOrganizations();
   let { body } = req;
   let orgid = req.params.organizationid;
   let organization;

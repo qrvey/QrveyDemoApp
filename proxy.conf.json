@@ -5,13 +5,13 @@
         "logLevel": "debug",
         "changeOrigin": true
     },
-    "/users/*": {
+    "/users-api/*": {
         "target": "http://localhost:3000",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true
     },
-    "/deployment/*": {
+    "/deployment-api/*": {
         "target": "http://localhost:3000",
         "secure": false,
         "logLevel": "debug",

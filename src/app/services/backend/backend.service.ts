@@ -9,43 +9,55 @@ export class BackendService {
   constructor(private httpClient: HttpClient) { }
 
   public getReports(body:any) {
-    return this.httpClient.post('/api/getReports', body);
+    return this.httpClient.post('/api/reports/getReports', body);
   }
 
   public getReport(body:any) {
-    return this.httpClient.post('/api/getReport', body);
+    return this.httpClient.post('/api/reports/getReport', body);
   }
 
   public updateReport(body:any) {
-    return this.httpClient.put('/api/updateReport', body);
+    return this.httpClient.put('/api/reports/updateReport', body);
   }
 
   public compareReport(body:any) {
-    return this.httpClient.post('/api/compareReport', body);
+    return this.httpClient.post('/api/reports/compareReport', body);
   }
 
   public generateJwt(body:any) {
-    return this.httpClient.post('/api/generateJwt', body);
+    return this.httpClient.post('/api/reports/generateJwt', body);
   }
 
   public datasetLookup(body:any) {
-    return this.httpClient.post('/api/datasetLookup', body);
+    return this.httpClient.post('/api/reports/datasetLookup', body);
   }
 
   public createNewReport(body: any){
-    return this.httpClient.post('/api/createReport', body);
+    return this.httpClient.post('/api/reports/createReport', body);
   }
 
   public cloneReport(body: any){
-    return this.httpClient.post('/api/cloneReport', body);
+    return this.httpClient.post('/api/reports/cloneReport', body);
   }
 
   public deleteReport(body: any){
-    return this.httpClient.post('/api/deleteReport', body);
+    return this.httpClient.post('/api/reports/deleteReport', body);
   }
 
   public addPagePlan(body: any){
-    return this.httpClient.put('/deployment/addPagePlan', body);
+    return this.httpClient.put('/api/deployment/addPagePlan', body);
+  }
+
+  public runDeployment(){
+    return this.httpClient.post('/api/deployment/run', {});
+  }
+
+  public checkStatus(taskid:string){
+    return this.httpClient.get('/api/deployment/progress/'+taskid);
+  }
+
+  public clearTask(){
+    return this.httpClient.put('/api/deployment/clear-task',{});
   }
   
 }

@@ -19,7 +19,7 @@ router.get('/', function (req, res, next) {
 });
 
 // Generate token to embed widgets with security token
-router.post('/api/generateJwt', (req, res, next) => {
+router.post('/generateJwt', (req, res, next) => {
 
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v4/core/login/token`;
@@ -45,7 +45,7 @@ router.post('/api/generateJwt', (req, res, next) => {
         });
 })
 
-router.post('/api/getReports', (req, res, next) => {
+router.post('/getReports', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/?limit=100`;
     let api = process.env.API_KEY;
@@ -58,8 +58,6 @@ router.post('/api/getReports', (req, res, next) => {
             "Content-Type": 'application/json'
         }
     };
-
-
 
     axios(config)
         .then(function (response) {
@@ -94,23 +92,11 @@ router.post('/api/getReports', (req, res, next) => {
         });
 })
 
-
-
-router.post('/api/createReport', (req, res, next) => {
+router.post('/createReport', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/?limit=100`;
     let api = process.env.API_KEY;
 
-    // let GENERATE_BODY = {
-    //     "name": body.name,
-    //     "description": "",
-    //     "private": false,
-    //     "published": false,
-    //     "active": false,
-    //     "editing": true,
-    //     "system_user_id": body.userid //Custom prop
-    // };
-
     let data = JSON.stringify(body.qbody);
 
     var config = {
@@ -132,21 +118,11 @@ router.post('/api/createReport', (req, res, next) => {
         });
 })
 
-router.post('/api/cloneReport', (req, res, next) => {
+router.post('/cloneReport', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/${body.pageid}/clone`;
     let api = process.env.API_KEY;
 
-    // let GENERATE_BODY = {
-    //     "name": body.name,
-    //     "description": "",
-    //     "private": false,
-    //     "published": false,
-    //     "active": false,
-    //     "editing": true,
-    //     "system_user_id": body.userid //Custom prop
-    // };
-
     let data = JSON.stringify(body.qbody);
 
     var config = {
@@ -168,7 +144,7 @@ router.post('/api/cloneReport', (req, res, next) => {
         });
 })
 
-router.post('/api/getReport', (req, res, next) => {
+router.post('/getReport', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/${body.pageid}`;
     let api = process.env.API_KEY;
@@ -192,7 +168,7 @@ router.post('/api/getReport', (req, res, next) => {
         });
 })
 
-router.post('/api/compareReport', (req, res, next) => {
+router.post('/compareReport', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/${body.pageid}/compare`;
     let api = process.env.API_KEY;
@@ -217,7 +193,7 @@ router.post('/api/compareReport', (req, res, next) => {
         });
 })
 
-router.put('/api/updateReport', (req, res, next) => {
+router.put('/updateReport', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/${body.pageid}`;
     let api = process.env.API_KEY;
@@ -242,7 +218,7 @@ router.put('/api/updateReport', (req, res, next) => {
         });
 })
 
-router.post('/api/datasetLookup', (req, res, next) => {
+router.post('/datasetLookup', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v4/user/${body.userid}/app/${body.appid}/qollect/dataset/all`;
     let api = process.env.API_KEY;
@@ -280,7 +256,7 @@ router.post('/api/datasetLookup', (req, res, next) => {
         });
 })
 
-router.post('/api/deleteReport', (req, res, next) => {
+router.post('/deleteReport', (req, res, next) => {
     let { body } = req;
     let url = `${process.env.BASE_PATH}/devapi/v3/user/${body.userid}/app/${body.appid}/builder/page/${body.pageid}`;
     let api = process.env.API_KEY;

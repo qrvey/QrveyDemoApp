@@ -11,7 +11,7 @@
         {{selectedReport && selectedReport.shared && loggedUser.type != 'admin' ? "Unshare" : "Share"}}
     </span>
 
-    <span class="share" (click)="publishClicked()" *ngIf="selectedReport && loggedUser.type == 'admin'">
+    <span class="share" (click)="publishClicked()" *ngIf="selectedReport && loggedUser.type == 'admin'" [ngClass]="{'disabled':disablePublish}">
         <i></i>
         Publish
     </span>

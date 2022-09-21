@@ -27,6 +27,8 @@ export class ReportsComponent implements OnInit {
   deleting_report: boolean = false;
   publish_report_modal: boolean = false;
   publishing_report: boolean = false;
+  dstatus:any = null;
+  taskid:any = null;
   confirmation_modal_text: any = {
     title: "Delete Report",
     message: "",
@@ -52,6 +54,22 @@ export class ReportsComponent implements OnInit {
     if (this.loggedUser.type == 'admin') {
       this.getPlans();
     }
+
+    this.user.getUserStatus().subscribe({
+      next: (response: any) => {
+        if(response.taskId && response.taskStatus){
+          this.dstatus = response.taskStatus;
+          this.taskid = response.taskId;
+          this.checkDeploymentStatus(response.taskId);
+        }
+      },
+      error: (e: any) => {
+        console.log(e);
+        this.loading = false;
+      },
+      complete: () => {
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -138,7 +156,7 @@ export class ReportsComponent implements OnInit {
     this.widgetContainer.append(page_view_tag);
   }
 
-  comparePublishedVersions(report: any){
+  comparePublishedVersions(report: any) {
     // Here we doublecheck if the version that was edited is different from the version that is published
     // If not, then we update the published version
     if (this.loading_widget && report.sidebar) return;
@@ -153,11 +171,11 @@ export class ReportsComponent implements OnInit {
         version: "LATEST"
       }
     };
-    this.compareReporVersions(comparebody, (r:any) => {
-      if(r.isEquivalent){
+    this.compareReporVersions(comparebody, (r: any) => {
+      if (r.isEquivalent) {
         // If the versions are equal, the widget gets embedded
         this.loadPageWidget(report);
-      }else{
+      } else {
         // If not, then using the widget actions component, we updated the published version before embedding
         this.actionClicked("view", true, true);
       }
@@ -275,7 +293,7 @@ export class ReportsComponent implements OnInit {
   }
 
   compareReporVersions(body: any, callback: any) {
-    let r:any;
+    let r: any;
     this.backend.compareReport(body).subscribe({
       next: (response) => {
         r = response;
@@ -325,9 +343,9 @@ export class ReportsComponent implements OnInit {
     if (m == 'view') {
       updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false };
       this.updatePageStatus(updates, true, () => {
-        if(from_new && !checked_version){
+        if (from_new && !checked_version) {
           this.actionClicked("edit", true);
-        }else{
+        } else {
           this.loadPageWidget(this.selected_report)
         }
       });
@@ -464,14 +482,14 @@ export class ReportsComponent implements OnInit {
           appid: this.loggedUser.qrvey_info.appid,
           pageid: new_report_model.pageId
         };
-        let updates = { 
-          editing: false, 
-          published: true, 
-          updateTo: "Published", 
-          forceUpdate: true, 
-          selected: false, 
-          system_user_id: this.loggedUser.type == 'admin' ? null : this.loggedUser.email, 
-          shared: false 
+        let updates = {
+          editing: false,
+          published: true,
+          updateTo: "Published",
+          forceUpdate: true,
+          selected: false,
+          system_user_id: this.loggedUser.type == 'admin' ? null : this.loggedUser.email,
+          shared: false
         };
         this.getReportAndMerge(rmbody, updates, (rmresponse: any) => {
           const updatebody = {
@@ -493,9 +511,9 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  getTenants(){
+  getTenants() {
     this.user.getTenantsAndUsers().subscribe({
-      next: (response:any) => {
+      next: (response: any) => {
         this.tenants = response;
       },
       error: (e) => {
@@ -507,9 +525,9 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  getPlans(){
+  getPlans() {
     this.user.getPlans().subscribe({
-      next: (response:any) => {
+      next: (response: any) => {
         this.plans = response;
       },
       error: (e) => {
@@ -521,32 +539,94 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  publishReportModal(report?: any){
+  publishReportModal(report?: any) {
+    if(this.taskid) return;
     this.publish_report_modal = true;
   }
 
-  publishReportClose(){
-    if(this.publishing_report) return;
+  publishReportClose() {
+    if (this.publishing_report) return;
     this.publish_report_modal = false;
   }
 
-  publishReport(planid: any){
-    if(this.publishing_report) return;
-    console.log(planid); 
+  publishReport(planid: any) {
+    if (this.publishing_report) return;
+    this.publishing_report = true;
+    console.log(planid);
     const body = {
       planid,
       page: this.selected_report
     }
-    this.backend.addPagePlan(body).subscribe({
-      next: (response:any) => {
+    this.runDeployment((r: any) => {
+      this.backend.addPagePlan(body).subscribe({
+        next: (response: any) => {
+          console.log(response);
+        },
+        error: (e) => {
+          console.log(e);
+        },
+        complete: () => {
+          this.publishing_report = false;
+          this.publishReportClose();
+          this.checkDeploymentStatus(r.taskId);
+        }
+      });
+    });
+
+  }
+
+  runDeployment(callback: any) {
+    let res: any;
+    this.backend.runDeployment().subscribe({
+      next: (response: any) => {
+        console.log(response);
+        res = response;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        callback(res);
+      }
+    });
+  }
+
+  clearTask(){
+    this.backend.clearTask().subscribe({
+      next: (response: any) => {
         console.log(response);
       },
       error: (e) => {
         console.log(e);
       },
       complete: () => {
-        this.publishing_report = false;
-        this.publishReportClose();
+      }
+    });
+  }
+
+  checkDeploymentStatus(taskid:string){
+    let res: any;
+    this.taskid = taskid;
+    this.backend.checkStatus(taskid).subscribe({
+      next: (response: any) => {
+        console.log(response);
+        res = response;
+      },
+      error: (e) => {
+        console.log(e);
+      },
+      complete: () => {
+        this.dstatus = res.status;
+        if(this.dstatus != "DEPLOYED"){
+          this.taskid = taskid;
+          setTimeout(() => {
+            this.checkDeploymentStatus(taskid);
+          }, 2000);
+        }else{
+          this.clearTask();
+          this.dstatus = null;
+          this.taskid = null;
+        }
       }
     });
   }
