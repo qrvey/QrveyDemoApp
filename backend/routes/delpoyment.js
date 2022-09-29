@@ -15,7 +15,6 @@ function getUsersPlansOrganizations() {
 
 function updateAdmins(taskid, clear) {
   getUsersPlansOrganizations();
-  console.log('taskID: ',taskid);
   let updated_users = [];
   users.forEach(u => {
     if (u.type == 'admin') {
@@ -24,7 +23,6 @@ function updateAdmins(taskid, clear) {
       updated_users.push(u);
     }
   });
-  console.log(updated_users);
   let user_data = JSON.stringify(users);
   fs.writeFileSync('./routes/database/users.json', user_data);
   return updated_users;
@@ -113,7 +111,6 @@ router.post('/run', (req, res, next) => {
 
 router.get('/progress/:taskid', (req, res, next) => {
   let url = `${process.env.DEPLOYMENT_PATH}/admin/task/${req.params.taskid}`;
-  console.log(url);
   let updated_users = [];
   var config = {
     method: 'get',
@@ -122,10 +119,8 @@ router.get('/progress/:taskid', (req, res, next) => {
       "Content-Type": 'application/json'
     }
   };
-  console.log(config);
   axios(config)
     .then(function (response) {
-      console.log(response.data);
       updated_users = updateAdmins(response.data.taskId);
       response.data['updated_parent_app_users'] = updated_users;
       return res.send(response.data);

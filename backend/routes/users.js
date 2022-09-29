@@ -13,18 +13,10 @@ function getUsersPlansOrganizations() {
   organizations = JSON.parse(raw_organizations);
 }
 
-// let raw_users = fs.readFileSync('./routes/database/users.json');
-// let raw_organizations = fs.readFileSync('./routes/database/organizations.json');
-// let raw_plans = fs.readFileSync('./routes/database/plans.json');
-
-// var users = JSON.parse(raw_users);
-
-// var organizations = JSON.parse(raw_organizations);
-
-// var plans = JSON.parse(raw_plans);
 
 router.get('/', (req, res, next) => {
-  return res.send(users)
+  getUsersPlansOrganizations();
+  return res.send(users);
 })
 
 router.put('/', (req, res, next) => {
