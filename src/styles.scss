@@ -187,10 +187,10 @@ app-loading{
     height: 100%;
     top: 0;
     z-index: 12;
-    background-color: rgba($color: #FFFFFF, $alpha: 0.5);
+    background-color: rgba($color: #FFFFFF, $alpha: 0.8);
     &.full{
         position: fixed;
-        background-color: rgba($color: #FFFFFF, $alpha: 0.2);
+        background-color: rgba(255, 255, 255, 0.8);
     }
 }
 

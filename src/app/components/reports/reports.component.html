@@ -14,7 +14,8 @@
 
 <app-publish *ngIf="publish_report_modal" [loggedUser]="loggedUser" [selectedReport]="selected_report" [plans]="plans" [publishing]="publishing_report" (publishReportClose)="publishReportClose()" (publishReport)="publishReport($event)"></app-publish>
 
-<app-loading class="full" *ngIf="loading_general_action" [size]=0.8></app-loading>
+<app-loading class="full" *ngIf="loading_general_action || publishing_report" [text]="loading_text" [size]=0.8></app-loading>
+<!-- <app-loading class="full" [text]="" [size]=0.8></app-loading> -->
 
 <app-deployment-status *ngIf="dstatus && dstatus != 'DEPLOYED'" [taskid]="taskid"></app-deployment-status>
 <!-- <app-deployment-status [taskid]="'UPJWEVWEGWQWF#$'"></app-deployment-status> -->

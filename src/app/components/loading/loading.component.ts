@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class LoadingComponent implements OnInit {
 
   @Input() size: number = 80;
+  @Input() text?: string = '';
 
   constructor() { }
 

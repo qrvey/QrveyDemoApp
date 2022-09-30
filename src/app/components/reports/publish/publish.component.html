@@ -6,7 +6,7 @@
         </div>
         <div class="content">
             <fieldset>
-                <label for="">Recipients</label>
+                <label for="">Plans</label>
                 <select name="" id="" [(ngModel)]="planid">
                     <option value="">Select a Plan</option>
                     <option *ngFor="let p of plans" value="{{p.id}}">{{p.name.toUpperCase()}}</option>

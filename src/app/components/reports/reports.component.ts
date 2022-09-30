@@ -36,6 +36,7 @@ export class ReportsComponent implements OnInit {
     action_index: null,
     confirm: "Confirm"
   }
+  loading_text: any = null;
 
   constructor(private user: UserService, private router: Router, private backend: BackendService) {
     this.loggedUser = this.user.getUser();
@@ -552,6 +553,7 @@ export class ReportsComponent implements OnInit {
   publishReport(planid: any) {
     if (this.publishing_report) return;
     this.publishing_report = true;
+    this.loading_text = "Preparing: Publishing Report";
     console.log(planid);
     const body = {
       planid,
@@ -567,6 +569,7 @@ export class ReportsComponent implements OnInit {
         },
         complete: () => {
           this.publishing_report = false;
+          this.loading_text = null;
           this.publishReportClose();
           this.checkDeploymentStatus(r.taskId);
         }
