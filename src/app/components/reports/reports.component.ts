@@ -109,7 +109,13 @@ export class ReportsComponent implements OnInit {
             "dataset_id": response.Items[0].datasetId,
             "record_permissions": [
               {
-                "security_name": "customer_number",
+                "security_name": "SubEventId",
+                "values": [
+                  this.loggedUser.organization.id
+                ]
+              },
+              {
+                "security_name": "OrganizationId",
                 "values": [
                   this.loggedUser.organization.id
                 ]
@@ -194,7 +200,7 @@ export class ReportsComponent implements OnInit {
     const dbody = {
       userid: this.loggedUser.qrvey_info.userid,
       appid: this.loggedUser.qrvey_info.appid,
-      datasetname: "Main Mysql - orders - View"
+      datasetname: "Gifts+ Users (Demo)"
     }
     this.getDatasetRLS(dbody, (dresponse: any) => {
       let permissions = dresponse;
