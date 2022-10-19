@@ -2,6 +2,7 @@
     {
         "name": "AV Stores, Co.",
         "id": 187,
+        "SubEventId": 187,
         "planid": 3,
         "hexcolor": "#BE1E2D",
         "logo": "AVStores.svg",
@@ -18,6 +19,7 @@
                 "organization": {
                     "name": "AV Stores, Co.",
                     "id": 187,
+                    "SubEventId": 187,
                     "planid": 1,
                     "hexcolor": "#BE1E2D",
                     "logo": "AVStores.svg",
@@ -37,6 +39,7 @@
                     "name": "AV Stores, Co.",
                     "id": 187,
                     "planid": 1,
+                    "SubEventId": 187,
                     "hexcolor": "#BE1E2D",
                     "logo": "AVStores.svg",
                     "logowidth": 146
@@ -54,6 +57,7 @@
                 "organization": {
                     "name": "AV Stores, Co.",
                     "id": 187,
+                    "SubEventId": 187,
                     "planid": 1,
                     "hexcolor": "#BE1E2D",
                     "logo": "AVStores.svg",
@@ -70,6 +74,7 @@
     {
         "name": "Clover Collections, Co.",
         "id": 189,
+        "SubEventId": 187,
         "planid": 2,
         "hexcolor": "#22B573",
         "logo": "CloverCollection.svg",
@@ -86,6 +91,7 @@
                 "organization": {
                     "name": "Clover Collections, Co.",
                     "id": 189,
+                    "SubEventId": 187,
                     "planid": 2,
                     "hexcolor": "#22B573",
                     "logo": "CloverCollection.svg",
@@ -104,6 +110,7 @@
                 "organization": {
                     "name": "Clover Collections, Co.",
                     "id": 189,
+                    "SubEventId": 187,
                     "planid": 2,
                     "hexcolor": "#22B573",
                     "logo": "CloverCollection.svg",
@@ -122,6 +129,7 @@
                 "organization": {
                     "name": "Clover Collections, Co.",
                     "id": 189,
+                    "SubEventId": 187,
                     "planid": 2,
                     "hexcolor": "#22B573",
                     "logo": "CloverCollection.svg",
@@ -138,6 +146,7 @@
     {
         "name": "Volvo Model Replicas, Co",
         "id": 144,
+        "SubEventId": 187,
         "planid": 1,
         "hexcolor": "#254083",
         "logo": "VolvoModelReplicas.svg",
@@ -154,6 +163,7 @@
                 "organization": {
                     "name": "Volvo Model Replicas, Co",
                     "id": 144,
+                    "SubEventId": 187,
                     "planid": 1,
                     "hexcolor": "#254083",
                     "logo": "VolvoModelReplicas.svg",
@@ -172,6 +182,7 @@
                 "organization": {
                     "name": "Volvo Model Replicas, Co",
                     "id": 144,
+                    "SubEventId": 187,
                     "planid": 1,
                     "hexcolor": "#254083",
                     "logo": "VolvoModelReplicas.svg",
@@ -190,6 +201,7 @@
                 "organization": {
                     "name": "Volvo Model Replicas, Co",
                     "id": 144,
+                    "SubEventId": 187,
                     "planid": 1,
                     "hexcolor": "#254083",
                     "logo": "VolvoModelReplicas.svg",

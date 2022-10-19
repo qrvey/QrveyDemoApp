@@ -117,7 +117,7 @@ export class ReportsComponent implements OnInit {
               {
                 "security_name": "OrganizationId",
                 "values": [
-                  this.loggedUser.organization.id
+                  this.loggedUser.organization.SubEventId
                 ]
               }
             ]
