@@ -106,18 +106,18 @@ export class ReportsComponent implements OnInit {
       next: (response: any) => {
         permissions = [
           {
-            "dataset_id": response.Items[0].datasetId,
+            "dataset_id": '*', //response.Items[0].datasetId,
             "record_permissions": [
               {
                 "security_name": "SubEventId",
                 "values": [
-                  this.loggedUser.organization.id
+                  this.loggedUser.organization.SubEventId
                 ]
               },
               {
                 "security_name": "OrganizationId",
                 "values": [
-                  this.loggedUser.organization.SubEventId
+                  this.loggedUser.organization.OrgId
                 ]
               }
             ]

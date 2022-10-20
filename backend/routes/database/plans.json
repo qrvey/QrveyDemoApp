@@ -17,7 +17,7 @@
             }
         ],
         "pages_access": [
-            "Baseline Page 1"
+            "Org Dashboard"
         ]
     },
     {
@@ -46,8 +46,8 @@
             }
         ],
         "pages_access": [
-            "Baseline Page 1",
-            "Baseline Page 2"
+            "Org Dashboard",
+            "Event Dashboard - 16254"
         ]
     },
     {
@@ -84,9 +84,9 @@
             }
         ],
         "pages_access": [
-            "Baseline Page 1",
-            "Baseline Page 2",
-            "Baseline Page 3"
+            "Org Dashboard",
+            "Event Dashboard - 16254",
+            "Transactions Report"
         ]
     }
 ]
