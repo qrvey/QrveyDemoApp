@@ -14,6 +14,12 @@ app-actions {
     left: 200px;
     overflow: auto;
 
+    &.dark{
+        width: 100%;
+        left: 0;
+        display: none;
+    }
+
     p.blank {
         width: 100%;
         height: auto;

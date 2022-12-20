@@ -4,6 +4,10 @@
     height: calc(100% - 95px);
     top: 95px;
     left: 0;
+    &.dark{
+        height: calc(100% - 50px);
+        top: 50px;
+    }
 }
 
 .content-nobar{

@@ -11,6 +11,77 @@
     background-color: rgba(255, 255, 255, 1);
     box-sizing: border-box;
 
+    &.dark {
+        width: 100%;
+        padding: 30px 50px;
+        overflow: auto;
+        position: relative;
+
+        .create-report {
+            background: #BE1E2D;
+            border-radius: 100px;
+            padding: 0px 20px;
+            color: #FFF;
+            display: inline-block;
+            width: auto;
+            margin-bottom: 30px;
+        }
+
+        .reports-nav {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-auto-rows: max-content;
+            /* OR min-content*/
+            grid-column-gap: 15px;
+            grid-row-gap: 15px;
+            position: relative;
+            overflow: unset;
+
+            li {
+                background: #FFFFFF;
+                box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+                border-radius: 10px;
+                height: auto;
+                padding: 20px;
+                box-sizing: border-box;
+
+                &:hover {
+                    background-color: #FFF;
+                    cursor: default;
+                }
+
+                .report-options {
+                    display: block;
+                    top: 22px;
+                }
+
+                a {
+                    padding: 0;
+                    font-size: 14px;
+                    color: $primary-color;
+                }
+
+                .dates-info{
+                    display: flex;
+                }
+                
+                &.selected{
+
+                    background-color: #FFF;
+
+                    a {
+                        background-color: #FFF;
+                    }
+
+                    .selected-bar{
+                        display: none;
+                    }
+                }
+                
+            }
+        }
+    }
+
     .create-report {
         position: relative;
         display: block;
@@ -48,9 +119,10 @@
             height: 30px;
             position: relative;
 
-            &.no-reports{
+            &.no-reports {
                 pointer-events: none;
-                a{
+
+                a {
                     font-style: italic;
                     font-size: 13px;
                     opacity: 0.5;
@@ -81,7 +153,7 @@
                 }
             }
 
-            input{
+            input {
                 position: absolute;
                 margin-top: 7px;
                 margin-left: 18px;
@@ -90,7 +162,7 @@
                 font-size: 12px;
                 outline: none;
                 background-color: transparent;
-                border-bottom: 1px solid rgba(0,0,0,0.2)
+                border-bottom: 1px solid rgba(0, 0, 0, 0.2)
             }
 
 
@@ -119,14 +191,25 @@
             &:hover {
                 background-color: rgba(46, 93, 244, 0.1);
                 cursor: pointer;
-                .report-options{
+
+                .report-options {
                     display: block;
                 }
+            }
+
+            .dates-info{
+                display: none;
+                position: relative;
+                width: 100%;
+                padding: 10px 0px 0px 0px;
+                border-top: 1px solid rgba(217, 217, 217, 1);
+                font-size: 14px;
+                justify-content: space-between;
             }
         }
     }
 
-    .report-options{
+    .report-options {
         position: absolute;
         width: 35px;
         height: 30px;
@@ -134,7 +217,7 @@
         top: 0px;
         display: none;
 
-        .three-dot{
+        .three-dot {
             position: relative;
             display: block;
             width: 3px;
@@ -142,12 +225,13 @@
             left: 50%;
             margin-left: -2px;
             top: 6px;
-            svg path{
+
+            svg path {
                 fill: $primary-color;
             }
         }
 
-        .sub-menu{
+        .sub-menu {
             right: 50%;
             top: 24px;
         }

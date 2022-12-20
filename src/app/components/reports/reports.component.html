@@ -2,7 +2,7 @@
 
 <app-leftbar [loggedUser]="loggedUser" [reports]="reports" [shareReportsPages]="share_report_page" [loading]="loading" [current_report]="selected_report" (reportClicked)="comparePublishedVersions($event)" (newReport)="newReportModal()" (reportOptionClicked)="reportOption($event)"></app-leftbar>
 
-<div class="side-content">
+<div class="side-content {{loggedUser.organization.theme}}">
     <div class="widget-wrapper"></div>
     <app-loading *ngIf="loading_widget" [size]=0.8></app-loading>
     <p class="blank" *ngIf="!selected_report">Please, select a Report.</p>

@@ -57,4 +57,9 @@ export class LeftbarComponent implements OnInit {
     if(event.key == 'Enter' || event.keyCode == 13)  this.reportOption(option,report,index);
   }
 
+  getDate(date:string){
+    let date_c = new Date(date);
+    return date_c.toLocaleDateString("en-US");
+  }
+
 }

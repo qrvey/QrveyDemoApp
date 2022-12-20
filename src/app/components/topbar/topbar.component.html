@@ -1,4 +1,4 @@
-<div class="main-topbar">
+<div class="main-topbar {{theme}}">
     <div class="logo" id="logo-place"></div>
     <nav *ngIf="loggedUser.type == 'admin'">
         <ul>
@@ -25,6 +25,21 @@
 
     <input class="searchbar" placeholder="Search" />
 
+    <ul class="inside-menu" *ngIf="loggedUser.type == 'composer'">
+        <li [ngClass]="{'selected': selectedRoute == '/'}">
+            <a [routerLink]="['/']">My Reports</a>
+        </li>
+        <li [ngClass]="{'selected': selectedRoute == '/shared-reports'}">
+            <a [routerLink]="['/shared-reports']">Shared Reports</a>
+        </li>
+    </ul>
+
+    <ul class="inside-menu" *ngIf="loggedUser.type != 'composer'">
+        <li class="selected">
+            <a class="title">{{loggedUser.type == 'admin' ? 'Reports' : 'Shared Reports'}}</a>
+        </li>
+    </ul>
+
     <div class="user">
         <span class="name">{{loggedUser.name}}</span>
         <span class="profile-pic" [ngStyle]="{'background-image': avatarURL}"></span>
@@ -35,7 +50,7 @@
     </div>
 
 </div>
-<div class="sub-topbar" *ngIf="!noSecondBar">
+<div class="sub-topbar {{theme}}" *ngIf="!noSecondBar">
     <nav *ngIf="loggedUser.type == 'composer'">
         <ul>
             <li [ngClass]="{'selected': selectedRoute == '/'}">

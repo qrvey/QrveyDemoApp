@@ -14,10 +14,12 @@ export class TopbarComponent implements OnInit {
 
   loggedUser: any = null;
   avatarURL: string = '';
+  theme: string = '';
 
   constructor(private user: UserService, private router: Router) {
     this.loggedUser = user.getUser();
     this.avatarURL = "url('" + this.user.avatarGenerator(this.loggedUser.name) + "')";
+    this.theme = this.loggedUser.organization.theme;
   }
 
   ngOnInit(): void {

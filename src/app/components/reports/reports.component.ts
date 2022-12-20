@@ -184,6 +184,15 @@ export class ReportsComponent implements OnInit {
   }
 
   async loadPageWidget(report: any, builder?: boolean) {
+    
+    const sinde_content:any = document.querySelector('.side-content');
+    const left_bar:any = document.querySelector('app-leftbar');
+
+    if(this.loggedUser.organization.theme == 'dark'){
+      left_bar.style.display = 'none';
+      sinde_content.style.display = 'block';
+    }
+
     if (this.view_mode == 'edit') {
       builder = true;
     }
