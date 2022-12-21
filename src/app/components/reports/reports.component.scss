@@ -1,3 +1,5 @@
+@import '../../global/vars.scss';
+
 app-actions {
     position: absolute;
     right: 0;
@@ -5,6 +7,10 @@ app-actions {
     width: auto;
     top: -45px;
     z-index: 2;
+    &.dark{
+        top: 24px;
+        right: 55px;
+    }
 }
 
 .side-content {
@@ -14,10 +20,35 @@ app-actions {
     left: 200px;
     overflow: auto;
 
+    .back-bar{
+        display: none;
+        margin: 30px 50px 10px 50px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #C0C0C0;
+        font-size: 25px;
+        font-weight: 700;
+        .back{
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
+            cursor: pointer;
+            g{
+                fill: $primary-color;
+            }
+        }
+    }
+
     &.dark{
         width: 100%;
         left: 0;
         display: none;
+        .back-bar{
+            display: block;
+        }
+        .widget-wrapper{
+            height: auto;
+            margin: 0px 50px;
+        }
     }
 
     p.blank {

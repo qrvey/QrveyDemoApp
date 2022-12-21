@@ -157,9 +157,27 @@ export class ReportsComponent implements OnInit {
     this.widgetContainer.append(page_view_tag);
   }
 
+  backBar(){
+    const sinde_content:any = document.querySelector('.side-content');
+    const left_bar:any = document.querySelector('app-leftbar');
+
+    if(this.loggedUser.organization.theme == 'dark'){
+      left_bar.style.display = 'contents';
+      sinde_content.style.display = 'none';
+    }
+  }
+
   comparePublishedVersions(report: any) {
     // Here we doublecheck if the version that was edited is different from the version that is published
     // If not, then we update the published version
+    const sinde_content:any = document.querySelector('.side-content');
+    const left_bar:any = document.querySelector('app-leftbar');
+
+    if(this.loggedUser.organization.theme == 'dark'){
+      left_bar.style.display = 'none';
+      sinde_content.style.display = 'block';
+    }
+
     if (this.loading_widget && report.sidebar) return;
     this.loadingOn();
     this.selected_report = report;
@@ -185,14 +203,6 @@ export class ReportsComponent implements OnInit {
 
   async loadPageWidget(report: any, builder?: boolean) {
     
-    const sinde_content:any = document.querySelector('.side-content');
-    const left_bar:any = document.querySelector('app-leftbar');
-
-    if(this.loggedUser.organization.theme == 'dark'){
-      left_bar.style.display = 'none';
-      sinde_content.style.display = 'block';
-    }
-
     if (this.view_mode == 'edit') {
       builder = true;
     }
@@ -351,6 +361,14 @@ export class ReportsComponent implements OnInit {
     this.view_mode = m;
     let updates: any;
     if (m == 'view') {
+      const sinde_content:any = document.querySelector('.side-content');
+      const left_bar:any = document.querySelector('app-leftbar');
+
+      if(this.loggedUser.organization.theme == 'dark'){
+        left_bar.style.display = 'none';
+        sinde_content.style.display = 'block';
+      }
+      
       updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false };
       this.updatePageStatus(updates, true, () => {
         if (from_new && !checked_version) {

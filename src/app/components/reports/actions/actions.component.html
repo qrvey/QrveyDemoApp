@@ -1,4 +1,4 @@
-<div class="report-actions" [ngClass]="{'disabled':!selectedReport}" *ngIf="!shareReportsPages">
+<div class="report-actions {{loggedUser?.organization?.theme}}" [ngClass]="{'disabled':!selectedReport}" *ngIf="!shareReportsPages">
     <span class="status" *ngIf="loggedUser.type != 'admin'">
         <b>Status:</b> {{selectedReport && selectedReport.shared ? "Public" : "Private"}}
     </span>
