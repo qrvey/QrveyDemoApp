@@ -20,6 +20,10 @@
             span:last-child{
                 border-radius: 0px 100px 100px 0px;
             }
+
+            &.view-only span{
+                border-radius: 100px;
+            }
         }
 
         .share {

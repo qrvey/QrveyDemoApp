@@ -7,9 +7,14 @@ app-actions {
     width: auto;
     top: -45px;
     z-index: 2;
-    &.dark{
+
+    &.dark {
         top: 24px;
         right: 55px;
+    }
+
+    &.green{
+        top: -48px;
     }
 }
 
@@ -20,33 +25,73 @@ app-actions {
     left: 200px;
     overflow: auto;
 
-    .back-bar{
+    .back-bar {
         display: none;
         margin: 30px 50px 10px 50px;
         padding-bottom: 20px;
         border-bottom: 1px solid #C0C0C0;
         font-size: 25px;
         font-weight: 700;
-        .back{
+        border-bottom-color: rgba(226, 226, 226, 1);
+        .click{
+            display: inline-block;
+            cursor: pointer;
+        }
+        .back {
             position: relative;
             display: inline-block;
             margin-right: 10px;
             cursor: pointer;
-            g{
+
+            g {
                 fill: $primary-color;
             }
         }
     }
 
-    &.dark{
+    &.green {
         width: 100%;
         left: 0;
         display: none;
-        .back-bar{
+        background-color: #FFF;
+        top: -45px;
+        height: calc(100% + 45px);
+
+        .back-bar {
+            display: block;
+            margin: 10px 0px 0px 0px;
+            padding: 0 20px 10px 20px;
+            font-size: 15px;
+            font-weight: 500;
+
+            .back {
+                margin-right: 5px;
+
+                svg {
+                    width: 10px;
+                    height: 11px;
+                }
+
+            }
+        }
+
+        .widget-wrapper {
+            height: calc(100% - 45px);
+            margin: 0px 50px;
+        }
+    }
+
+    &.dark {
+        width: 100%;
+        left: 0;
+        display: none;
+
+        .back-bar {
             display: block;
         }
-        .widget-wrapper{
-            height: auto;
+
+        .widget-wrapper {
+            height: calc(100% - 90px);
             margin: 0px 50px;
         }
     }
@@ -64,7 +109,7 @@ app-actions {
     }
 }
 
-app-deployment-status{
+app-deployment-status {
     position: absolute;
     z-index: 8;
     bottom: 0;

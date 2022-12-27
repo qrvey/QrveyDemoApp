@@ -176,23 +176,38 @@
     .inside-menu {
         display: none;
         list-style: none;
-        li{
+
+        li {
             display: inline-block;
             height: 50px;
             line-height: 50px;
             padding: 0 20px;
-            a{
+
+            a {
                 text-decoration: none;
                 color: #FFF;
                 opacity: 0.5;
             }
-            &.selected{
+
+            &.selected {
                 background-color: rgba(190, 30, 45, 0.3);
-                a{
+
+                a {
                     opacity: 1;
                 }
             }
         }
+    }
+
+    .hamburguer{
+        display: none;
+        position: absolute;
+        left: 20px;
+        top: 15px;
+        width: 24px;
+        height: 20px;
+        background-image: url(../../../assets/icons/hamb.svg);
+        background-position: center;
     }
 
     &.dark {
@@ -213,6 +228,32 @@
             color: #FFF;
         }
     }
+
+    &.green {
+        background-color: #22B573;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .searchbar {
+            display: none;
+        }
+
+        .hamburguer{
+            display: block;
+        }
+
+        .user .name {
+            color: #FFF;
+        }
+
+        .logo{
+            width: 144px !important;
+            filter: brightness(0) invert(1);
+            position: relative;
+            left: initial;
+        }
+    }
 }
 
 .sub-topbar {
@@ -226,11 +267,43 @@
         display: none;
     }
 
+    &.green {
+        background-color: #FFF;
+
+        nav {
+            padding: 0px 50px;
+            ul{
+                display: flex;
+                gap: 20px;
+                li{
+                    a{
+                        padding: 0;
+                    }
+                    &.selected{
+                        a{
+                            border-bottom: none;
+                            &::after{
+                                content: '';
+                                width: 24px;
+                                height: 3px;
+                                background-color: $primary-color;
+                                position: absolute;
+                                bottom: 0px;
+                                left: 50%;
+                                margin-left: -12px;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+        }
+
+    }
+
     nav {
         display: inline-block;
-        position: absolute;
         height: 100%;
-        left: 0;
 
         ul {
             margin: 0;

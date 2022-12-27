@@ -11,6 +11,113 @@
     background-color: rgba(255, 255, 255, 1);
     box-sizing: border-box;
 
+    &.green {
+        width: 100%;
+        padding: 20px 50px;
+        overflow: auto;
+        position: relative;
+        border: none;
+
+        .create-report {
+            background: $primary-color;
+            border-radius: 5px;
+            padding: 0px 10px;
+            color: #FFF;
+            display: inline-block;
+            width: auto;
+            margin-bottom: 20px;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .reports-nav {
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-auto-rows: max-content;
+            /* OR min-content*/
+            grid-column-gap: 15px;
+            grid-row-gap: 15px;
+            position: relative;
+            overflow: unset;
+            height: auto;
+
+            li {
+                background: #FFFFFF;
+                box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.25);
+                border-radius: 10px;
+                height: auto;
+                padding: 15px;
+                box-sizing: border-box;
+
+                &:hover {
+                    background-color: #FFF;
+                    cursor: default;
+                }
+
+                .report-options {
+                    display: block;
+                    top: 50%;
+                    margin-top: -15px;
+                    .three-dot svg path{
+                        fill: #474747;
+                    }
+                }
+
+                a {
+                    padding: 0;
+                    font-size: 15px;
+                    color: #000;
+                    line-height: normal;
+                }
+
+                input {
+                    position: relative;
+                    display: inline-block;
+                    top: 0;
+                    left: 0;
+                    margin: 0;
+                    font-size: 14px;
+                    padding-top: 8px;
+                    padding-bottom: 11px;
+                    border: 0;
+                    padding-left: 0;
+                }
+
+                .dates-info {
+                    border: none;
+                    font-size: 15px;
+                    padding: 0;
+                    display: block;
+                    color: #7D7D7D;
+                    
+                    span{
+                        b{
+                            font-weight: normal;
+                        }
+                        &:last-child{
+                            display: none;
+                        }
+                        
+                    }
+                }
+
+                &.selected {
+
+                    background-color: #FFF;
+
+                    a {
+                        background-color: #FFF;
+                    }
+
+                    .selected-bar {
+                        display: none;
+                    }
+                }
+
+            }
+        }
+    }
+
     &.dark {
         width: 100%;
         padding: 30px 50px;
@@ -62,7 +169,7 @@
                     color: $primary-color;
                 }
 
-                input{
+                input {
                     position: relative;
                     display: inline-block;
                     top: 0;
@@ -75,11 +182,11 @@
                     padding-left: 0;
                 }
 
-                .dates-info{
+                .dates-info {
                     display: flex;
                 }
-                
-                &.selected{
+
+                &.selected {
 
                     background-color: #FFF;
 
@@ -87,11 +194,11 @@
                         background-color: #FFF;
                     }
 
-                    .selected-bar{
+                    .selected-bar {
                         display: none;
                     }
                 }
-                
+
             }
         }
     }
@@ -211,7 +318,7 @@
                 }
             }
 
-            .dates-info{
+            .dates-info {
                 display: none;
                 position: relative;
                 width: 100%;
