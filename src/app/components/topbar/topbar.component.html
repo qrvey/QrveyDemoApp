@@ -59,7 +59,7 @@
                 <a [routerLink]="['/']">My Reports</a>
             </li>
             <li [ngClass]="{'selected': selectedRoute == '/shared-reports'}">
-                <a [routerLink]="['/shared-reports']">Shared Reports</a>
+                <a [routerLink]="['/shared-reports']">{{theme == 'blue' ? 'Shared' : 'Shared Reports'}}</a>
             </li>
         </ul>
     </nav>

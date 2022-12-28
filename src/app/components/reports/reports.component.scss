@@ -8,6 +8,15 @@ app-actions {
     top: -45px;
     z-index: 2;
 
+    &.blue{
+        height: 95px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: -95px;
+        width: calc(100% - 200px);
+    }
+
     &.dark {
         top: 24px;
         right: 55px;
@@ -46,6 +55,19 @@ app-actions {
             g {
                 fill: $primary-color;
             }
+        }
+    }
+
+    &.blue{
+        height: calc(100% + 95px);
+        top: -95px;
+        background-color: #f4f6f8;
+
+        .widget-wrapper{
+            height: calc(100% - 95px);
+            top: 95px;
+            position: absolute;
+            width: 100%;
         }
     }
 

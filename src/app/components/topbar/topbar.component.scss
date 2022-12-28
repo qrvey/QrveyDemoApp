@@ -199,7 +199,7 @@
         }
     }
 
-    .hamburguer{
+    .hamburguer {
         display: none;
         position: absolute;
         left: 20px;
@@ -208,6 +208,63 @@
         height: 20px;
         background-image: url(../../../assets/icons/hamb.svg);
         background-position: center;
+    }
+
+    &.blue {
+        background-color: #254083;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+
+        .searchbar {
+            display: none;
+        }
+
+        .logo {
+            width: 102px !important;
+            filter: brightness(0) invert(1);
+            position: relative;
+            left: initial;
+        }
+
+        .user {
+            position: fixed;
+            height: 50px;
+            left: 0;
+            width: 200px;
+            bottom: 20px;
+            top: unset;
+            padding: 0 20px;
+            box-sizing: border-box;
+
+            .name {
+                float: right;
+                width: calc(100% - 44px);
+                height: 50px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 0px;
+                color: #254083;
+                ;
+            }
+
+            .profile-pic {
+                float: left;
+                height: 34px;
+                width: 34px;
+                top: 8px;
+            }
+
+            .sub-menu {
+                left: calc(100% - 15px);
+                top: 1px;
+            }
+        }
+
+
+
     }
 
     &.dark {
@@ -239,7 +296,7 @@
             display: none;
         }
 
-        .hamburguer{
+        .hamburguer {
             display: block;
         }
 
@@ -247,7 +304,7 @@
             color: #FFF;
         }
 
-        .logo{
+        .logo {
             width: 144px !important;
             filter: brightness(0) invert(1);
             position: relative;
@@ -262,6 +319,30 @@
     background-color: rgba(244, 246, 248, 1);
     position: relative;
 
+    &.blue {
+        width: 200px;
+        background: #EAEDF2;
+
+        nav {
+            width: 100%;
+            ul {
+                width: 100%;
+                position: relative;
+
+                li {
+                    width: 50%;
+                    a {
+                        padding: 0;
+                        font-size: 13px;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+            }
+
+        }
+
+    }
 
     &.dark {
         display: none;
@@ -272,17 +353,21 @@
 
         nav {
             padding: 0px 50px;
-            ul{
+
+            ul {
                 display: flex;
                 gap: 20px;
-                li{
-                    a{
+
+                li {
+                    a {
                         padding: 0;
                     }
-                    &.selected{
-                        a{
+
+                    &.selected {
+                        a {
                             border-bottom: none;
-                            &::after{
+
+                            &::after {
                                 content: '';
                                 width: 24px;
                                 height: 3px;
@@ -294,7 +379,7 @@
                             }
                         }
                     }
-                    
+
                 }
             }
         }

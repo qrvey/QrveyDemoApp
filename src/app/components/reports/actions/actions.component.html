@@ -2,17 +2,20 @@
     <span class="status" *ngIf="loggedUser.type != 'admin'">
         <b>Status:</b> {{selectedReport && selectedReport.shared ? "Public" : "Private"}}
     </span>
-    <div class="view-edit" [ngClass]="{'view-only': selectedReport && (!selectedReport.system_user_id && loggedUser.type != 'admin')}">
-        <span [ngClass]="{'selected': mode == 'view'}" (click)="changeView('view')">View Mode</span>
-        <span *ngIf="selectedReport && (selectedReport.system_user_id || loggedUser.type == 'admin')" [ngClass]="{'selected': mode == 'edit'}" (click)="changeView('edit')">Edit Mode</span>
+    <div class="right-place">
+        <div class="view-edit" [ngClass]="{'view-only': selectedReport && (!selectedReport.system_user_id && loggedUser.type != 'admin')}">
+            <span [ngClass]="{'selected': mode == 'view'}" (click)="changeView('view')">View Mode</span>
+            <span *ngIf="selectedReport && (selectedReport.system_user_id || loggedUser.type == 'admin')" [ngClass]="{'selected': mode == 'edit'}" (click)="changeView('edit')">Edit Mode</span>
+        </div>
+        <span class="share" (click)="shareClicked()" *ngIf="selectedReport && selectedReport.system_user_id && loggedUser.type != 'admin'">
+            <i></i>
+            {{selectedReport && selectedReport.shared && loggedUser.type != 'admin' ? "Unshare" : "Share"}}
+        </span>
+    
+        <span class="share" (click)="publishClicked()" *ngIf="selectedReport && loggedUser.type == 'admin'" [ngClass]="{'disabled':disablePublish}">
+            <i></i>
+            Publish
+        </span>
     </div>
-    <span class="share" (click)="shareClicked()" *ngIf="selectedReport && selectedReport.system_user_id && loggedUser.type != 'admin'">
-        <i></i>
-        {{selectedReport && selectedReport.shared && loggedUser.type != 'admin' ? "Unshare" : "Share"}}
-    </span>
-
-    <span class="share" (click)="publishClicked()" *ngIf="selectedReport && loggedUser.type == 'admin'" [ngClass]="{'disabled':disablePublish}">
-        <i></i>
-        Publish
-    </span>
+    
 </div>

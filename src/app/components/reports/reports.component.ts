@@ -166,7 +166,7 @@ export class ReportsComponent implements OnInit {
     if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
       left_bar.style.display = 'contents';
       sinde_content.style.display = 'none';
-      app_actions.style.display = 'none';
+      app_actions && (app_actions.style.display = 'none');
       sub_bar.style.opacity = 1;
     }
   }
@@ -182,7 +182,7 @@ export class ReportsComponent implements OnInit {
     if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
       left_bar.style.display = 'none';
       sinde_content.style.display = 'block';
-      app_actions.style.display = 'block';
+      app_actions && (app_actions.style.display = 'block');
       sub_bar.style.opacity = 0;
     }
 
@@ -377,7 +377,7 @@ export class ReportsComponent implements OnInit {
       if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
         left_bar.style.display = 'none';
         sinde_content.style.display = 'block';
-        app_actions.style.display = 'block';
+        app_actions && (app_actions.style.display = 'block');
         sub_bar.style.opacity = 0;
       }
       
