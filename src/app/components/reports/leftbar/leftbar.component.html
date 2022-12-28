@@ -4,6 +4,12 @@
             {{loggedUser.organization.theme == 'blue' ? 'Create Report' : '+ Create New Report'}}
         </span>
     </div>
+
+    <div class="reports-search">
+        <input type="text" placeholder="Search Report" [(ngModel)]="searchText">
+        <span class="search-icn"></span>
+    </div>
+
     <ul class="reports-nav">
         <li class="selected" *ngIf="loading">
             <a>Loading...</a>
@@ -14,7 +20,7 @@
         </li>
 
         <li 
-        *ngFor="let report of reports; let i = index" 
+        *ngFor="let report of reports | ReportsFilter: searchText; let i = index " 
         [ngClass]="{'selected' : report.pageid == current_report?.pageid}"
         [ngStyle]="{'z-index': reports.length - i}"
         >

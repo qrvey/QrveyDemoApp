@@ -8,6 +8,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 })
 export class LeftbarComponent implements OnInit {
 
+  searchText: string = "";
   @Input() loggedUser: any;
   @Input() loading: any = true;
   @Input() reports: any[] = [];
