@@ -15,6 +15,8 @@
         height: 32px;
         background-repeat: no-repeat;
         display: inline-block;
+        // position: absolute;
+        left: 20px;
     }
 
     nav {
@@ -164,9 +166,154 @@
 
         &:hover {
             cursor: pointer;
+
             >.sub-menu {
                 display: block;
             }
+        }
+    }
+
+    .inside-menu {
+        display: none;
+        list-style: none;
+
+        li {
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+            padding: 0 20px;
+
+            a {
+                text-decoration: none;
+                color: #FFF;
+                opacity: 0.5;
+            }
+
+            &.selected {
+                background-color: rgba(190, 30, 45, 0.3);
+
+                a {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+
+    .hamburguer {
+        display: none;
+        position: absolute;
+        left: 20px;
+        top: 15px;
+        width: 24px;
+        height: 20px;
+        background-image: url(../../../assets/icons/hamb.svg);
+        background-position: center;
+    }
+
+    &.blue {
+        background-color: #254083;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+
+        .searchbar {
+            display: none;
+        }
+
+        .logo {
+            width: 102px !important;
+            filter: brightness(0) invert(1);
+            position: relative;
+            left: initial;
+        }
+
+        .user {
+            position: fixed;
+            height: 50px;
+            left: 0;
+            width: 200px;
+            bottom: 20px;
+            top: unset;
+            padding: 0 20px;
+            box-sizing: border-box;
+
+            .name {
+                float: right;
+                width: calc(100% - 44px);
+                height: 50px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                margin-right: 0px;
+                color: #254083;
+                ;
+            }
+
+            .profile-pic {
+                float: left;
+                height: 34px;
+                width: 34px;
+                top: 8px;
+            }
+
+            .sub-menu {
+                left: calc(100% - 15px);
+                top: 1px;
+            }
+        }
+
+
+
+    }
+
+    &.dark {
+        background-color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .logo {
+            position: absolute;
+            top: 14px;
+        }
+
+        .searchbar {
+            display: none;
+        }
+
+        .inside-menu {
+            display: block;
+        }
+
+        .user .name {
+            color: #FFF;
+        }
+    }
+
+    &.green {
+        background-color: #22B573;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .searchbar {
+            display: none;
+        }
+
+        .hamburguer {
+            display: block;
+        }
+
+        .user .name {
+            color: #FFF;
+        }
+
+        .logo {
+            width: 144px !important;
+            filter: brightness(0) invert(1);
+            position: relative;
+            left: initial;
         }
     }
 }
@@ -177,11 +324,76 @@
     background-color: rgba(244, 246, 248, 1);
     position: relative;
 
+    &.blue {
+        width: 200px;
+        background: #EAEDF2;
+
+        nav {
+            width: 100%;
+            ul {
+                width: 100%;
+                position: relative;
+
+                li {
+                    width: 50%;
+                    a {
+                        padding: 0;
+                        font-size: 13px;
+                        width: 100%;
+                        text-align: center;
+                    }
+                }
+            }
+
+        }
+
+    }
+
+    &.dark {
+        display: none;
+    }
+
+    &.green {
+        background-color: #FFF;
+
+        nav {
+            padding: 0px 50px;
+
+            ul {
+                display: flex;
+                gap: 20px;
+
+                li {
+                    a {
+                        padding: 0;
+                    }
+
+                    &.selected {
+                        a {
+                            border-bottom: none;
+
+                            &::after {
+                                content: '';
+                                width: 24px;
+                                height: 3px;
+                                background-color: $primary-color;
+                                position: absolute;
+                                bottom: 0px;
+                                left: 50%;
+                                margin-left: -12px;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+
+    }
+
     nav {
         display: inline-block;
-        position: absolute;
         height: 100%;
-        left: 0;
 
         ul {
             margin: 0;
@@ -207,13 +419,16 @@
                     font-style: normal;
                     letter-spacing: 0px;
                     text-decoration: none;
-                    &:hover{
+
+                    &:hover {
                         opacity: 0.7;
                     }
-                    &.title{
+
+                    &.title {
                         opacity: 1;
                     }
                 }
+
                 &.selected {
                     a {
                         color: $primary-color;

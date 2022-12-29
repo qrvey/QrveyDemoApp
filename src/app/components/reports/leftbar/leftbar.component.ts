@@ -8,6 +8,7 @@ import { BackendService } from 'src/app/services/backend/backend.service';
 })
 export class LeftbarComponent implements OnInit {
 
+  searchText: string = "";
   @Input() loggedUser: any;
   @Input() loading: any = true;
   @Input() reports: any[] = [];
@@ -55,6 +56,11 @@ export class LeftbarComponent implements OnInit {
 
   onKey(event:any, option: string, report: any, index?: number ){
     if(event.key == 'Enter' || event.keyCode == 13)  this.reportOption(option,report,index);
+  }
+
+  getDate(date:string){
+    let date_c = new Date(date);
+    return date_c.toLocaleDateString("en-US");
   }
 
 }

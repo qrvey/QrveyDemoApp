@@ -157,9 +157,35 @@ export class ReportsComponent implements OnInit {
     this.widgetContainer.append(page_view_tag);
   }
 
+  backBar(){
+    const sinde_content:any = document.querySelector('.side-content');
+    const left_bar:any = document.querySelector('app-leftbar');
+    const app_actions:any = document.querySelector('app-actions');
+    const sub_bar:any = document.querySelector('.sub-topbar nav');
+
+    if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
+      left_bar.style.display = 'contents';
+      sinde_content.style.display = 'none';
+      app_actions && (app_actions.style.display = 'none');
+      sub_bar.style.opacity = 1;
+    }
+  }
+
   comparePublishedVersions(report: any) {
     // Here we doublecheck if the version that was edited is different from the version that is published
     // If not, then we update the published version
+    const sinde_content:any = document.querySelector('.side-content');
+    const left_bar:any = document.querySelector('app-leftbar');
+    const app_actions:any = document.querySelector('app-actions');
+    const sub_bar:any = document.querySelector('.sub-topbar nav');
+
+    if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
+      left_bar.style.display = 'none';
+      sinde_content.style.display = 'block';
+      app_actions && (app_actions.style.display = 'block');
+      sub_bar.style.opacity = 0;
+    }
+
     if (this.loading_widget && report.sidebar) return;
     this.loadingOn();
     this.selected_report = report;
@@ -184,6 +210,7 @@ export class ReportsComponent implements OnInit {
   }
 
   async loadPageWidget(report: any, builder?: boolean) {
+    
     if (this.view_mode == 'edit') {
       builder = true;
     }
@@ -342,6 +369,18 @@ export class ReportsComponent implements OnInit {
     this.view_mode = m;
     let updates: any;
     if (m == 'view') {
+      const sinde_content:any = document.querySelector('.side-content');
+      const left_bar:any = document.querySelector('app-leftbar');
+      const app_actions:any = document.querySelector('app-actions');
+      const sub_bar:any = document.querySelector('.sub-topbar nav');
+
+      if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
+        left_bar.style.display = 'none';
+        sinde_content.style.display = 'block';
+        app_actions && (app_actions.style.display = 'block');
+        sub_bar.style.opacity = 0;
+      }
+      
       updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false };
       this.updatePageStatus(updates, true, () => {
         if (from_new && !checked_version) {

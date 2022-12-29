@@ -19,6 +19,7 @@ import { CardComponent } from './components/admin/card/card.component';
 import { TenantInfoComponent } from './components/admin/tenant-info/tenant-info.component';
 import { PublishComponent } from './components/reports/publish/publish.component';
 import { DeploymentStatusComponent } from './components/reports/deployment-status/deployment-status.component';
+import { ReportsPipe } from './global/reports-pipe';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { DeploymentStatusComponent } from './components/reports/deployment-statu
     CardComponent,
     TenantInfoComponent,
     PublishComponent,
-    DeploymentStatusComponent
+    DeploymentStatusComponent,
+    ReportsPipe
   ],
   imports: [
     BrowserModule,

@@ -1,20 +1,47 @@
-<app-actions *ngIf="loggedUser.type != 'viewer'" [loggedUser]="loggedUser" [selectedReport]="selected_report" [mode]="view_mode" [shareReportsPages]="share_report_page" [disablePublish]="taskid ? true : false" (actionClicked)="actionClicked($event)" (shareReport)="shareReport($event)" (publishReport)="publishReportModal($event)" ></app-actions>
+<app-actions class="{{loggedUser?.organization?.theme}}" *ngIf="loggedUser.type != 'viewer'" [loggedUser]="loggedUser"
+    [selectedReport]="selected_report" [mode]="view_mode" [shareReportsPages]="share_report_page"
+    [disablePublish]="taskid ? true : false" (actionClicked)="actionClicked($event)" (shareReport)="shareReport($event)"
+    (publishReport)="publishReportModal($event)"></app-actions>
 
-<app-leftbar [loggedUser]="loggedUser" [reports]="reports" [shareReportsPages]="share_report_page" [loading]="loading" [current_report]="selected_report" (reportClicked)="comparePublishedVersions($event)" (newReport)="newReportModal()" (reportOptionClicked)="reportOption($event)"></app-leftbar>
+<app-leftbar [loggedUser]="loggedUser" [reports]="reports" [shareReportsPages]="share_report_page" [loading]="loading"
+    [current_report]="selected_report" (reportClicked)="comparePublishedVersions($event)" (newReport)="newReportModal()"
+    (reportOptionClicked)="reportOption($event)"></app-leftbar>
 
-<div class="side-content">
+<div class="side-content {{loggedUser.organization.theme}}">
+    <div class="back-bar">
+        <div class="click" (click)="backBar()">
+            <span class="back" >
+                <svg width="10px" height="18px" viewBox="0 0 10 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title>back</title>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="back" fill="#2E5DF4" fill-rule="nonzero">
+                            <polygon id="Path-2"
+                                points="8.60273807 0 10 1.46178546 2.79530088 9 10 16.5382145 8.60273807 18 0 9"></polygon>
+                        </g>
+                    </g>
+                </svg>
+            </span>{{selected_report?.name}}
+        </div>
+    </div>
     <div class="widget-wrapper"></div>
     <app-loading *ngIf="loading_widget" [size]=0.8></app-loading>
     <p class="blank" *ngIf="!selected_report">Please, select a Report.</p>
 </div>
 
-<app-new-report *ngIf="new_report_modal" [loggedUser]="loggedUser" [reports]="reports" (newReportClose)="newReportModal()" (newReport)="newReportAdded($event)"></app-new-report>
+<app-new-report *ngIf="new_report_modal" [loggedUser]="loggedUser" [reports]="reports"
+    (newReportClose)="newReportModal()" (newReport)="newReportAdded($event)"></app-new-report>
 
-<app-confirmation-modal *ngIf="delete_report_modal" [texts]="confirmation_modal_text" (closeConfirmationModal)="closeDeleteReportModal()" (confirmAction)="deleteSelectedReport()"></app-confirmation-modal>
+<app-confirmation-modal *ngIf="delete_report_modal" [texts]="confirmation_modal_text"
+    (closeConfirmationModal)="closeDeleteReportModal()" (confirmAction)="deleteSelectedReport()">
+</app-confirmation-modal>
 
-<app-publish *ngIf="publish_report_modal" [loggedUser]="loggedUser" [selectedReport]="selected_report" [plans]="plans" [publishing]="publishing_report" (publishReportClose)="publishReportClose()" (publishReport)="publishReport($event)"></app-publish>
+<app-publish *ngIf="publish_report_modal" [loggedUser]="loggedUser" [selectedReport]="selected_report" [plans]="plans"
+    [publishing]="publishing_report" (publishReportClose)="publishReportClose()"
+    (publishReport)="publishReport($event)"></app-publish>
 
-<app-loading class="full" *ngIf="loading_general_action || publishing_report" [text]="loading_text" [size]=0.8></app-loading>
+<app-loading class="full" *ngIf="loading_general_action || publishing_report" [text]="loading_text" [size]=0.8>
+</app-loading>
 <!-- <app-loading class="full" [text]="" [size]=0.8></app-loading> -->
 
 <app-deployment-status *ngIf="dstatus && dstatus != 'DEPLOYED'" [taskid]="taskid"></app-deployment-status>

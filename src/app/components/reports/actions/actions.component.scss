@@ -6,7 +6,49 @@
     line-height: 45px;
     padding-right: 20px;
 
-    &.disabled{
+    &.blue{
+        width: 100%;
+        padding: 0 68px;
+
+        .right-place{
+            float: right;
+        }
+    }
+
+    &.dark {
+        padding-right: 0px;
+
+        .view-edit {
+            height: 30px;
+            line-height: 30px;
+            border-radius: 100px;
+            width: 218px;
+            span:first-child{
+                border-radius: 100px 0px 0px 100px;
+            }
+            span:last-child{
+                border-radius: 0px 100px 100px 0px;
+            }
+
+            &.view-only span{
+                border-radius: 100px;
+            }
+        }
+
+        .share {
+            border-radius: 100px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0px 20px 0 40px;
+
+            i {
+                left: 18px;
+                top: 9px;
+            }
+        }
+    }
+
+    &.disabled {
         opacity: 0;
     }
 
@@ -52,14 +94,15 @@
                 opacity: 1;
             }
 
-            &:hover{
+            &:hover {
                 cursor: pointer;
             }
         }
 
-        &.view-only{
+        &.view-only {
             width: 79px;
-            span{
+
+            span {
                 width: 100%;
             }
         }

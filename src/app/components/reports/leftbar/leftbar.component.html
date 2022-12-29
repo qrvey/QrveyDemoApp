@@ -1,9 +1,15 @@
-<div class="left-bar">
+<div class="left-bar {{loggedUser.organization.theme}}">
     <div class="create-report" *ngIf="loggedUser.type != 'viewer' && !shareReportsPages">
         <span (click)="triggerNewReport()">
-            + Create New Report
+            {{loggedUser.organization.theme == 'blue' ? 'Create Report' : '+ Create New Report'}}
         </span>
     </div>
+
+    <div class="reports-search">
+        <input type="text" placeholder="Search Report" [(ngModel)]="searchText">
+        <span class="search-icn"></span>
+    </div>
+
     <ul class="reports-nav">
         <li class="selected" *ngIf="loading">
             <a>Loading...</a>
@@ -14,7 +20,7 @@
         </li>
 
         <li 
-        *ngFor="let report of reports; let i = index" 
+        *ngFor="let report of reports | ReportsFilter: searchText; let i = index " 
         [ngClass]="{'selected' : report.pageid == current_report?.pageid}"
         [ngStyle]="{'z-index': reports.length - i}"
         >
@@ -23,6 +29,12 @@
             <a *ngIf="!report.renaming" (click)="selectReport(report)" [ngClass]="{'base-page':!report.system_user_id && loggedUser.type != 'admin'}" title="{{report.name}}">{{report.name}}{{!report.system_user_id && loggedUser.type != 'admin' ? '*' : ''}}</a>
 
             <input *ngIf="report.renaming" type="text" id="input-name-{{report.pageid}}" [(ngModel)]="report.new_name" (blur)="reportOption('rename', report, i )" (keyup)="onKey($event, 'rename', report, i )">
+
+            <div class="dates-info">
+                <span><b>Created on:</b> {{getDate(report.createDate)}}</span>
+                <span><b>Last update:</b> {{getDate(report.modifyDate)}}</span>
+            </div>
+            
 
             <div class="report-options" *ngIf="!report.renaming && loggedUser.type != 'viewer'">
                 <span class="three-dot">
