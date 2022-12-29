@@ -15,7 +15,7 @@
         height: 32px;
         background-repeat: no-repeat;
         display: inline-block;
-        position: absolute;
+        // position: absolute;
         left: 20px;
     }
 
@@ -272,6 +272,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+
+        .logo {
+            position: absolute;
+            top: 14px;
+        }
 
         .searchbar {
             display: none;

@@ -14,11 +14,18 @@
     &.blue {
         border: 0px;
         background-color: #EAEDF2;
+        height: calc(100% - 30px);
+        padding-top: 20px;
+
+        .reports-nav{
+            height: calc(100% - 78px);
+        }
 
         .create-report {
             padding: 0;
             border: 0;
             margin: 20px;
+            margin-top: 0px;
             border: 1px solid;
             border-radius: 2px;
             text-align: center;
@@ -362,7 +369,7 @@
     .reports-nav {
         display: block;
         position: absolute;
-        height: calc(100% - 30px);
+        height: calc(100% - 82px);
         overflow: auto;
         width: 100%;
         padding: 0;
