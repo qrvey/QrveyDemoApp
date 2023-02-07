@@ -25,7 +25,7 @@
         </div>
     </div>
     <div class="widget-wrapper"></div>
-    <app-loading *ngIf="loading_widget" [size]=0.8></app-loading>
+    <app-loading class=" {{loggedUser?.organization?.theme ? loggedUser?.organization?.theme : ''}}" [theme]="loggedUser?.organization?.theme" *ngIf="loading_widget" [size]=0.8></app-loading>
     <p class="blank" *ngIf="!selected_report">Please, select a Report.</p>
 </div>
 
@@ -40,9 +40,9 @@
     [publishing]="publishing_report" (publishReportClose)="publishReportClose()"
     (publishReport)="publishReport($event)"></app-publish>
 
-<app-loading class="full" *ngIf="loading_general_action || publishing_report" [text]="loading_text" [size]=0.8>
+<app-loading class="full {{loggedUser?.organization?.theme ? loggedUser?.organization?.theme : ''}}" [theme]="loggedUser?.organization?.theme" *ngIf="loading_general_action || publishing_report" [text]="loading_text" [size]=0.8>
 </app-loading>
-<!-- <app-loading class="full" [text]="" [size]=0.8></app-loading> -->
+<!-- <app-loading class="full {{loggedUser?.organization?.theme ? loggedUser?.organization?.theme : ''}}" [theme]="loggedUser?.organization?.theme" [text]="" [size]=0.8></app-loading> -->
 
 <app-deployment-status *ngIf="dstatus && dstatus != 'DEPLOYED'" [taskid]="taskid"></app-deployment-status>
 <!-- <app-deployment-status [taskid]="'UPJWEVWEGWQWF#$'"></app-deployment-status> -->

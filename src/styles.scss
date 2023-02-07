@@ -192,6 +192,9 @@ app-loading{
         position: fixed;
         background-color: rgba(255, 255, 255, 0.8);
     }
+    &.dark{
+        background-color: rgba($color: #0000, $alpha: 0.5);
+    }
 }
 
 .datasets-container{

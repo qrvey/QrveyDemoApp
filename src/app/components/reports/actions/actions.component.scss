@@ -18,11 +18,19 @@
     &.dark {
         padding-right: 0px;
 
+        .status{
+            color: #FFF;
+        }
+
         .view-edit {
             height: 30px;
             line-height: 30px;
             border-radius: 100px;
             width: 218px;
+            span{
+                color: #FFF;
+                opacity: 1;
+            }
             span:first-child{
                 border-radius: 100px 0px 0px 100px;
             }

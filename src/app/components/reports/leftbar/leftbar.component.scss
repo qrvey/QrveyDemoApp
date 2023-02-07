@@ -201,7 +201,7 @@
         position: relative;
 
         .create-report {
-            background: #BE1E2D;
+            background: $primary-color;
             border-radius: 100px;
             padding: 0px 20px;
             color: #FFF;
@@ -269,7 +269,8 @@
                 a {
                     padding: 0;
                     font-size: 14px;
-                    color: $primary-color;
+                    color: #000;
+                    font-weight: bold;
                 }
 
                 input {

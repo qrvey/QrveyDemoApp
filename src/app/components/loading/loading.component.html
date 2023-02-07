@@ -1,4 +1,4 @@
-<div class="loading-wrapper">
+<div class="loading-wrapper {{theme ? theme : ''}}">
     <p *ngIf="text">{{text}}</p>
     <div class="lds-ellipsis" [ngClass]="{'text':text}" [ngStyle]="{'transform':'scale('+size+')'}"><div></div><div></div><div></div><div></div></div>
 </div>

@@ -24,8 +24,9 @@
             "name": "AV Stores, Co.",
             "id": 187,
             "planid": 3,
-            "hexcolor": "#BE1E2D",
-            "logo": "AVStores.svg",
+            "hexcolor": "#9266FD",
+            "hextext": "#A4A9AE",
+            "logo": "AVStores.png",
             "logowidth": 170,
             "theme": "dark"
         },
@@ -43,8 +44,9 @@
             "name": "AV Stores, Co.",
             "id": 187,
             "planid": 3,
-            "hexcolor": "#BE1E2D",
-            "logo": "AVStores.svg",
+            "hexcolor": "#9266FD",
+            "hextext": "#A4A9AE",
+            "logo": "AVStores.png",
             "logowidth": 170,
             "theme": "dark"
         },
@@ -62,8 +64,9 @@
             "name": "AV Stores, Co.",
             "id": 187,
             "planid": 3,
-            "hexcolor": "#BE1E2D",
-            "logo": "AVStores.svg",
+            "hexcolor": "#9266FD",
+            "hextext": "#A4A9AE",
+            "logo": "AVStores.png",
             "logowidth": 170,
             "theme": "dark"
         },
@@ -81,7 +84,7 @@
             "name": "Clover Collections, Co.",
             "id": 189,
             "planid": 2,
-            "hexcolor": "#22B573",
+            "hexcolor": "#64BCC1",
             "logo": "CloverCollection.svg",
             "logowidth": 126,
             "theme": "green"
@@ -100,7 +103,7 @@
             "name": "Clover Collections, Co.",
             "id": 189,
             "planid": 2,
-            "hexcolor": "#22B573",
+            "hexcolor": "#64BCC1",
             "logo": "CloverCollection.svg",
             "logowidth": 126,
             "theme": "green"
@@ -119,7 +122,7 @@
             "name": "Clover Collections, Co.",
             "id": 189,
             "planid": 2,
-            "hexcolor": "#22B573",
+            "hexcolor": "#64BCC1",
             "logo": "CloverCollection.svg",
             "logowidth": 126,
             "theme": "green"

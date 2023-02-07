@@ -109,9 +109,14 @@ app-actions {
         width: 100%;
         left: 0;
         display: none;
+        background-color: #252525;
 
         .back-bar {
             display: block;
+            border-bottom-color: #4A4B50;
+            .click{
+                color: #A4A9AE;
+            }
         }
 
         .widget-wrapper {

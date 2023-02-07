@@ -27,8 +27,8 @@ export class ReportsComponent implements OnInit {
   deleting_report: boolean = false;
   publish_report_modal: boolean = false;
   publishing_report: boolean = false;
-  dstatus:any = null;
-  taskid:any = null;
+  dstatus: any = null;
+  taskid: any = null;
   confirmation_modal_text: any = {
     title: "Delete Report",
     message: "",
@@ -58,7 +58,7 @@ export class ReportsComponent implements OnInit {
 
     this.user.getUserStatus().subscribe({
       next: (response: any) => {
-        if(response.taskId && response.taskStatus){
+        if (response.taskId && response.taskStatus) {
           this.dstatus = response.taskStatus;
           this.taskid = response.taskId;
           this.checkDeploymentStatus(response.taskId);
@@ -144,12 +144,158 @@ export class ReportsComponent implements OnInit {
     })
   }
 
-  buildQrveyPage(token: any, builder: boolean) {
+  buildQrveyPage(token: any, builder: boolean, pageid: string) {
     this.loading_widget = false;
+
+    // CSS
+    let css_injection:string = `an-panel{
+      border-radius: 10px !important;
+      border: 1px solid #F0F1F7;
+      }.an-panel-header, .an-panel-chart__content{
+          padding: 12px 20px !important;
+      }.an-panel-chart__content{
+          padding-top: 0px !important;
+      }an-panel{
+          box-shadow: 0px 5px 16.372px rgba(205, 208, 227, 0.25) !important;
+      }.an-panel-header__title{
+          font-size: 15px !important;
+          color: undefined !important;
+          font-weight: bold !important;
+      }.an-panel-header{
+          border-bottom: none !important;
+      }.an-panel-header__button{
+          border: none !important;
+          font-size: 15px !important;
+          color: #B4B7CC !important;
+      }
+      .qpb-bottom-bar-action.qpb-pages-bottom-bar-menu-trigger, .qpb-bottom-bar-action.qpb-add-more-tabs, .qpb-barmenu-selector:nth-child(1),
+      .qpb-navigation-link:nth-child(2), .qpb-navigation-link:nth-child(3),
+      .qpb-publish-container > *,
+      qpb-editable-tab qui-dropdownv2 > *, 
+      .qpb-pages-selector-drop.qpb-insert-menu-container .qpb-insert-selector-option:nth-child(2),
+      .qpb-pages-selector-drop.qpb-insert-menu-container .qpb-insert-selector-option:nth-child(3),
+      .qpb-pages-selector-drop.qpb-insert-menu-container .qpb-insert-selector-option:nth-child(7),
+      .qpb-pages-selector-drop.qpb-insert-menu-container .qpb-insert-selector-option:nth-child(8),
+      .qpb-pages-selector-drop.qpb-insert-menu-container .qpb-insert-selector-option:nth-child(9),
+      .qpb-item-topbar-container-center qui-dropdownv2:nth-child(1),
+      .qpb-item-topbar-container-center qui-dropdownv2:nth-child(11),
+      .qpb-item-topbar-container-center qui-dropdownv2:nth-child(12),
+      .qpb-item-topbar-container-center qpb-topbar-menu-icon:nth-child(7),qpb-bottombar, 
+      qpb-blue-topbar, .qpb-pages-bar .qpb-item-topbar-container-right{
+          display: none !important;
+          visibility: hidden !important;
+      }
+      .qpb-page-builder-container .qpb-page-builder-editor-container .horizontal-container{
+          height: calc(100% - 40px) !important;
+      }
+      .qpb-page-builder-container .qpb-page-builder-editor-container{
+          height: 100% !important;
+          z-index: 1 !important;
+      }
+      .qui-action-menu-container{ bottom: 15px !important;}
+      .qpb-pages-bar{ display: none !important;}
+      .selectionTriggerDate{
+        border-radius: 10px;
+        border: 1px solid #F0F1F7 !important;
+      }
+      #container{
+        border-radius: 10px;
+        border: 1px solid #F0F1F7 !important;
+      }
+      qeu-input-box-grid-item .container{
+        border-radius: 10px;
+      }
+      .qui-value-list-container{
+        border-radius: 10px;
+        border: 1px solid #F0F1F7 !important;
+      }
+      qeu-value-list-grid-item .q-container{
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .qui-list-window__selections.qui-list-window__selections--displayed{
+        border-bottom: none !important;
+      }
+      .qui-value-list-container .qui-value-list-header{
+        border-radius: 10px 10px 0px 0px;
+      }
+      .metric-legend{
+        padding: 0px 20px !important;
+      }
+      an-panel-combochart .an-panel-combochart__content{
+        overflow: hidden !important;
+      }`;
+
+    if(this.loggedUser?.organization?.theme == 'dark' && !builder){
+      css_injection += `an-panel{
+        background-color: #131313 !important;
+        border: 1px solid #4A4B50;
+        box-shadow: 0px 5px 16.372px rgba(0, 0, 0, 0.25) !important;
+      }
+      .an-panel-combochart__content div.chart_heatmap div.scale,
+      .an-panel-combochart__content div.chart_heatmap div.scale:after
+      {
+        background: #131313 !important;
+        color: #4A4B50 !important;
+      }
+      .an-panel-header__button:hover{
+        background-color: transparent !important;
+        border: 1px solid #A4A9AE !important;
+      }
+      .selectionTriggerDate{
+        background-color: #131313 !important;
+        border: 1px solid #4A4B50 !important;
+      }
+      .main-arc{
+        fill: transparent !important;
+        stroke: transparent !important;
+      }
+      .an-panel-body-loading-wrapper{
+        background: transparent !important;
+      }
+      .an-panel-combochart__content div.chart_heatmap .spec-heatmap-cell{
+        border: solid 1px #736c6c !important;
+      }
+      #container{
+        background-color: #131313 !important;
+        border: 1px solid #4A4B50 !important;
+      }
+      .qui-value-list-container{
+        border: 1px solid #4A4B50 !important;
+      }
+      
+      .qui-value-list-container, .qui-value-list-header{
+        background-color: #131313 !important;
+      }
+      .qui-value-list-header{
+        background-color: #131313 !important;
+        border-bottom: 1px solid #4A4B50 !important;
+      }
+      .qui-list-window__selections{
+        border-top: 1px solid #4A4B50 !important;
+      }
+      .qui-list-window__searcher-input{
+        background: transparent !important;
+      }
+      
+      an-qv-list{
+        background-color: #131313 !important;
+        border: 1px solid #4A4B50 !important;
+      }
+      
+      an-qv-list-item:not([type="label-only"]):hover{
+        background-color: rgb(0 0 0 / 37%) !important;
+        color: #4A4B50 !important;
+      }`;
+    }
 
     (window as any).qrveyPageConfig = {
       qv_token: token,
-      domain: environment.qrvey_domain
+      domain: environment.qrvey_domain,
+      dashboard_id: pageid,
+      customCSSRules: css_injection,
+      single_page_edit: true,
+      custom_styles: true
     };
     (window as any).customEUStyle = '';
     let page_view_tag = !builder ? document.createElement("qrvey-end-user") : document.createElement("qrvey-builders");
@@ -157,13 +303,13 @@ export class ReportsComponent implements OnInit {
     this.widgetContainer.append(page_view_tag);
   }
 
-  backBar(){
-    const sinde_content:any = document.querySelector('.side-content');
-    const left_bar:any = document.querySelector('app-leftbar');
-    const app_actions:any = document.querySelector('app-actions');
-    const sub_bar:any = document.querySelector('.sub-topbar nav');
+  backBar() {
+    const sinde_content: any = document.querySelector('.side-content');
+    const left_bar: any = document.querySelector('app-leftbar');
+    const app_actions: any = document.querySelector('app-actions');
+    const sub_bar: any = document.querySelector('.sub-topbar nav');
 
-    if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
+    if (this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green') {
       left_bar.style.display = 'contents';
       sinde_content.style.display = 'none';
       app_actions && (app_actions.style.display = 'none');
@@ -174,12 +320,12 @@ export class ReportsComponent implements OnInit {
   comparePublishedVersions(report: any) {
     // Here we doublecheck if the version that was edited is different from the version that is published
     // If not, then we update the published version
-    const sinde_content:any = document.querySelector('.side-content');
-    const left_bar:any = document.querySelector('app-leftbar');
-    const app_actions:any = document.querySelector('app-actions');
-    const sub_bar:any = document.querySelector('.sub-topbar nav');
+    const sinde_content: any = document.querySelector('.side-content');
+    const left_bar: any = document.querySelector('app-leftbar');
+    const app_actions: any = document.querySelector('app-actions');
+    const sub_bar: any = document.querySelector('.sub-topbar nav');
 
-    if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
+    if (this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green') {
       left_bar.style.display = 'none';
       sinde_content.style.display = 'block';
       app_actions && (app_actions.style.display = 'block');
@@ -210,7 +356,7 @@ export class ReportsComponent implements OnInit {
   }
 
   async loadPageWidget(report: any, builder?: boolean) {
-    
+
     if (this.view_mode == 'edit') {
       builder = true;
     }
@@ -284,7 +430,7 @@ export class ReportsComponent implements OnInit {
       }
       this.widgetContainer.style.cssText = `--qv-main-color: ${MAIN_COLOR};  --qv-tab-bar-color: rgb(244, 246, 248); --qv-tab-font-color: #585858; --qv-secondary-color: #585858 !important;`;
       this.getJWT(jwtbody, (jwtresponse: any) => {
-        this.buildQrveyPage(jwtresponse, builder as boolean);
+        this.buildQrveyPage(jwtresponse, builder as boolean, report.pageid);
       })
     })
   }
@@ -369,18 +515,18 @@ export class ReportsComponent implements OnInit {
     this.view_mode = m;
     let updates: any;
     if (m == 'view') {
-      const sinde_content:any = document.querySelector('.side-content');
-      const left_bar:any = document.querySelector('app-leftbar');
-      const app_actions:any = document.querySelector('app-actions');
-      const sub_bar:any = document.querySelector('.sub-topbar nav');
+      const sinde_content: any = document.querySelector('.side-content');
+      const left_bar: any = document.querySelector('app-leftbar');
+      const app_actions: any = document.querySelector('app-actions');
+      const sub_bar: any = document.querySelector('.sub-topbar nav');
 
-      if(this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green'){
+      if (this.loggedUser.organization.theme == 'dark' || this.loggedUser.organization.theme == 'green') {
         left_bar.style.display = 'none';
         sinde_content.style.display = 'block';
         app_actions && (app_actions.style.display = 'block');
         sub_bar.style.opacity = 0;
       }
-      
+
       updates = { editing: false, published: true, updateTo: "Published", forceUpdate: true, selected: false };
       this.updatePageStatus(updates, true, () => {
         if (from_new && !checked_version) {
@@ -580,7 +726,7 @@ export class ReportsComponent implements OnInit {
   }
 
   publishReportModal(report?: any) {
-    if(this.taskid) return;
+    if (this.taskid) return;
     this.publish_report_modal = true;
   }
 
@@ -633,7 +779,7 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  clearTask(){
+  clearTask() {
     this.backend.clearTask().subscribe({
       next: (response: any) => {
         console.log(response);
@@ -646,7 +792,7 @@ export class ReportsComponent implements OnInit {
     });
   }
 
-  checkDeploymentStatus(taskid:string){
+  checkDeploymentStatus(taskid: string) {
     let res: any;
     this.taskid = taskid;
     this.backend.checkStatus(taskid).subscribe({
@@ -659,12 +805,12 @@ export class ReportsComponent implements OnInit {
       },
       complete: () => {
         this.dstatus = res.status;
-        if(this.dstatus != "DEPLOYED"){
+        if (this.dstatus != "DEPLOYED") {
           this.taskid = taskid;
           setTimeout(() => {
             this.checkDeploymentStatus(taskid);
           }, 2000);
-        }else{
+        } else {
           this.clearTask();
           this.dstatus = null;
           this.taskid = null;
