@@ -1,4 +1,4 @@
-<app-actions class="{{loggedUser?.organization?.theme}}" *ngIf="loggedUser.type != 'viewer'" [loggedUser]="loggedUser"
+<app-actions class="{{loggedUser?.organization?.theme}}" *ngIf="loggedUser.type != 'viewer' && !share_report_page" [loggedUser]="loggedUser"
     [selectedReport]="selected_report" [mode]="view_mode" [shareReportsPages]="share_report_page"
     [disablePublish]="taskid ? true : false" (actionClicked)="actionClicked($event)" (shareReport)="shareReport($event)"
     (publishReport)="publishReportModal($event)"></app-actions>
@@ -24,7 +24,7 @@
             </span>{{selected_report?.name}}
         </div>
     </div>
-    <div class="widget-wrapper"></div>
+    <div class="widget-wrapper" [ngClass]="{'share':share_report_page}"></div>
     <app-loading class=" {{loggedUser?.organization?.theme ? loggedUser?.organization?.theme : ''}}" [theme]="loggedUser?.organization?.theme" *ngIf="loading_widget" [size]=0.8></app-loading>
     <p class="blank" *ngIf="!selected_report">Please, select a Report.</p>
 </div>

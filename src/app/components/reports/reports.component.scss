@@ -9,7 +9,7 @@ app-actions {
     z-index: 2;
 
     &.blue{
-        height: 95px;
+        height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -66,10 +66,14 @@ app-actions {
         background-color: #f4f6f8;
 
         .widget-wrapper{
-            height: calc(100% - 95px);
-            top: 95px;
+            height: calc(100% - 50px);
+            top: 50px;
             position: absolute;
             width: 100%;
+            &.share{
+                height: 100%;
+                top: 0px;
+            }
         }
     }
 

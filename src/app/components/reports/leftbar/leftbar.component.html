@@ -26,13 +26,16 @@
         >
             <span class="selected-bar"></span>
 
-            <a *ngIf="!report.renaming" (click)="selectReport(report)" [ngClass]="{'base-page':!report.system_user_id && loggedUser.type != 'admin'}" title="{{report.name}}">{{report.name}}{{!report.system_user_id && loggedUser.type != 'admin' ? '*' : ''}}</a>
+            <a *ngIf="!report.renaming" (click)="selectReport(report)" [ngClass]="{'base-page':!report.system_user_id && loggedUser.type != 'admin'}" title="{{report.name}}{{shareReportsPages ? '\nBy: '+report.system_user_id : ''}}">{{report.name}}{{!report.system_user_id && loggedUser.type != 'admin' ? '*' : ''}}</a>
 
             <input *ngIf="report.renaming" type="text" id="input-name-{{report.pageid}}" [(ngModel)]="report.new_name" (blur)="reportOption('rename', report, i )" (keyup)="onKey($event, 'rename', report, i )">
 
             <div class="dates-info">
                 <span><b>Created on:</b> {{getDate(report.createDate)}}</span>
                 <span><b>Last update:</b> {{getDate(report.modifyDate)}}</span>
+            </div>
+            <div class="dates-info owner" *ngIf="shareReportsPages">
+                <span><b>Owner:</b> {{report.system_user_id}}</span>
             </div>
             
 

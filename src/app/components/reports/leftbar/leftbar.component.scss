@@ -17,7 +17,7 @@
         height: calc(100% - 30px);
         padding-top: 20px;
 
-        .reports-nav{
+        .reports-nav {
             height: calc(100% - 78px);
         }
 
@@ -74,7 +74,6 @@
             color: #FFF;
             display: inline-block;
             width: auto;
-            margin-bottom: 20px;
             height: 30px;
             line-height: 30px;
         }
@@ -98,7 +97,7 @@
                 width: calc(100% - 20px);
                 color: #000;
 
-                &::placeholder{
+                &::placeholder {
                     color: #C0C0C0;
                 }
             }
@@ -114,6 +113,7 @@
             position: relative;
             overflow: unset;
             height: auto;
+            padding-top: 20px;
 
             li {
                 background: #FFFFFF;
@@ -170,10 +170,14 @@
                             font-weight: normal;
                         }
 
-                        &:last-child {
+                        &:nth-child(2) {
                             display: none;
                         }
 
+                    }
+
+                    &.owner{
+                        padding-top: 5px;
                     }
                 }
 
@@ -207,7 +211,6 @@
             color: #FFF;
             display: inline-block;
             width: auto;
-            margin-bottom: 30px;
         }
 
         .reports-search {
@@ -231,7 +234,7 @@
                 width: calc(100% - 42px);
                 color: #000;
 
-                &::placeholder{
+                &::placeholder {
                     color: #C0C0C0;
                 }
             }
@@ -247,6 +250,7 @@
             position: relative;
             overflow: unset;
             height: auto;
+            padding-top: 30px;
 
             li {
                 background: #FFFFFF;
@@ -288,6 +292,11 @@
 
                 .dates-info {
                     display: flex;
+
+                    &.owner {
+                        border-top: none;
+                        padding-top: 5px;
+                    }
                 }
 
                 &.selected {
@@ -414,6 +423,11 @@
 
                 &.base-page {
                     font-weight: 500;
+                }
+
+                span.list-owner{
+                    // display: none;
+                    display: block;
                 }
             }
 
