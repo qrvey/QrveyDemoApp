@@ -10,7 +10,7 @@ export class SetColorService {
   public setColor(user?:any){
     let body: HTMLElement = (document as any).querySelector("body");
     if(!user){
-      body.setAttribute("style", `--primary-color:#2E5DF4; --qv-main-color:#2E5DF4 !important`);
+      body.setAttribute("style", `--primary-color:#ff6f00; --qv-main-color:#ff6f00 !important`);
     }else{
       body.setAttribute("style", `--primary-color:${user.organization.hexcolor || '#2E5DF4'}; --qv-main-color:${user.organization.hexcolor} !important; --qv-pageview-canvas-valuelist-font-color: #000 !important`);
 

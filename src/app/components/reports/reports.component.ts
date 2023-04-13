@@ -104,19 +104,22 @@ export class ReportsComponent implements OnInit {
     let permissions: any = [];
     this.backend.datasetLookup(body).subscribe({
       next: (response: any) => {
-        permissions = [
-          {
-            "dataset_id": response.Items[0].datasetId,
-            "record_permissions": [
-              {
-                "security_name": "customer_number",
-                "values": [
-                  this.loggedUser.organization.id
-                ]
-              }
-            ]
-          }
-        ];
+        if(response.Items && response.Items.length > 0){
+          permissions = [
+            {
+              "dataset_id": response.Items[0].datasetId,
+              "record_permissions": [
+                {
+                  "security_name": "customer_number",
+                  "values": [
+                    this.loggedUser.organization.id
+                  ]
+                }
+              ]
+            }
+          ];
+        }
+        
       },
       error: (e: any) => {
         console.log(e);

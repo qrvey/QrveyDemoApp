@@ -1,16 +1,17 @@
 [
     {
         "id": 0,
-        "email": "admin@ica.com",
-        "name": "ICA Admin",
+        "email":"admin@hyp.com",
+        "name":"Hyperproof Analytics Admin",
         "type": "admin",
         "qrvey_info": {
-            "userid": "iN3xBZfkO",
-            "appid": "vt1gmR0cH"
+            "userid":"Zdj0UdUeA",
+            "appid":"v3U4nVApi"
         },
         "organization": {
-            "hexcolor": "#2E5DF4",
-            "logo": "ica_header.svg",
+            "hexcolor":"#ff6f00",
+            "logo":"logo-hyperproof-2023.webp",
+            "logowidth":120,
             "id": "*"
         },
         "taskId": null,
@@ -18,62 +19,60 @@
     },
     {
         "id": 1,
-        "email": "composer@avstores.com",
-        "name": "AVStoresCo Composer",
+        "email":"composer@hyp.io",
+        "name":"Hyperproof Tenant Composer",
         "organization": {
-            "name": "AV Stores, Co.",
+            "name":"Hyperproof TC 1",
             "id": 187,
-            "planid": 3,
-            "hexcolor": "#9266FD",
+            "planid": 1,
+            "hexcolor":"#ff6f00",
             "hextext": "#A4A9AE",
-            "logo": "AVStores.png",
-            "logowidth": 170,
+            "logo":"logo-hyperproof-2023.webp",
+            "logowidth":120
+        },
+        "type": "composer",
+        "qrvey_info": {
+            "userid":"Zdj0UdUeA",
+            "appid":"v3U4nVApi"
+        }
+    },
+    {
+        "id": 1,
+        "email":"composer2@hyp.io",
+        "name":"Hyperproof Tenant 2 Composer",
+        "organization": {
+            "name":"Hyperproof TC 1",
+            "id": 187,
+            "planid": 1,
+            "hexcolor":"#ff6f00",
+            "hextext": "#A4A9AE",
+            "logo":"logo-hyperproof-2023.webp",
+            "logowidth":120
+        },
+        "type": "composer",
+        "qrvey_info": {
+            "userid":"Zdj0UdUeA",
+            "appid":"v3U4nVApi"
+        }
+    },
+    {
+        "id": 1,
+        "email":"viewer@hyp.io",
+        "name":"Hyperproof Tenant Viewer",
+        "organization": {
+            "name":"Hyperproof TC 1",
+            "id": 187,
+            "planid": 1,
+            "hexcolor":"#ff6f00",
+            "hextext": "#A4A9AE",
+            "logo":"logo-hyperproof-2023.webp",
+            "logowidth":120,
             "theme": "dark"
         },
         "type": "composer",
         "qrvey_info": {
-            "userid": "vc1xpuGjz",
-            "appid": "7QPNzup4O"
-        }
-    },
-    {
-        "id": 7,
-        "email": "composer2@avstores.com",
-        "name": "AVStoresCo Composer2",
-        "organization": {
-            "name": "AV Stores, Co.",
-            "id": 187,
-            "planid": 3,
-            "hexcolor": "#9266FD",
-            "hextext": "#A4A9AE",
-            "logo": "AVStores.png",
-            "logowidth": 170,
-            "theme": "dark"
-        },
-        "type": "composer",
-        "qrvey_info": {
-            "userid": "vc1xpuGjz",
-            "appid": "7QPNzup4O"
-        }
-    },
-    {
-        "id": 2,
-        "email": "viewer@avstores.com",
-        "name": "AVStoresCo Viewer",
-        "organization": {
-            "name": "AV Stores, Co.",
-            "id": 187,
-            "planid": 3,
-            "hexcolor": "#9266FD",
-            "hextext": "#A4A9AE",
-            "logo": "AVStores.png",
-            "logowidth": 170,
-            "theme": "dark"
-        },
-        "type": "viewer",
-        "qrvey_info": {
-            "userid": "vc1xpuGjz",
-            "appid": "7QPNzup4O"
+            "userid":"Zdj0UdUeA",
+            "appid":"v3U4nVApi"
         }
     },
     {

@@ -17,6 +17,7 @@
         display: inline-block;
         // position: absolute;
         left: 20px;
+        background-size: contain;
     }
 
     nav {
@@ -97,7 +98,7 @@
 
                 &.selected {
                     a {
-                        background-color: #2E5DF4;
+                        background-color: $primary-color;
                         color: rgba(255, 255, 255, 1);
 
                         span {

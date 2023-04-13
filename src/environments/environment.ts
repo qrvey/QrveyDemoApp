@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  qrvey_domain: "https://demo.qrvey.com" 
+  qrvey_domain: "https://fdmxn.qrveyapp.com" 
 };
 
 /*
