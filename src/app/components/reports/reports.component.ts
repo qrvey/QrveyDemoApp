@@ -100,35 +100,21 @@ export class ReportsComponent implements OnInit {
     }
   }
 
-  getDatasetRLS(body: any, callback: any) {
+  getDatasetRLS(callback: any) {
     let permissions: any = [];
-    this.backend.datasetLookup(body).subscribe({
-      next: (response: any) => {
-        if(response.Items && response.Items.length > 0){
-          permissions = [
-            {
-              "dataset_id": response.Items[0].datasetId,
-              "record_permissions": [
-                {
-                  "security_name": "customer_number",
-                  "values": [
-                    this.loggedUser.organization.id
-                  ]
-                }
-              ]
-            }
-          ];
-        }
-        
-      },
-      error: (e: any) => {
-        console.log(e);
-        this.loading = false;
-      },
-      complete: () => {
-        callback(permissions);
+    callback(permissions = [
+      {
+        "dataset_id": "*",
+        "record_permissions": [
+          {
+            "security_name": "orgid",
+            "values": [
+              this.loggedUser.organization.id 
+            ]
+          }
+        ]
       }
-    })
+    ])
   }
 
   getJWT(body: any, callback: any) {
@@ -372,7 +358,7 @@ export class ReportsComponent implements OnInit {
       appid: this.loggedUser.qrvey_info.appid,
       datasetname: "Main Mysql - orders - View"
     }
-    this.getDatasetRLS(dbody, (dresponse: any) => {
+    this.getDatasetRLS((dresponse: any) => {
       let permissions = dresponse;
       let asset_permissions = {};
       let clientid = null;

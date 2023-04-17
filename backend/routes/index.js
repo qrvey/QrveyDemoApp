@@ -66,13 +66,12 @@ router.post('/getReports', (req, res, next) => {
                 
                 response.data.Items = response.data.Items.filter(r => {
                     let report_org = r.system_user_id ? r.system_user_id.split('@')[1] : '';
-                    console.log(report_org);
                     return r.shared && r.system_user_id && (org == report_org);
                 });
             }
 
             if (body.system_user_id && !body.getshared) {
-                response.data.Items = response.data.Items.filter(r => r.system_user_id == body.system_user_id || !r.system_user_id);
+                response.data.Items = response.data.Items.filter(r => (r.system_user_id == body.system_user_id) || !r.system_user_id);
             }
 
             getUsersPlansOrganizations();
