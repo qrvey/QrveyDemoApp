@@ -84,9 +84,10 @@
             }
         ],
         "pages_access": [
-            "Baseline Page 1",
-            "Baseline Page 2",
-            "Baseline Page 3"
+            "Control Health",
+            "Risk Dashboard",
+            "Audit",
+            "Data By Organization"
         ]
     }
 ]
