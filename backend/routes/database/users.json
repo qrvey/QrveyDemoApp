@@ -10,7 +10,8 @@
             "hexcolor": "#ff6f00",
             "hextext": "#A4A9AE",
             "logo": "logo-hyperproof-2023.webp",
-            "logowidth": 120
+            "logowidth": 120,
+            "theme": "blue"
         },
         "type": "composer",
         "qrvey_info": {
@@ -29,7 +30,8 @@
             "hexcolor": "#ff6f00",
             "hextext": "#A4A9AE",
             "logo": "logo-hyperproof-2023.webp",
-            "logowidth": 120
+            "logowidth": 120,
+            "theme": "blue"
         },
         "type": "composer",
         "qrvey_info": {
@@ -49,7 +51,7 @@
             "hextext": "#A4A9AE",
             "logo": "logo-hyperproof-2023.webp",
             "logowidth": 120,
-            "theme": "dark"
+            "theme": "blue"
         },
         "type": "viewer",
         "qrvey_info": {
@@ -101,7 +103,7 @@
         "name": "Hyperproof Tenant Composer",
         "organization": {
             "name": "Hyperproof TC 1",
-            "id": 187,
+            "id": "*",
             "planid": 1,
             "hexcolor": "#ff6f00",
             "hextext": "#A4A9AE",
@@ -120,7 +122,7 @@
         "name": "Hyperproof Tenant 2 Composer",
         "organization": {
             "name": "Hyperproof TC 1",
-            "id": 187,
+            "id": "*",
             "planid": 1,
             "hexcolor": "#ff6f00",
             "hextext": "#A4A9AE",
@@ -139,7 +141,7 @@
         "name": "Hyperproof Tenant Viewer",
         "organization": {
             "name": "Hyperproof TC 1",
-            "id": 187,
+            "id": "*",
             "planid": 1,
             "hexcolor": "#ff6f00",
             "hextext": "#A4A9AE",
