@@ -47,6 +47,78 @@ export class NewReportComponent implements OnInit {
       "published": true,
       "active": false,
       "editing": false,
+      "cssGrid": {
+        "desktop": {
+          "gap": {
+            "value": 5,
+            "unit": "px"
+          },
+          "columns": {
+            "type": "custom",
+            "count": 6
+          },
+          "rows": {
+            "generalCustomRow": {
+              "type": "value",
+              "value": {
+                "value": 32,
+                "unit": "px"
+              }
+            },
+            "count": 1000
+          },
+          "breakpoint": {
+            "min": 1280
+          }
+        },
+        "tablet": {
+          "gap": {
+            "value": 5,
+            "unit": "px"
+          },
+          "columns": {
+            "type": "custom",
+            "count": 2
+          },
+          "rows": {
+            "generalCustomRow": {
+              "type": "value",
+              "value": {
+                "value": 32,
+                "unit": "px"
+              }
+            },
+            "count": 1000
+          },
+          "breakpoint": {
+            "min": 724,
+            "max": 1279
+          }
+        },
+        "mobile": {
+          "gap": {
+            "value": 5,
+            "unit": "px"
+          },
+          "columns": {
+            "type": "custom",
+            "count": 1
+          },
+          "rows": {
+            "generalCustomRow": {
+              "type": "value",
+              "value": {
+                "value": 32,
+                "unit": "px"
+              }
+            },
+            "count": 1000
+          },
+          "breakpoint": {
+            "max": 723
+          }
+        }
+      },
       "system_user_id": this.loggedUser.type == 'admin' ? null : this.loggedUser.email, //Custom prop, admins don't link reports with accounts, they all create baseline content
     }
 
