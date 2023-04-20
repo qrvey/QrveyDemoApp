@@ -73,7 +73,7 @@
             "logowidth": 120,
             "theme": "green"
         },
-        "type": "composer",
+        "type": "viewer",
         "qrvey_info": {
             "userid": "Zdj0UdUeA",
             "appid": "v3U4nVApi"

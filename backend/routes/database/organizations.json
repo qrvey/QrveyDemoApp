@@ -77,6 +77,7 @@
         "planid": 1,
         "hexcolor": "#ff6f00",
         "logo": "logo-hyperproof-2023.webp",
+        "theme": "blue",
         "qrvey_info": {
             "userid": "Zdj0UdUeA",
             "appid": "v3U4nVApi",
@@ -93,6 +94,7 @@
                     "planid": 1,
                     "hexcolor": "#ff6f00",
                     "hextext": "#A4A9AE",
+                    "theme": "blue",
                     "logo": "logo-hyperproof-2023.webp",
                     "logowidth": 120
                 },
@@ -112,6 +114,7 @@
                     "planid": 1,
                     "hexcolor": "#ff6f00",
                     "hextext": "#A4A9AE",
+                    "theme": "blue",
                     "logo": "logo-hyperproof-2023.webp",
                     "logowidth": 120
                 },
@@ -149,6 +152,7 @@
         "planid": 1,
         "hexcolor": "#ff6f00",
         "logo": "logo-hyperproof-2023.webp",
+        "theme": "green",
         "qrvey_info": {
             "userid": "Zdj0UdUeA",
             "appid": "v3U4nVApi",
@@ -167,9 +171,9 @@
                     "hextext": "#A4A9AE",
                     "logo": "logo-hyperproof-2023.webp",
                     "logowidth": 120,
-                    "theme": "dark"
+                    "theme": "green"
                 },
-                "type": "composer",
+                "type": "viewer",
                 "qrvey_info": {
                     "userid": "Zdj0UdUeA",
                     "appid": "v3U4nVApi"
