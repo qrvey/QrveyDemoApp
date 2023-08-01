@@ -30,6 +30,7 @@ export class TopbarComponent implements OnInit {
   logout() {
     this.user.removeUser();
     this.router.navigate(['/login']);
+    location.reload();
   }
 
 }
